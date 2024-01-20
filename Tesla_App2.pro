@@ -11,18 +11,17 @@ CONFIG += c++17
 SOURCES += \
     footer.cpp \
     headermap.cpp \
+    leftsourcefile.cpp \
     main.cpp \
-    mainwindow.cpp \
     rightsourcefile.cpp
 
 HEADERS += \
     footer.h \
     headermap.h \
-    mainwindow.h \
+    leftsourcefile.h \
     rightsourcefile.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
