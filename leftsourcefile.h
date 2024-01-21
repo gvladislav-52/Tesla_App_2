@@ -16,11 +16,14 @@ class leftsourcefile: public QQuickPaintedItem
     Q_PROPERTY(qreal speed READ getSpeed WRITE setSpeed NOTIFY speedChanged FINAL)
     Q_PROPERTY(int arcWidth READ getArcWidth WRITE setArcWidth NOTIFY arcWidthChanged FINAL)
     Q_PROPERTY(QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged FINAL)
-    Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor NOTIFY textColorChanged FINAL)
+
+    Q_PROPERTY(QString textSelector READ getTextSelector WRITE setTextSelector NOTIFY textSelectorChanged FINAL)
 
 public:
     leftsourcefile(QQuickItem * parent = 0);
     virtual void paint(QPainter *painter);
+    void updateTahometer(qreal value);
+    void updateSpeedometer(qreal &value, bool &direction);
 
     qreal getSpeedometerSize();
     qreal getStartAngle();
@@ -30,7 +33,7 @@ public:
     qreal getSpeed();
     int   getArcWidth();
     QColor getOuterColor();
-    QColor getTextColor();
+    QString getTextSelector();
 
     void  setSpeedometerSize(qreal size);
     void setStartAngle(qreal startAngle);
@@ -40,7 +43,7 @@ public:
     void setSpeed(qreal speed);
     void setArcWidth(int arcWidth);
     void setOuterColor(QColor outerColor);
-    void setTextColor(QColor textColor);
+    void setTextSelector(QString textSelector);
 
 signals:
     void speedometerSizeChanged();      //signal
@@ -51,8 +54,7 @@ signals:
     void speedChanged();
     void arcWidthChanged();
     void outerColorChanged();
-    void textColorChanged();
-
+    void textSelectorChanged();
 
 private:
     qreal m_SpeedometerSize;
@@ -63,8 +65,7 @@ private:
     qreal m_Speed;
     int m_ArcWidth;
     QColor m_OuterColor;
-    QColor m_TextColor;
-
+    QString m_textSelector;
 };
 
 #endif // LEFTSOURCEFILE_H

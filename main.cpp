@@ -11,69 +11,44 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 6, 1)
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app(argc, argv);
-
-    //LeftSourceFile leftSource;
+    QGuiApplication app(argc, argv);                                            //Создание обьекта приложения Qt для графического интерфейса пользователя
     headerMap header_temp;
     footer footer_temp;
     RightSourceFile right_temp;
-    QQmlApplicationEngine engine;
-    qmlRegisterType<leftsourcefile>("com.ulasdikme.speedometer",1,0,"Speedometer");
-    const QUrl url(QStringLiteral("qrc:/MainQML.qml"));
-    QObject::connect(
-        &engine,
-        &QQmlApplicationEngine::objectCreated,
-        &app,
-        [url](QObject *obj, const QUrl &objUrl) {
+    QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
+    qmlRegisterType<leftsourcefile>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
+    const QUrl url(QStringLiteral("qrc:/MainQML.qml"));                         //Загрузка основной QML-страницы
+    QObject::connect(&engine,&QQmlApplicationEngine::objectCreated,&app,[url](QObject *obj, const QUrl &objUrl)
+        {
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
-        },
-        Qt::QueuedConnection);
+        }, Qt::QueuedConnection);                                               //Установка соединения, которое будет вызвано при создании объектов Qt Quick из QML.
+                                                                                //Если объект не создан и URL совпадает, вызывается QCoreApplication::exit().
 
-    engine.load(url);
-    QQmlContext *rootContext = engine.rootContext();
-    //rootContext->setContextProperty("leftClass",&leftSource);
-    rootContext->setContextProperty("header_temp_qml", &header_temp);
+    engine.load(url);                                                           //3агрузка QML-файла по указанному URL
+    QQmlContext *rootContext = engine.rootContext();                            //Получения корневого контекста QML-движка (загрузки и выполнения кода)
+    rootContext->setContextProperty("header_temp_qml", &header_temp);           //Установка свойства контекста QML для объектов
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
     rootContext->setContextProperty("right_temp_qml", &right_temp);
 
-    QObject *object = engine.rootObjects()[0];
-    QObject *speedometer = object->findChild<QObject*>("speedoMeter");
-
-    leftsourcefile * ptrSpeedometr = qobject_cast<leftsourcefile*>(speedometer);
-    qreal val = 0;
-    ptrSpeedometr->setSpeed(val);
-
-    QTimer timer1;
-    bool direction;
-    QObject::connect(&timer1, &QTimer::timeout, [&]()
-                     {
-                         qDebug() << val;
-                         if (val < 1500)
-                             ptrSpeedometr->setOuterColor(QColor(128,255,0));
-                         else if (val > 1500 && val < 3000)
-                             ptrSpeedometr->setOuterColor(QColor(255,255,0));
-                         else if (val > 3000 && val < 4000)
-                             ptrSpeedometr->setOuterColor(QColor(255,0,0));
-                         if(val >= 4450)
-                             direction = false;
-                         else if (val <= 0.1)
-                             direction = true;
-
-                         if(direction)
-                             val = val+ 10;
-                         else
-                             val = val - 10;
-                         ptrSpeedometr->setSpeed(val);
-                     });
-
-    timer1.start(10);
+    //[Speedometr]
+    QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
+    QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
+    leftsourcefile *ptrSpeedometer = qobject_cast<leftsourcefile*>(speedometer);    //Приведение при помощи qobject_cast к типу leftsourcefile
+    qreal value = 0;
+    ptrSpeedometer->setSpeed(value);                                                //устанавливаем скорость спидометра, которая зависит на данный момент от времени
+    QTimer timer;                                                                   //устанавливаем таймер
+    bool direction = true;                                                          //переменная отвечающая за направление
+    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateSpeedometer(value, direction);});   //Устанавливаем сигнал таймера с лямдой выражением, которая вызывает функцию
+                                                     //лямбда-выражение заменяет создание доп функции (слот) для вызова
+    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateTahometer(value);});
+    timer.start(10);                                                                //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)
-    engine.rootContext()->setContextProperty("supportsSsl", QSslSocket::supportsSsl());
+    engine.rootContext()->setContextProperty("supportsSsl", QSslSocket::supportsSsl()); //Устанавливаем свойства контекста QML поддержки SSL, для Map
 #else
     engine.rootContext()->setContextProperty("supportsSsl", false);
 #endif
-    QMetaObject::invokeMethod(engine.rootObjects().value(0), "initializeProviders");
+    QMetaObject::invokeMethod(engine.rootObjects().value(0), "initializeProviders");    //Вызов метода initializeProviders у корневого объекта QML для Map
     return app.exec();
 }

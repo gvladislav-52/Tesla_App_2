@@ -6,8 +6,6 @@ leftsourcefile::leftsourcefile(QQuickItem * parent): QQuickPaintedItem(parent),
     m_StartAngle(50),
     m_AlignAngle(260)
 {
-
-
 }
 
 void leftsourcefile::paint(QPainter *painter)
@@ -23,19 +21,6 @@ void leftsourcefile::paint(QPainter *painter)
     startAngle = m_StartAngle - 40;
     spanAngle = 0 - m_AlignAngle;
 
-    //text which shows the value
-    painter->save();
-    QFont font("Halvetica", 30, QFont::Bold);
-    painter->setFont(font);
-    pen.setColor(m_TextColor);
-    painter->setPen(pen);
-    // Вычисляем новые координаты смещения по вертикали
-    int verticalOffset = -40; // смещение на 10 единиц вниз
-    QRectF adjustedRect = rect.adjusted(m_SpeedometerSize / 30, m_SpeedometerSize / 30 - verticalOffset, -m_SpeedometerSize / 30, -m_SpeedometerSize / 4 - verticalOffset);
-    painter->drawText(adjustedRect, Qt::AlignCenter, QString::number((m_Speed / 40), 'f', 1));
-    painter->restore();
-
-    //current active process
     painter->save();
     pen.setWidth(m_ArcWidth);
     pen.setColor(m_OuterColor);
@@ -43,7 +28,37 @@ void leftsourcefile::paint(QPainter *painter)
     painter->setPen(pen);
     painter->drawArc(rect.adjusted(m_ArcWidth, m_ArcWidth, -m_ArcWidth, -m_ArcWidth),startAngle * 16, valueToAngle * 16);
     painter->restore();
+}
 
+void leftsourcefile::updateTahometer(qreal value)
+{
+    value = value/17.8;
+    if(value > 210) setTextSelector("6");
+    else if (value > 150) setTextSelector("5");
+    else if (value > 110) setTextSelector("4");
+    else if (value > 70)  setTextSelector("3");
+    else if (value > 30)  setTextSelector("2");
+    else if (value > 0)   setTextSelector("1");
+    else setTextSelector("N");
+}
+
+void leftsourcefile::updateSpeedometer(qreal &value, bool &direction){
+    if (value < 1500)
+        setOuterColor(QColor(128,255,0));
+    else if (value > 1500 && value < 3000)
+        setOuterColor(QColor(255,255,0));
+    else if (value > 3000 && value < 4000)
+        setOuterColor(QColor(255,0,0));
+    if(value >= 4450)
+        direction = false;
+    else if (value <= 0.1)
+        direction = true;
+
+    if(direction)
+        value = value + 10;
+    else
+        value = value - 10;
+    setSpeed(value);
 }
 
 qreal leftsourcefile::getSpeedometerSize()
@@ -86,9 +101,9 @@ QColor leftsourcefile::getOuterColor()
     return m_OuterColor;
 }
 
-QColor leftsourcefile::getTextColor()
+QString leftsourcefile::getTextSelector()
 {
-    return m_TextColor;
+    return m_textSelector;
 }
 
 void leftsourcefile::setSpeedometerSize(qreal size)
@@ -164,14 +179,15 @@ void leftsourcefile::setOuterColor(QColor outerColor)
     emit outerColorChanged();
 }
 
-void leftsourcefile::setTextColor(QColor textColor)
+void leftsourcefile::setTextSelector(QString textSelector)
 {
-    if(m_TextColor == textColor)
+    if(m_textSelector == textSelector)
         return;
 
-    m_TextColor = textColor;
-    emit textColorChanged();
+    m_textSelector = textSelector;
+    emit textSelectorChanged();
 }
+
 
 
 

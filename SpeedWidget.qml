@@ -1,24 +1,77 @@
-// Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
-//! [imports]
 import QtQuick
 import QtQuick.Window
-//! [imports]
+import my_type_speedometer 1.0
 
-//! [0]
 Rectangle {
-    property var temp_tahometr: 1
     color: "#1f1f1f"
-    //! [the dial in use]
-    // Dial with a slider to adjust it
-    Dial {
-        id: dial
-        anchors.centerIn: parent
-        value: slider.x * 100 / (container.width - 32)
-    }
-    //! [the dial in use]
 
+    //[SPEEDOMETER]
+    Image {
+        id: back_image
+        source: "qrc:/ui/background1.png"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.verticalCenter
+        anchors.bottomMargin: -30
+    }
+
+    Speedometer
+    {
+        id: speedometer_name
+        objectName: "speedometer_object_qml"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.verticalCenter
+        anchors.bottomMargin: -61
+        width: 258
+        height: 253
+        startAngle: 275
+        alignAngle: 40
+        lowestRange: 0
+        highestRange: 4000
+        arcWidth: 10
+        outerColor: outerColor
+    }
+
+    Text {
+        id: text_speed
+        anchors.verticalCenter: back_image.verticalCenter
+        anchors.horizontalCenter: back_image.horizontalCenter
+        text: parseInt(speedometer_name.speed/17.8)
+        font.pixelSize: 50
+        font.bold: true
+        color: "#09e8e5"
+        topPadding: -50
+    }
+
+    Text {
+        id: text_mph
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: text_speed.bottom
+        text: "MPH"
+        font.pixelSize: 30
+        font.bold: true
+        color: "#09e8e5"
+    }
+
+    Text {
+        id: text_tahometr
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: text_mph.bottom
+        font.pixelSize: 20
+        font.bold: true
+        color: "#09e8e5"
+        text: speedometer_name.textSelector
+    }
+    //[~SPEEDOMETER]
+
+    Image {
+        id: car_copy
+        source: "qrc:/ui/tesla_copy.png"
+        anchors.horizontalCenter: back_image.horizontalCenter
+        anchors.top: back_image.bottom
+    }
+
+
+    //[DISTANCE]
     Image {
         id: image_distance
         source: "qrc:/ui/distance.png"
@@ -52,6 +105,7 @@ Rectangle {
         font.bold: true
         color: "white"
     }
+    //[~DISTANCE]
 
     Image {
         id: image_optics
@@ -141,4 +195,4 @@ Rectangle {
         height: parent.height * 0.03
     }
 }
-//! [0]
+

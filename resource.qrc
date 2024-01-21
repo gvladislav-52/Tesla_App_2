@@ -69,7 +69,6 @@
         <file>ui/VintRed.png</file>
         <file>MainQML.qml</file>
         <file>ChargeWidget.qml</file>
-        <file>Dial.qml</file>
         <file>HeaderMapWidget.qml</file>
         <file>MainLeftWidget.qml</file>
         <file>MainMenu.qml</file>
