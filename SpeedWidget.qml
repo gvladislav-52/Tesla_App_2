@@ -92,7 +92,7 @@ Rectangle {
         font.bold: true
         color: "white"
         topPadding: -parent.height * 0.03
-        text: "180" + " km"
+        text: speedometer_name.textDistance + " mph"
     }
 
     Text {
@@ -113,9 +113,9 @@ Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.05
-        anchors.leftMargin: parent.width * 0.2
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        anchors.leftMargin: parent.width * 0.25
+        height: parent.height * 0.035
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -123,10 +123,10 @@ Rectangle {
         source: "qrc:/ui/optics/optics_2.png"
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: parent.height * 0.15
-        anchors.leftMargin: parent.width * 0.1
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        anchors.topMargin: parent.height * 0.125
+        anchors.leftMargin: parent.width * 0.125
+        height: parent.height * 0.07
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -136,8 +136,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.25
         anchors.leftMargin: parent.width * 0.05
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        height: parent.height * 0.045
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -147,8 +147,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.35
         anchors.leftMargin: parent.width * 0.05
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        height: parent.height * 0.05
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -157,9 +157,9 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.05
-        anchors.rightMargin: parent.width * 0.2
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        anchors.rightMargin: parent.width * 0.25
+        height: parent.height * 0.045
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -167,10 +167,10 @@ Rectangle {
         source: "qrc:/ui/optics/optics_6.png"
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: parent.height * 0.15
-        anchors.rightMargin: parent.width * 0.1
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        anchors.topMargin: parent.height * 0.125
+        anchors.rightMargin: parent.width * 0.125
+        height: parent.height * 0.045
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -180,8 +180,8 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.25
         anchors.rightMargin: parent.width * 0.05
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        height: parent.height * 0.045
+        fillMode: Image.PreserveAspectFit
     }
 
     Image {
@@ -191,8 +191,8 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35
         anchors.rightMargin: parent.width * 0.05
-        width: parent.width * 0.07
-        height: parent.height * 0.03
+        height: parent.height * 0.055
+        fillMode: Image.PreserveAspectFit
     }
 }
 

@@ -61,6 +61,16 @@ void leftsourcefile::updateSpeedometer(qreal &value, bool &direction){
     setSpeed(value);
 }
 
+void leftsourcefile::updateDistance(qreal value)
+{
+    qreal distance = ((value / 17.8)/60/60);
+    if((full_distance+distance) > 999)
+    {
+        full_distance=0;
+    }
+    full_distance += distance;
+    setTextDistance(QString::number(full_distance, 'f', 1));
+}
 qreal leftsourcefile::getSpeedometerSize()
 {
     return m_SpeedometerSize;
@@ -104,6 +114,11 @@ QColor leftsourcefile::getOuterColor()
 QString leftsourcefile::getTextSelector()
 {
     return m_textSelector;
+}
+
+QString leftsourcefile::getTextDistance()
+{
+    return m_textDistance;
 }
 
 void leftsourcefile::setSpeedometerSize(qreal size)
@@ -186,6 +201,15 @@ void leftsourcefile::setTextSelector(QString textSelector)
 
     m_textSelector = textSelector;
     emit textSelectorChanged();
+}
+
+void leftsourcefile::setTextDistance(QString textDistance)
+{
+    if(m_textDistance == textDistance)
+        return;
+
+    m_textDistance = textDistance;
+    emit textDistanceChanged();
 }
 
 

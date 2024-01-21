@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateSpeedometer(value, direction);});   //Устанавливаем сигнал таймера с лямдой выражением, которая вызывает функцию
                                                      //лямбда-выражение заменяет создание доп функции (слот) для вызова
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateTahometer(value);});
+    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateDistance(value);});
     timer.start(10);                                                                //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)

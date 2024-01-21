@@ -18,12 +18,15 @@ class leftsourcefile: public QQuickPaintedItem
     Q_PROPERTY(QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged FINAL)
 
     Q_PROPERTY(QString textSelector READ getTextSelector WRITE setTextSelector NOTIFY textSelectorChanged FINAL)
+    Q_PROPERTY(QString textDistance READ getTextDistance WRITE setTextDistance NOTIFY textDistanceChanged FINAL)
 
 public:
     leftsourcefile(QQuickItem * parent = 0);
     virtual void paint(QPainter *painter);
     void updateTahometer(qreal value);
     void updateSpeedometer(qreal &value, bool &direction);
+    void updateDistance(qreal value);
+    qreal full_distance;
 
     qreal getSpeedometerSize();
     qreal getStartAngle();
@@ -34,6 +37,7 @@ public:
     int   getArcWidth();
     QColor getOuterColor();
     QString getTextSelector();
+    QString getTextDistance();
 
     void  setSpeedometerSize(qreal size);
     void setStartAngle(qreal startAngle);
@@ -44,6 +48,7 @@ public:
     void setArcWidth(int arcWidth);
     void setOuterColor(QColor outerColor);
     void setTextSelector(QString textSelector);
+    void setTextDistance(QString textDistance);
 
 signals:
     void speedometerSizeChanged();      //signal
@@ -55,6 +60,7 @@ signals:
     void arcWidthChanged();
     void outerColorChanged();
     void textSelectorChanged();
+    void textDistanceChanged();
 
 private:
     qreal m_SpeedometerSize;
@@ -66,6 +72,7 @@ private:
     int m_ArcWidth;
     QColor m_OuterColor;
     QString m_textSelector;
+    QString m_textDistance;
 };
 
 #endif // LEFTSOURCEFILE_H
