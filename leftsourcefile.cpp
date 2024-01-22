@@ -1,14 +1,46 @@
 #include "leftsourcefile.h"
 #include <QPainter>
 
-leftsourcefile::leftsourcefile(QQuickItem * parent): QQuickPaintedItem(parent),
+Speedometer::Speedometer(QQuickItem * parent): QQuickPaintedItem(parent),
     m_SpeedometerSize(500),
     m_StartAngle(50),
     m_AlignAngle(260)
 {
 }
 
-void leftsourcefile::paint(QPainter *painter)
+Indicators::Indicators()
+{
+}
+
+void Indicators::update_dimensions(bool &temp)
+{
+    temp = !temp;
+    if(temp)
+    {
+        setIndicator_dimensions("qrc:/ui/optics/optics_1_bw.png");
+        setIndicator_external_light("qrc:/ui/optics/optics_2_bw.png");
+        setIndicator_low_beam("qrc:/ui/optics/optics_3_bw.png");
+        setIndicator_fog_light("qrc:/ui/optics/optics_4.png");
+        setIndicator_abs("qrc:/ui/optics/optics_5.png");
+        setIndicator_handbrake("qrc:/ui/optics/optics_6.png");
+        setIndicator_check("qrc:/ui/optics/optics_7.png");
+        setIndicator_belt("qrc:/ui/optics/optics_8_bw.png");
+    }
+    else
+    {
+        setIndicator_dimensions("qrc:/ui/optics/optics_1.png");
+        setIndicator_external_light("qrc:/ui/optics/optics_2.png");
+        setIndicator_low_beam("qrc:/ui/optics/optics_3.png");
+        setIndicator_fog_light("qrc:/ui/optics/optics_4_bw.png");
+        setIndicator_abs("qrc:/ui/optics/optics_5_bw.png");
+        setIndicator_handbrake("qrc:/ui/optics/optics_6_bw.png");
+        setIndicator_check("qrc:/ui/optics/optics_7_bw.png");
+        setIndicator_belt("qrc:/ui/optics/optics_8.png");
+    }
+
+}
+
+void Speedometer::paint(QPainter *painter)
 {
     QRectF rect = this->boundingRect();
     painter->setRenderHint(QPainter::Antialiasing);
@@ -30,7 +62,7 @@ void leftsourcefile::paint(QPainter *painter)
     painter->restore();
 }
 
-void leftsourcefile::updateTahometer(qreal value)
+void Speedometer::updateTahometer(qreal value)
 {
     value = value/17.8;
     if(value > 210) setTextSelector("6");
@@ -42,7 +74,7 @@ void leftsourcefile::updateTahometer(qreal value)
     else setTextSelector("N");
 }
 
-void leftsourcefile::updateSpeedometer(qreal &value, bool &direction){
+void Speedometer::updateSpeedometer(qreal &value, bool &direction){
     if (value < 1500)
         setOuterColor(QColor(128,255,0));
     else if (value > 1500 && value < 3000)
@@ -61,67 +93,103 @@ void leftsourcefile::updateSpeedometer(qreal &value, bool &direction){
     setSpeed(value);
 }
 
-void leftsourcefile::updateDistance(qreal value)
+void Speedometer::updateDistance(qreal value)
 {
     qreal distance = ((value / 17.8)/60/60);
-    if((full_distance+distance) > 999)
-    {
-        full_distance=0;
-    }
     full_distance += distance;
     setTextDistance(QString::number(full_distance, 'f', 1));
 }
-qreal leftsourcefile::getSpeedometerSize()
+qreal Speedometer::getSpeedometerSize()
 {
     return m_SpeedometerSize;
 }
 
-qreal leftsourcefile::getStartAngle()
+qreal Speedometer::getStartAngle()
 {
     return m_StartAngle;
 }
 
-qreal leftsourcefile::getAlignAngle()
+qreal Speedometer::getAlignAngle()
 {
     return m_AlignAngle;
 }
 
-qreal leftsourcefile::getLowestRange()
+qreal Speedometer::getLowestRange()
 {
     return m_LowestRange;
 }
 
-qreal leftsourcefile::getHighestRange()
+qreal Speedometer::getHighestRange()
 {
     return m_HighestRange;
 }
 
-qreal leftsourcefile::getSpeed()
+qreal Speedometer::getSpeed()
 {
     return m_Speed;
 }
 
-int leftsourcefile::getArcWidth()
+int Speedometer::getArcWidth()
 {
     return m_ArcWidth;
 }
 
-QColor leftsourcefile::getOuterColor()
+QColor Speedometer::getOuterColor()
 {
     return m_OuterColor;
 }
 
-QString leftsourcefile::getTextSelector()
+QString Speedometer::getTextSelector()
 {
     return m_textSelector;
 }
 
-QString leftsourcefile::getTextDistance()
+QString Speedometer::getTextDistance()
 {
     return m_textDistance;
 }
 
-void leftsourcefile::setSpeedometerSize(qreal size)
+QString Indicators::getIndicator_dimensions()
+{
+    return m_dimensions;
+}
+
+QString Indicators::getIndicator_external_light()
+{
+    return m_external_light;
+}
+
+QString Indicators::getIndicator_low_beam()
+{
+    return m_low_beam;
+}
+
+QString Indicators::getIndicator_fog_light()
+{
+    return m_fog_light;
+}
+
+QString Indicators::getIndicator_abs()
+{
+    return m_abs;
+}
+
+QString Indicators::getIndicator_handbrake()
+{
+    return m_handbrake;
+}
+
+QString Indicators::getIndicator_check()
+{
+    return m_check;
+}
+
+QString Indicators::getIndicator_belt()
+{
+    return m_belt;
+}
+
+void Speedometer::setSpeedometerSize(qreal size)
 {
     if(m_SpeedometerSize == size)
         return;
@@ -130,7 +198,7 @@ void leftsourcefile::setSpeedometerSize(qreal size)
     emit speedometerSizeChanged();      //this will call the qml part
 }
 
-void leftsourcefile::setStartAngle(qreal startAngle)
+void Speedometer::setStartAngle(qreal startAngle)
 {
     if(m_StartAngle == startAngle)
         return;
@@ -139,7 +207,7 @@ void leftsourcefile::setStartAngle(qreal startAngle)
     emit startAngleChanged();
 }
 
-void leftsourcefile::setAlignAngle(qreal angle)
+void Speedometer::setAlignAngle(qreal angle)
 {
     if(m_StartAngle == angle)
         return;
@@ -148,7 +216,7 @@ void leftsourcefile::setAlignAngle(qreal angle)
     emit alignAngleChanged();
 }
 
-void leftsourcefile::setLowestRange(qreal lowestRange)
+void Speedometer::setLowestRange(qreal lowestRange)
 {
     if(m_LowestRange == lowestRange)
         return;
@@ -157,7 +225,7 @@ void leftsourcefile::setLowestRange(qreal lowestRange)
     emit lowestRangeChanged();
 }
 
-void leftsourcefile::setHighestRange(qreal highestRange)
+void Speedometer::setHighestRange(qreal highestRange)
 {
     if(m_HighestRange == highestRange)
         return;
@@ -166,7 +234,7 @@ void leftsourcefile::setHighestRange(qreal highestRange)
     emit highestRangeChanged();
 }
 
-void leftsourcefile::setSpeed(qreal speed)
+void Speedometer::setSpeed(qreal speed)
 {
     if(m_Speed == speed)
         return;
@@ -176,7 +244,7 @@ void leftsourcefile::setSpeed(qreal speed)
     emit speedChanged();
 }
 
-void leftsourcefile::setArcWidth(int arcWidth)
+void Speedometer::setArcWidth(int arcWidth)
 {
     if(m_ArcWidth == arcWidth)
         return;
@@ -185,7 +253,7 @@ void leftsourcefile::setArcWidth(int arcWidth)
     emit arcWidthChanged();
 }
 
-void leftsourcefile::setOuterColor(QColor outerColor)
+void Speedometer::setOuterColor(QColor outerColor)
 {
     if(m_OuterColor == outerColor)
         return;
@@ -194,7 +262,7 @@ void leftsourcefile::setOuterColor(QColor outerColor)
     emit outerColorChanged();
 }
 
-void leftsourcefile::setTextSelector(QString textSelector)
+void Speedometer::setTextSelector(QString textSelector)
 {
     if(m_textSelector == textSelector)
         return;
@@ -203,7 +271,7 @@ void leftsourcefile::setTextSelector(QString textSelector)
     emit textSelectorChanged();
 }
 
-void leftsourcefile::setTextDistance(QString textDistance)
+void Speedometer::setTextDistance(QString textDistance)
 {
     if(m_textDistance == textDistance)
         return;
@@ -211,6 +279,81 @@ void leftsourcefile::setTextDistance(QString textDistance)
     m_textDistance = textDistance;
     emit textDistanceChanged();
 }
+
+void Indicators::setIndicator_dimensions(QString dimensions)
+{
+    if(m_dimensions == dimensions)
+        return;
+
+    m_dimensions = dimensions;
+    emit indicator_dimensionsChanged();
+}
+
+void Indicators::setIndicator_external_light(QString external_light)
+{
+    if(m_external_light == external_light)
+        return;
+
+    m_external_light = external_light;
+    emit indicator_external_lightChanged();
+}
+
+void Indicators::setIndicator_low_beam(QString low_beam)
+{
+    if(m_low_beam == low_beam)
+        return;
+
+    m_low_beam = low_beam;
+    emit indicator_low_beamChanged();
+}
+
+void Indicators::setIndicator_fog_light(QString fog_light)
+{
+    if(m_fog_light == fog_light)
+        return;
+
+    m_fog_light = fog_light;
+    emit indicator_fog_lightChanged();
+}
+
+void Indicators::setIndicator_abs(QString abs)
+{
+    if(m_abs == abs)
+        return;
+
+    m_abs = abs;
+    emit indicator_absChanged();
+}
+
+void Indicators::setIndicator_handbrake(QString handbrake)
+{
+    if(m_handbrake == handbrake)
+        return;
+
+    m_handbrake = handbrake;
+    emit indicator_handbrakeChanged();
+}
+
+void Indicators::setIndicator_check(QString check)
+{
+    if(m_check == check)
+        return;
+
+    m_check = check;
+    emit indicator_checkChanged();
+}
+
+void Indicators::setIndicator_belt(QString belt)
+{
+    if(m_belt == belt)
+        return;
+
+    m_belt = belt;
+    emit indicator_beltChanged();
+}
+
+
+
 
 
 

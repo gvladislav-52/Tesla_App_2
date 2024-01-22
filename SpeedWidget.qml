@@ -76,7 +76,7 @@ Rectangle {
         id: image_distance
         source: "qrc:/ui/distance.png"
         anchors.left: parent.left
-        anchors.leftMargin: parent.width*0.05
+        anchors.leftMargin: parent.width*0.04
         anchors.top: parent.verticalCenter
         anchors.topMargin: parent.height *0.12
         width: parent.width*0.08
@@ -88,7 +88,7 @@ Rectangle {
         anchors.left: image_distance.left
         anchors.leftMargin: parent.width * 0.1
         anchors.verticalCenter: image_distance.verticalCenter
-        font.pixelSize: image_distance.height * 0.5
+        font.pixelSize: image_distance.height * 0.4
         font.bold: true
         color: "white"
         topPadding: -parent.height * 0.03
@@ -109,89 +109,89 @@ Rectangle {
 
     Image {
         id: image_optics
-        source: "qrc:/ui/optics/optics_1.png"
+        source: indicator_temp_qml.indicator_dimensions
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.05
         anchors.leftMargin: parent.width * 0.25
-        height: parent.height * 0.035
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_2
-        source: "qrc:/ui/optics/optics_2.png"
+        source: indicator_temp_qml.indicator_external_light
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.125
         anchors.leftMargin: parent.width * 0.125
-        height: parent.height * 0.07
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_3
-        source: "qrc:/ui/optics/optics_3.png"
+        source: indicator_temp_qml.indicator_low_beam
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.25
         anchors.leftMargin: parent.width * 0.05
-        height: parent.height * 0.045
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_4
-        source: "qrc:/ui/optics/optics_4.png"
+        source: indicator_temp_qml.indicator_fog_light
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.35
         anchors.leftMargin: parent.width * 0.05
-        height: parent.height * 0.05
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_5
-        source: "qrc:/ui/optics/optics_5.png"
+        source: indicator_temp_qml.indicator_abs
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.05
         anchors.rightMargin: parent.width * 0.25
-        height: parent.height * 0.045
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_6
-        source: "qrc:/ui/optics/optics_6.png"
+        source: indicator_temp_qml.indicator_handbrake
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.125
         anchors.rightMargin: parent.width * 0.125
-        height: parent.height * 0.045
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_7
-        source: "qrc:/ui/optics/optics_7.png"
+        source: indicator_temp_qml.indicator_check
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.25
         anchors.rightMargin: parent.width * 0.05
-        height: parent.height * 0.045
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_8
-        source: "qrc:/ui/optics/optics_8.png"
+        source: indicator_temp_qml.indicator_belt
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35
         anchors.rightMargin: parent.width * 0.05
-        height: parent.height * 0.055
+        height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }
 }

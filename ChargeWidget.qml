@@ -15,9 +15,9 @@ Item {
             source: "qrc:/ui/thunder.png"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 15
-            width: parent.width * 0.15
             height: parent.height * 0.5
             anchors.top: parent.top
+            fillMode: Image.PreserveAspectFit
         }
 
         Rectangle {
