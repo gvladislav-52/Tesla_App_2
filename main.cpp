@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
 #if QT_VERSION < QT_VERSION_CHECK(6, 6, 1)
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
-    bool temp = false;
     QGuiApplication app(argc, argv);                                            //Создание обьекта приложения Qt для графического интерфейса пользователя
     headerMap header_temp;
     footer footer_temp;
@@ -46,7 +45,7 @@ int main(int argc, char *argv[])
                                                      //лямбда-выражение заменяет создание доп функции (слот) для вызова
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateTahometer(value);});
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateDistance(value);});
-    QObject::connect(&timer, &QTimer::timeout, [&]() {indicator_temp.update_dimensions(temp);});
+    QObject::connect(&timer, &QTimer::timeout, [&]() {indicator_temp.update_dimensions();});
     timer.start(10);                                                                //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)

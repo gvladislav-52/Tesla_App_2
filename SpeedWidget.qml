@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import my_type_speedometer 1.0
+import QtQuick.Controls
 
 Rectangle {
     color: "#1f1f1f"
@@ -107,20 +108,21 @@ Rectangle {
     }
     //[~DISTANCE]
 
-    Image {
+    ToolButton {
         id: image_optics
-        source: indicator_temp_qml.indicator_dimensions
+        icon.source: indicator_temp_qml.indicator_path[0]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.05
         anchors.leftMargin: parent.width * 0.25
         height: parent.height * 0.075
-        fillMode: Image.PreserveAspectFit
+        onClicked: indicator_temp_qml.indicator_str[0] = !indicator_temp_qml.indicator_str[0];
+        //fillMode: Image.PreserveAspectFit
     }
 
     Image {
         id: image_optics_2
-        source: indicator_temp_qml.indicator_external_light
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.125
@@ -131,7 +133,7 @@ Rectangle {
 
     Image {
         id: image_optics_3
-        source: indicator_temp_qml.indicator_low_beam
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.25
@@ -142,7 +144,7 @@ Rectangle {
 
     Image {
         id: image_optics_4
-        source: indicator_temp_qml.indicator_fog_light
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.35
@@ -153,7 +155,7 @@ Rectangle {
 
     Image {
         id: image_optics_5
-        source: indicator_temp_qml.indicator_abs
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.05
@@ -164,7 +166,7 @@ Rectangle {
 
     Image {
         id: image_optics_6
-        source: indicator_temp_qml.indicator_handbrake
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.125
@@ -175,7 +177,7 @@ Rectangle {
 
     Image {
         id: image_optics_7
-        source: indicator_temp_qml.indicator_check
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.25
@@ -186,7 +188,7 @@ Rectangle {
 
     Image {
         id: image_optics_8
-        source: indicator_temp_qml.indicator_belt
+        source: "qrc:/ui/optics/optics_1_bw.png";
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35

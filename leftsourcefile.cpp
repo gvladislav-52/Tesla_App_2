@@ -10,34 +10,17 @@ Speedometer::Speedometer(QQuickItem * parent): QQuickPaintedItem(parent),
 
 Indicators::Indicators()
 {
+    m_indicator_str.append(true);
+    m_indicator_path.append("qrc:/ui/optics/optics_2.png");
 }
 
-void Indicators::update_dimensions(bool &temp)
+void Indicators::update_dimensions()
 {
-    temp = !temp;
-    if(temp)
-    {
-        setIndicator_dimensions("qrc:/ui/optics/optics_1_bw.png");
-        setIndicator_external_light("qrc:/ui/optics/optics_2_bw.png");
-        setIndicator_low_beam("qrc:/ui/optics/optics_3_bw.png");
-        setIndicator_fog_light("qrc:/ui/optics/optics_4.png");
-        setIndicator_abs("qrc:/ui/optics/optics_5.png");
-        setIndicator_handbrake("qrc:/ui/optics/optics_6.png");
-        setIndicator_check("qrc:/ui/optics/optics_7.png");
-        setIndicator_belt("qrc:/ui/optics/optics_8_bw.png");
-    }
+    if(m_indicator_str[0])
+    m_indicator_path[0] = "qrc:/ui/optics/optics_1_bw.png";
     else
-    {
-        setIndicator_dimensions("qrc:/ui/optics/optics_1.png");
-        setIndicator_external_light("qrc:/ui/optics/optics_2.png");
-        setIndicator_low_beam("qrc:/ui/optics/optics_3.png");
-        setIndicator_fog_light("qrc:/ui/optics/optics_4_bw.png");
-        setIndicator_abs("qrc:/ui/optics/optics_5_bw.png");
-        setIndicator_handbrake("qrc:/ui/optics/optics_6_bw.png");
-        setIndicator_check("qrc:/ui/optics/optics_7_bw.png");
-        setIndicator_belt("qrc:/ui/optics/optics_8.png");
-    }
-
+    m_indicator_path[0] = "qrc:/ui/optics/optics_1.png";
+    emit indicator_pathChanged();
 }
 
 void Speedometer::paint(QPainter *painter)
@@ -149,46 +132,6 @@ QString Speedometer::getTextDistance()
     return m_textDistance;
 }
 
-QString Indicators::getIndicator_dimensions()
-{
-    return m_dimensions;
-}
-
-QString Indicators::getIndicator_external_light()
-{
-    return m_external_light;
-}
-
-QString Indicators::getIndicator_low_beam()
-{
-    return m_low_beam;
-}
-
-QString Indicators::getIndicator_fog_light()
-{
-    return m_fog_light;
-}
-
-QString Indicators::getIndicator_abs()
-{
-    return m_abs;
-}
-
-QString Indicators::getIndicator_handbrake()
-{
-    return m_handbrake;
-}
-
-QString Indicators::getIndicator_check()
-{
-    return m_check;
-}
-
-QString Indicators::getIndicator_belt()
-{
-    return m_belt;
-}
-
 void Speedometer::setSpeedometerSize(qreal size)
 {
     if(m_SpeedometerSize == size)
@@ -280,81 +223,29 @@ void Speedometer::setTextDistance(QString textDistance)
     emit textDistanceChanged();
 }
 
-void Indicators::setIndicator_dimensions(QString dimensions)
-{
-    if(m_dimensions == dimensions)
-        return;
 
-    m_dimensions = dimensions;
-    emit indicator_dimensionsChanged();
+QVector<bool> Indicators::getIndicator_str() const
+{
+    return m_indicator_str;
 }
 
-void Indicators::setIndicator_external_light(QString external_light)
+void Indicators::setIndicator_str(const QVector<bool> &newIndicator_str)
 {
-    if(m_external_light == external_light)
+    if (m_indicator_str == newIndicator_str)
         return;
-
-    m_external_light = external_light;
-    emit indicator_external_lightChanged();
+    m_indicator_str = newIndicator_str;
+    emit indicator_strChanged();
 }
 
-void Indicators::setIndicator_low_beam(QString low_beam)
+QVector<QString> Indicators::getIndicator_path() const
 {
-    if(m_low_beam == low_beam)
-        return;
-
-    m_low_beam = low_beam;
-    emit indicator_low_beamChanged();
+    return m_indicator_path;
 }
 
-void Indicators::setIndicator_fog_light(QString fog_light)
+void Indicators::setIndicator_path(const QVector<QString> &newIndicator_path)
 {
-    if(m_fog_light == fog_light)
+    if (m_indicator_path == newIndicator_path)
         return;
-
-    m_fog_light = fog_light;
-    emit indicator_fog_lightChanged();
+    m_indicator_path = newIndicator_path;
+    emit indicator_pathChanged();
 }
-
-void Indicators::setIndicator_abs(QString abs)
-{
-    if(m_abs == abs)
-        return;
-
-    m_abs = abs;
-    emit indicator_absChanged();
-}
-
-void Indicators::setIndicator_handbrake(QString handbrake)
-{
-    if(m_handbrake == handbrake)
-        return;
-
-    m_handbrake = handbrake;
-    emit indicator_handbrakeChanged();
-}
-
-void Indicators::setIndicator_check(QString check)
-{
-    if(m_check == check)
-        return;
-
-    m_check = check;
-    emit indicator_checkChanged();
-}
-
-void Indicators::setIndicator_belt(QString belt)
-{
-    if(m_belt == belt)
-        return;
-
-    m_belt = belt;
-    emit indicator_beltChanged();
-}
-
-
-
-
-
-
-

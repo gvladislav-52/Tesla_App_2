@@ -78,55 +78,32 @@ private:
 class Indicators: public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString indicator_dimensions READ getIndicator_dimensions WRITE setIndicator_dimensions NOTIFY indicator_dimensionsChanged FINAL)
-    Q_PROPERTY(QString  indicator_external_light READ getIndicator_external_light WRITE setIndicator_external_light NOTIFY indicator_external_lightChanged FINAL)
-    Q_PROPERTY(QString indicator_low_beam READ getIndicator_low_beam WRITE setIndicator_low_beam NOTIFY indicator_low_beamChanged FINAL)
-    Q_PROPERTY(QString indicator_fog_light READ getIndicator_fog_light WRITE setIndicator_fog_light NOTIFY indicator_fog_lightChanged FINAL)
-    Q_PROPERTY(QString indicator_abs READ getIndicator_abs WRITE setIndicator_abs NOTIFY indicator_absChanged FINAL)
-    Q_PROPERTY(QString indicator_handbrake READ getIndicator_handbrake WRITE setIndicator_handbrake NOTIFY indicator_handbrakeChanged FINAL)
-    Q_PROPERTY(QString indicator_check READ getIndicator_check WRITE setIndicator_check NOTIFY indicator_checkChanged FINAL)
-    Q_PROPERTY(QString indicator_belt READ getIndicator_belt WRITE setIndicator_belt NOTIFY indicator_beltChanged FINAL)
+    Q_PROPERTY(QVector<bool> indicator_str READ getIndicator_str WRITE setIndicator_str NOTIFY indicator_strChanged FINAL)
+    Q_PROPERTY(QVector<QString> indicator_path READ getIndicator_path WRITE setIndicator_path NOTIFY indicator_pathChanged FINAL)
 
 public:
     Indicators();
-    void update_dimensions(bool &emp);
-    QString getIndicator_dimensions();
-    QString getIndicator_external_light();
-    QString getIndicator_low_beam();
-    QString getIndicator_fog_light();
-    QString getIndicator_abs();
-    QString getIndicator_handbrake();
-    QString getIndicator_check();
-    QString getIndicator_belt();
+    void update_dimensions();
 
-    void setIndicator_dimensions(QString dimensions);
-    void setIndicator_external_light(QString external_light);
-    void setIndicator_low_beam(QString low_beam);
-    void setIndicator_fog_light(QString fog_light);
-    void setIndicator_abs(QString abs);
-    void setIndicator_handbrake(QString handbrake);
-    void setIndicator_check(QString check);
-    void setIndicator_belt(QString belt);
+
+
+    QVector<bool> getIndicator_str() const;
+    void setIndicator_str(const QVector<bool> &newIndicator_str);
+
+    QVector<QString> getIndicator_path() const;
+    void setIndicator_path(const QVector<QString> &newIndicator_path);
 
 signals:
-    void indicator_dimensionsChanged();
-    void indicator_external_lightChanged();
-    void indicator_low_beamChanged();
-    void indicator_fog_lightChanged();
-    void indicator_absChanged();
-    void indicator_handbrakeChanged();
-    void indicator_checkChanged();
-    void indicator_beltChanged();
+
+
+    void indicator_strChanged();
+
+    void indicator_pathChanged();
 
 private:
-    QString m_dimensions;
-    QString m_external_light;
-    QString m_low_beam;
-    QString m_fog_light;
-    QString m_abs;
-    QString m_handbrake;
-    QString m_check;
-    QString m_belt;
+
+    QVector<bool> m_indicator_str;
+    QVector<QString> m_indicator_path;
 };
 
 #endif // LEFTSOURCEFILE_H
