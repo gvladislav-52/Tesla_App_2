@@ -13,13 +13,15 @@ SOURCES += \
     headermap.cpp \
     leftsourcefile.cpp \
     main.cpp \
-    rightsourcefile.cpp
+    rightsourcefile.cpp \
+    setting_source.cpp
 
 HEADERS += \
     footer.h \
     headermap.h \
     leftsourcefile.h \
-    rightsourcefile.h
+    rightsourcefile.h \
+    setting_source.h
 
 FORMS +=
 
