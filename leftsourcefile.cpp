@@ -96,6 +96,7 @@ void Speedometer::updateDistance(qreal value)
     full_distance += distance;
     setTextDistance(QString::number(full_distance, 'f', 1));
 }
+
 qreal Speedometer::getSpeedometerSize()
 {
     return m_SpeedometerSize;
