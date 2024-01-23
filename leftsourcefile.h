@@ -101,9 +101,9 @@ signals:
     void indicator_pathChanged();
 
 private:
-
     QVector<bool> m_indicator_str;
     QVector<QString> m_indicator_path;
+    QVector<QString> path_temp;
 };
 
 #endif // LEFTSOURCEFILE_H

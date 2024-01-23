@@ -10,17 +10,31 @@ Speedometer::Speedometer(QQuickItem * parent): QQuickPaintedItem(parent),
 
 Indicators::Indicators()
 {
-    m_indicator_str.append(true);
-    m_indicator_path.append("qrc:/ui/optics/optics_2.png");
+    for(int i = 0; i < 8; i++)
+            m_indicator_str.append(true);
+    for(int i = 0; i < 8; i++)
+        m_indicator_path.append("1");
 }
 
 void Indicators::update_dimensions()
 {
-    if(m_indicator_str[0])
-    m_indicator_path[0] = "qrc:/ui/optics/optics_1_bw.png";
-    else
-    m_indicator_path[0] = "qrc:/ui/optics/optics_1.png";
-    emit indicator_pathChanged();
+    path_temp = m_indicator_path;
+    for(int i = 0; i < m_indicator_str.size(); i++)
+    {
+        if(m_indicator_str[i])
+        {
+            if (m_indicator_path[i] != "qrc:/ui/optics/optics_" + QString::number(i+1) +"_bw.png")
+                m_indicator_path[i] = ("qrc:/ui/optics/optics_" + QString::number(i+1) +"_bw.png");
+        }
+        else
+        {
+            if (m_indicator_path[i] != "qrc:/ui/optics/optics_" + QString::number(i+1) +".png")
+                m_indicator_path[i] = ("qrc:/ui/optics/optics_" + QString::number(i+1) +".png");
+        }
+    }
+
+    if(path_temp !=m_indicator_path)
+        emit indicator_pathChanged();
 }
 
 void Speedometer::paint(QPainter *painter)
