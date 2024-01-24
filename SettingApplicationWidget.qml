@@ -45,7 +45,7 @@ import QtQuick.Layouts
                                 Layout.preferredWidth: column_Id.width
 
                                 Text {
-                                    id: text_1_1
+                                    id: text_1
                                     text:  lightsourcefile_temp_qml.settingSource.name_optical_switch[index]
                                     color: "white"
                                     font.pixelSize: switch_optical_1.height * 0.5
@@ -85,7 +85,7 @@ import QtQuick.Layouts
                                     }
 
                                     onClicked: {
-                                        indicator_temp_qml.indicator_str[index] = !indicator_temp_qml.indicator_str[index];
+                                        lightsourcefile_temp_qml.indicatorSource.indicator_str[index] = !lightsourcefile_temp_qml.indicatorSource.indicator_str[index]
                                     }
                                 }
                             }

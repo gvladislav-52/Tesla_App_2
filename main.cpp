@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     headerMap header_temp;
     footer footer_temp;
     RightSourceFile right_temp;
-    Indicators indicator_temp;
-    setting_source setting_temp;
+    //Indicators indicator_temp;
+    //setting_source setting_temp;
     LeftSourceFile left_temp;
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
     qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
@@ -34,8 +34,8 @@ int main(int argc, char *argv[])
     rootContext->setContextProperty("header_temp_qml", &header_temp);           //Установка свойства контекста QML для объектов
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
     rootContext->setContextProperty("right_temp_qml", &right_temp);
-    rootContext->setContextProperty("indicator_temp_qml", &indicator_temp);
-    rootContext->setContextProperty("setting_temp_qml",&setting_temp);
+    //rootContext->setContextProperty("indicator_temp_qml", &indicator_temp);
+    //rootContext->setContextProperty("setting_temp_qml",&setting_temp);
     rootContext->setContextProperty("lightsourcefile_temp_qml",&left_temp);
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
                                                      //лямбда-выражение заменяет создание доп функции (слот) для вызова
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateTahometer(value);});
     QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateDistance(value);});
-    QObject::connect(&timer, &QTimer::timeout, [&]() {indicator_temp.update_dimensions();});
+    QObject::connect(&timer, &QTimer::timeout, [&]() {left_temp.indicatorSource()->update_dimensions();});
     timer.start(10);                                                                //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)

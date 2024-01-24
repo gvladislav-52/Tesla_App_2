@@ -5,19 +5,6 @@
 #include <QQuickPaintedItem>
 #include "setting_source.h"
 
-class LeftSourceFile : public QObject {
-    Q_OBJECT
-    Q_PROPERTY(setting_source* settingSource READ settingSource CONSTANT)
-
-public:
-    explicit LeftSourceFile(QObject *parent = nullptr);
-
-    setting_source* settingSource() const;
-
-private:
-    setting_source* m_settingSource;
-};
-
 class Speedometer: public QQuickPaintedItem
 {
     Q_OBJECT
@@ -118,6 +105,24 @@ private:
     QVector<bool> m_indicator_str;
     QVector<QString> m_indicator_path;
     QVector<QString> path_temp;
+};
+
+
+class LeftSourceFile : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(setting_source* settingSource READ settingSource CONSTANT)
+    Q_PROPERTY(Indicators* indicatorSource READ indicatorSource CONSTANT)
+
+public:
+    explicit LeftSourceFile(QObject *parent = nullptr);
+
+    setting_source* settingSource() const;
+
+    Indicators *indicatorSource() const;
+
+private:
+    setting_source* m_settingSource;
+    Indicators *m_indicatorSource = nullptr;
 };
 
 #endif // LEFTSOURCEFILE_H

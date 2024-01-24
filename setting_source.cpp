@@ -23,3 +23,5 @@ void setting_source::setName_optical_switch(const QVector<QString> &newName_opti
     m_name_optical_switch = newName_optical_switch;
     emit name_optical_switchChanged();
 }
+
+

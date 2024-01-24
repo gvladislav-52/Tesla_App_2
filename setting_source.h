@@ -16,4 +16,5 @@ private:
     QVector<QString> m_name_optical_switch;
 };
 
+
 #endif // SETTING_SOURCE_H

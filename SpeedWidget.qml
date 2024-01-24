@@ -110,7 +110,7 @@ Rectangle {
 
     Image {
         id: image_optics
-        source: indicator_temp_qml.indicator_path[0]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[0]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.05
@@ -121,7 +121,7 @@ Rectangle {
 
     Image {
         id: image_optics_2
-        source: indicator_temp_qml.indicator_path[1]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[1]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.125
@@ -132,7 +132,7 @@ Rectangle {
 
     Image {
         id: image_optics_3
-        source: indicator_temp_qml.indicator_path[2]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[2]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.25
@@ -143,7 +143,7 @@ Rectangle {
 
     Image {
         id: image_optics_4
-        source: indicator_temp_qml.indicator_path[3]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[3]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.35
@@ -154,7 +154,7 @@ Rectangle {
 
     Image {
         id: image_optics_5
-        source: indicator_temp_qml.indicator_path[4]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[4]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.05
@@ -165,7 +165,7 @@ Rectangle {
 
     Image {
         id: image_optics_6
-        source: indicator_temp_qml.indicator_path[5]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[5]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.125
@@ -176,7 +176,7 @@ Rectangle {
 
     Image {
         id: image_optics_7
-        source: indicator_temp_qml.indicator_path[6]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[6]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.25
@@ -187,7 +187,7 @@ Rectangle {
 
     Image {
         id: image_optics_8
-        source: indicator_temp_qml.indicator_path[7]
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[7]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35
