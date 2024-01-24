@@ -95,5 +95,6 @@
         <file>ui/optics/optics_7_bw.png</file>
         <file>ui/optics/optics_8.png</file>
         <file>ui/optics/optics_8_bw.png</file>
+        <file>SettingApplicationWidget.qml</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQuickPaintedItem>
+#include "setting_source.h"
 
 class Speedometer: public QQuickPaintedItem
 {

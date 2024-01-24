@@ -242,7 +242,12 @@ Rectangle {
             color: carButton.pressed ? "lightgray" : "transparent"
             radius: 10
         }
+
+        onClicked: settting_style.visible = !settting_style.visible
     }
+
+    SettingApplicationWidget {id: settting_style
+        visible: false}
 
     ToolButton {
         id: musicButton
