@@ -46,7 +46,7 @@ import QtQuick.Layouts
 
                                 Text {
                                     id: text_1_1
-                                    text:  setting_temp_qml.name_optical_switch[index]
+                                    text:  lightsourcefile_temp_qml.settingSource.name_optical_switch[index]
                                     color: "white"
                                     font.pixelSize: switch_optical_1.height * 0.5
                                     anchors.left: parent.left

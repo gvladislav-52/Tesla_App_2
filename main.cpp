@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     RightSourceFile right_temp;
     Indicators indicator_temp;
     setting_source setting_temp;
-    //lightsourcefile left_temp;
+    LeftSourceFile left_temp;
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
     qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
     const QUrl url(QStringLiteral("qrc:/MainQML.qml"));                         //Загрузка основной QML-страницы
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     rootContext->setContextProperty("right_temp_qml", &right_temp);
     rootContext->setContextProperty("indicator_temp_qml", &indicator_temp);
     rootContext->setContextProperty("setting_temp_qml",&setting_temp);
-    //rootContext->setContextProperty("lightsourcefile_temp_qml",&left_temp);
+    rootContext->setContextProperty("lightsourcefile_temp_qml",&left_temp);
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
     QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним

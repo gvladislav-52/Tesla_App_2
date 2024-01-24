@@ -264,3 +264,11 @@ void Indicators::setIndicator_path(const QVector<QString> &newIndicator_path)
     m_indicator_path = newIndicator_path;
     emit indicator_pathChanged();
 }
+
+LeftSourceFile::LeftSourceFile(QObject *parent) : QObject(parent) {
+    m_settingSource = new setting_source();
+}
+
+setting_source* LeftSourceFile::settingSource() const {
+    return m_settingSource;
+}
