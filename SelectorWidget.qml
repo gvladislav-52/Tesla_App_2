@@ -243,11 +243,8 @@ Rectangle {
             radius: 10
         }
 
-        onClicked: settting_style.visible = !settting_style.visible
+        onClicked: add_temp_qml.add_window_source = !add_temp_qml.add_window_source
     }
-
-    SettingApplicationWidget {id: settting_style
-        visible: false}
 
     ToolButton {
         id: musicButton

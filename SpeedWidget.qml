@@ -71,6 +71,25 @@ Rectangle {
         anchors.top: back_image.bottom
     }
 
+    Image {
+        id: car_speedometer
+        source: "qrc:/ui/speedometer_znak.png"
+        height: parent.height * 0.13
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.height*0.02
+
+        Text
+        {
+            text: lightsourcefile_temp_qml.indicatorSource.speed_limiter
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: parent.height*0.3
+            font.bold: true
+        }
+        fillMode: Image.PreserveAspectFit
+    }
+
 
     //[DISTANCE]
     Image {
@@ -82,6 +101,7 @@ Rectangle {
         anchors.topMargin: parent.height *0.12
         width: parent.width*0.08
         height: parent.height*0.05
+        fillMode: Image.PreserveAspectFit
     }
 
     Text {
@@ -107,6 +127,43 @@ Rectangle {
         color: "white"
     }
     //[~DISTANCE]
+
+    //[BATTARY]
+    Image {
+        id: image_battary
+        source: "qrc:/ui/lightning.png"
+        anchors.right: parent.right
+        anchors.rightMargin: parent.width*0.2
+        anchors.top: parent.verticalCenter
+        anchors.topMargin: parent.height *0.12
+        width: parent.width*0.08
+        height: parent.height*0.05
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Text {
+        id: text_battary
+        anchors.left: image_battary.left
+        anchors.leftMargin: parent.width * 0.1
+        anchors.verticalCenter: image_battary.verticalCenter
+        font.pixelSize: image_battary.height * 0.4
+        font.bold: true
+        color: "white"
+        topPadding: -parent.height * 0.03
+        text: lightsourcefile_temp_qml.battarySource + " %"
+    }
+
+    Text {
+        id: text_battary_static
+        anchors.left: image_battary.left
+        anchors.leftMargin: parent.width*0.1
+        anchors.top: text_battary.bottom
+        text: "Battery"
+        font.pixelSize: image_battary.height*0.35
+        font.bold: true
+        color: "white"
+    }
+    //[~BATTARY]
 
     Image {
         id: image_optics
@@ -192,6 +249,27 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35
         anchors.rightMargin: parent.width * 0.05
+        height: parent.height * 0.075
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: image_optics_9
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[8]
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.bottomMargin: parent.height * 0.05
+        anchors.rightMargin: parent.width * 0.05
+        height: parent.height * 0.075
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Image {
+        id: image_optics_10
+        source: lightsourcefile_temp_qml.indicatorSource.indicator_path[9]
+        anchors.left: parent.left
+        anchors.verticalCenter: image_optics_9.verticalCenter
+        anchors.leftMargin: parent.width * 0.05
         height: parent.height * 0.075
         fillMode: Image.PreserveAspectFit
     }

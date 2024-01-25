@@ -37,11 +37,12 @@ Item {
             anchors.bottomMargin: 10
             anchors.rightMargin: 5
             anchors.bottom: parent.bottom
+            fillMode: Image.PreserveAspectFit
         }
 
         Text {
             id: redittext
-            text:  qsTr("100%");
+            text:  lightsourcefile_temp_qml.battarySource + "%"
             color: "black"
             font.bold: true
             font.pixelSize: parent.width * 0.04
@@ -261,7 +262,7 @@ Item {
         {
             property bool isButtonClick: true
             id: capotDoorButton
-            text: "Open capot"
+            text: "Open hood"
             width: parent.width * 0.2
             height: parent.height * 0.1
             anchors.bottom: parent.verticalCenter
@@ -289,7 +290,7 @@ Item {
         {
             property bool isButtonClick: true
             id: bagDoorButton
-            text: "Open bag"
+            text: "Open trunk"
             width: parent.width * 0.2
             height: parent.height * 0.1
             anchors.top: parent.verticalCenter

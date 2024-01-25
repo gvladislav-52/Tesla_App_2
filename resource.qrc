@@ -19,7 +19,6 @@
         <file>ui/CarUpNew.png</file>
         <file>ui/charge.png</file>
         <file>ui/CloseBag.png</file>
-        <file>ui/D.png</file>
         <file>ui/distance.png</file>
         <file>ui/DOWN.png</file>
         <file>ui/energyBut.png</file>
@@ -36,17 +35,13 @@
         <file>ui/menu.png</file>
         <file>ui/minus.png</file>
         <file>ui/music.png</file>
-        <file>ui/N.png</file>
         <file>ui/navi.png</file>
         <file>ui/OpenBag.png</file>
         <file>ui/overlay.png</file>
-        <file>ui/P.png</file>
         <file>ui/phone.png</file>
         <file>ui/plus.png</file>
         <file>ui/plus2.png</file>
-        <file>ui/R.png</file>
         <file>ui/RightDoorBottom.png</file>
-        <file>ui/S.png</file>
         <file>ui/seatLeft.png</file>
         <file>ui/seatRight.png</file>
         <file>ui/seatRightRedBottom.png</file>
@@ -96,5 +91,16 @@
         <file>ui/optics/optics_8.png</file>
         <file>ui/optics/optics_8_bw.png</file>
         <file>SettingApplicationWidget.qml</file>
+        <file>ui/speedometer_znak.png</file>
+        <file>ui/optics/optics_9.png</file>
+        <file>ui/optics/optics_9_bw.png</file>
+        <file>ui/optics/optics_10.png</file>
+        <file>ui/optics/optics_10_bw.png</file>
+        <file>ui/lightning.png</file>
+        <file>ui/selector_button/selector_num_1.png</file>
+        <file>ui/selector_button/selector_num_2.png</file>
+        <file>ui/selector_button/selector_num_3.png</file>
+        <file>ui/selector_button/selector_num_4.png</file>
+        <file>ui/selector_button/selector_num_5.png</file>
     </qresource>
 </RCC>

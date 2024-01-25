@@ -3,30 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts 1.15
 
 Item {
-    function setWidgetVisible(value) {
-        if (value === 1) {
-            chargeStatus.visible = true;
-            speedStatus.visible = false;
-            microStatus.visible = false;
-            }
-         else if (value === 2) {
-            chargeStatus.visible = false;
-            speedStatus.visible = true;
-            microStatus.visible = false;
-            }
-         else if (value === 3) {
-            chargeStatus.visible = false;
-            speedStatus.visible = false;
-            microStatus.visible = true;
-            }
-        }
 
     ColumnLayout {
         anchors.fill: parent
-        property int temp_button: 1
         ChargeWidget
         {   id: chargeStatus
-            visible: true
+            visible: lightsourcefile_temp_qml.chargeStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -34,7 +16,7 @@ Item {
 
         SpeedWidget
         {   id: speedStatus
-            visible: false
+            visible: lightsourcefile_temp_qml.speedStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -42,7 +24,7 @@ Item {
 
         MicroWidget
         {   id: microStatus
-            visible: false
+            visible: lightsourcefile_temp_qml.microStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -68,7 +50,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: setWidgetVisible(1)
+                    onClicked: lightsourcefile_temp_qml.update_mainBar(1);
 
                 }
 
@@ -78,8 +60,8 @@ Item {
                     anchors.left: chargeButton.horizontalCenter
                     anchors.leftMargin: -parent.width * 0.3
                     anchors.verticalCenter: parent.verticalCenter
-                    icon.width: parent.width * 0.35 // Масштабирование ширины иконки
-                    icon.height: parent.height * 0.35 // Масштабирование высоты иконки
+                    icon.width: parent.width * 0.35
+                    icon.height: parent.height * 0.35
                     hoverEnabled: false
 
                     background: Rectangle {
@@ -87,7 +69,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: setWidgetVisible(2)
+                    onClicked: lightsourcefile_temp_qml.update_mainBar(2);
 
                 }
 
@@ -97,8 +79,8 @@ Item {
                     anchors.right: chargeButton.horizontalCenter
                     anchors.rightMargin: -parent.width * 0.3
                     anchors.verticalCenter: parent.verticalCenter
-                    icon.width: parent.width * 0.35 // Масштабирование ширины иконки
-                    icon.height: parent.height * 0.35 // Масштабирование высоты иконки
+                    icon.width: parent.width * 0.35
+                    icon.height: parent.height * 0.35
                     hoverEnabled: false
 
                     background: Rectangle {
@@ -106,7 +88,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: setWidgetVisible(3)
+                    onClicked: lightsourcefile_temp_qml.update_mainBar(3);
 
                 }
 

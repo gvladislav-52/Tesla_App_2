@@ -2,6 +2,7 @@ import QtQuick
 import QtPositioning
 import QtLocation
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Rectangle {
     id: selector
@@ -11,66 +12,32 @@ Rectangle {
     anchors.top: parent.top
     anchors.left: parent.left
 
-    ToolButton {
-        id: pbutton
-        anchors.horizontalCenter: selector.horizontalCenter
-        width: selector.width*0.9
-        height: selector.height*0.2
-        contentItem: Image {
-            source: "qrc:/ui/P.png"
-            fillMode: Image.PreserveAspectFit
+    ColumnLayout
+    {
+        id: column_id
+        anchors.fill: parent
+        Repeater {
+            model: 5
+            ToolButton {
+                id: pbutton
+                anchors.horizontalCenter: column_id.horizontalCenter
+                Layout.preferredWidth: column_id.width*0.8
+                Layout.preferredHeight: column_id.height*0.15
+                contentItem:
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "transparent"
+                        border.color: lightsourcefile_temp_qml.selectorSource.name_selectorSource[index]? "green" : "transparent"
+                        border.width: 3
+                        Image {
+                            anchors.fill: parent
+                            source: lightsourcefile_temp_qml.selectorSource.path_selectorSource[index]
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                hoverEnabled: false
+                onClicked: lightsourcefile_temp_qml.selectorSource.update_select(index)
+            }
         }
-        hoverEnabled: false
-    }
-    ToolButton {
-        id: rbutton
-        anchors.top: pbutton.bottom
-        anchors.horizontalCenter: selector.horizontalCenter
-        width: selector.width*0.9
-        height: selector.height*0.2
-        contentItem: Image {
-            source: "qrc:/ui/R.png"
-            fillMode: Image.PreserveAspectFit
-        }
-        hoverEnabled: false
-    }
-
-    ToolButton {
-        id: nbutton
-        anchors.top: rbutton.bottom
-        anchors.horizontalCenter: selector.horizontalCenter
-        width: selector.width*0.9
-        height: selector.height*0.2
-        contentItem: Image {
-            source: "qrc:/ui/N.png"
-            fillMode: Image.PreserveAspectFit
-        }
-        hoverEnabled: false
-    }
-
-    ToolButton {
-    id: sbutton
-    anchors.top: nbutton.bottom
-    anchors.horizontalCenter: selector.horizontalCenter
-    width: selector.width*0.9
-    height: selector.height*0.2
-    contentItem: Image {
-        source: "qrc:/ui/S.png"
-        fillMode: Image.PreserveAspectFit
-        }
-        hoverEnabled: false
-    }
-
-    ToolButton {
-        id: dbutton
-        anchors.top: sbutton.bottom
-        anchors.horizontalCenter: selector.horizontalCenter
-        width: selector.width*0.9
-        height: selector.height*0.2
-        contentItem: Image {
-            source: "qrc:/ui/D.png"
-            fillMode: Image.PreserveAspectFit
-        }
-        hoverEnabled: false
     }
 }

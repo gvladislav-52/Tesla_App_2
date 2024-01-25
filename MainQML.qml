@@ -32,4 +32,8 @@ Window {
     function initializeProviders() {
                 rightchild.initializeProviders()
             }
+
+    SettingApplicationWidget {id: settting_style
+        visible: add_temp_qml.add_window_source}
+
 }

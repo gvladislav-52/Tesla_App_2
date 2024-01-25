@@ -10,9 +10,10 @@ Speedometer::Speedometer(QQuickItem * parent): QQuickPaintedItem(parent),
 
 Indicators::Indicators()
 {
-    for(int i = 0; i < 8; i++)
+    m_speed_limiter = "40";
+    for(int i = 0; i < 10; i++)
             m_indicator_str.append(true);
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < 10; i++)
         m_indicator_path.append("1");
 }
 
@@ -35,6 +36,24 @@ void Indicators::update_dimensions()
 
     if(path_temp !=m_indicator_path)
         emit indicator_pathChanged();
+}
+
+void Indicators::update_speed_limiter()
+{
+    int random = rand()%6+1;
+    if(random == 1)
+        setSpeed_limiter("20");
+    else if (random == 2)
+        setSpeed_limiter("40");
+    else if (random == 3)
+        setSpeed_limiter("60");
+    else if (random == 4)
+        setSpeed_limiter("90");
+    else if (random == 5)
+        setSpeed_limiter("110");
+    else if (random == 6)
+        setSpeed_limiter("130");
+    emit speed_limiterChanged();
 }
 
 void Speedometer::paint(QPainter *painter)
@@ -266,8 +285,15 @@ void Indicators::setIndicator_path(const QVector<QString> &newIndicator_path)
 }
 
 LeftSourceFile::LeftSourceFile(QObject *parent) : QObject(parent) {
+    m_chargeStatus = true;
+    m_speedStatus = false;
+    m_microStatus = false;
+
     m_settingSource = new setting_source();
     m_indicatorSource = new Indicators();
+    m_selectorSource = new Selector();
+    m_indicatorSource->update_dimensions();
+
 }
 
 setting_source* LeftSourceFile::settingSource() const {
@@ -278,4 +304,181 @@ setting_source* LeftSourceFile::settingSource() const {
 Indicators *LeftSourceFile::indicatorSource() const
 {
     return m_indicatorSource;
+}
+
+setting_source::setting_source() {
+    m_name_optical_switch.append("Parking lights");
+    m_name_optical_switch.append("External lighting equipment");
+    m_name_optical_switch.append("Low beam");
+    m_name_optical_switch.append("Fog lights");
+    m_name_optical_switch.append("Anti-lock braking system");
+    m_name_optical_switch.append("Hand brake");
+    m_name_optical_switch.append("Notification system");
+    m_name_optical_switch.append("Seat belt warning");
+    m_name_optical_switch.append("Turn signal right");
+    m_name_optical_switch.append("Turn signal left");
+}
+
+QVector<QString> setting_source::getName_optical_switch() const
+{
+    return m_name_optical_switch;
+}
+
+void setting_source::setName_optical_switch(const QVector<QString> &newName_optical_switch)
+{
+    if (m_name_optical_switch == newName_optical_switch)
+        return;
+    m_name_optical_switch = newName_optical_switch;
+    emit name_optical_switchChanged();
+}
+
+bool LeftSourceFile::getChargeStatus() const
+{
+    return m_chargeStatus;
+}
+
+void LeftSourceFile::setChargeStatus(bool newChargeStatus)
+{
+    if (m_chargeStatus == newChargeStatus)
+        return;
+    m_chargeStatus = newChargeStatus;
+    emit chargeStatusChanged();
+}
+
+bool LeftSourceFile::getSpeedStatus() const
+{
+    return m_speedStatus;
+}
+
+void LeftSourceFile::setSpeedStatus(bool newSpeedStatus)
+{
+    if (m_speedStatus == newSpeedStatus)
+        return;
+    m_speedStatus = newSpeedStatus;
+    emit speedStatusChanged();
+}
+
+bool LeftSourceFile::getMicroStatus() const
+{
+    return m_microStatus;
+}
+
+void LeftSourceFile::setMicroStatus(bool newMicroStatus)
+{
+    if (m_microStatus == newMicroStatus)
+        return;
+    m_microStatus = newMicroStatus;
+    emit microStatusChanged();
+}
+
+void LeftSourceFile::update_mainBar(int num)
+{
+    if(num == 1)
+    {
+        setChargeStatus(true);
+        setSpeedStatus(false);
+        setMicroStatus(false);
+    }
+    else if (num == 2) {
+        setChargeStatus(false);
+        setSpeedStatus(true);
+        setMicroStatus(false);
+    }
+    else if (num == 3) {
+        setChargeStatus(false);
+        setSpeedStatus(false);
+        setMicroStatus(true);
+    }
+    emit mainBarUpdated();
+}
+
+void LeftSourceFile::update_indicators()
+{
+    m_indicatorSource->update_dimensions();
+}
+
+QString Indicators::getSpeed_limiter() const
+{
+    return m_speed_limiter;
+}
+
+void Indicators::setSpeed_limiter(const QString &newSpeed_limiter)
+{
+    if (m_speed_limiter == newSpeed_limiter)
+        return;
+    m_speed_limiter = newSpeed_limiter;
+    emit speed_limiterChanged();
+}
+
+QString LeftSourceFile::getBattarySource() const
+{
+    return m_battarySource;
+}
+
+void LeftSourceFile::setBattarySource(const QString &newBattarySource)
+{
+    if (m_battarySource == newBattarySource)
+        return;
+    m_battarySource = newBattarySource;
+    emit battarySourceChanged();
+}
+
+void LeftSourceFile::update_battery()
+{
+    if(battery_temp >= 0)
+        setBattarySource(QString::number(battery_temp--));
+}
+
+Selector::Selector()
+{
+    for(int i = 0; i < 5; i++)
+    {
+        m_path_selectorSource.append("qrc:/ui/selector_button/selector_num_"+QString::number(i+1)+".png");
+        m_name_selectorSource.append(false);
+    }
+        m_name_selectorSource[0] = true;
+
+}
+
+void Selector::update_select(int index_path)
+{
+        for(int i = 0; i < 5; i++)
+        {
+            if(index_path == i)
+                m_name_selectorSource[i] = true;
+            else
+                m_name_selectorSource[i] = false;
+        }
+        emit name_selectorSourceChanged();
+}
+
+QVector<bool> Selector::getName_selectorSource() const
+{
+    return m_name_selectorSource;
+}
+
+void Selector::setName_selectorSource(const QVector<bool> &newName_selectorSource)
+{
+    if (m_name_selectorSource == newName_selectorSource)
+        return;
+    m_name_selectorSource = newName_selectorSource;
+    emit name_selectorSourceChanged();
+}
+
+Selector *LeftSourceFile::selectorSource() const
+{
+    return m_selectorSource;
+}
+
+QVector<QString> Selector::getPath_selectorSource() const
+{
+    return m_path_selectorSource;
+}
+
+void Selector::setPath_selectorSource(const QVector<QString> &newPath_selectorSource)
+{
+    if (m_path_selectorSource == newPath_selectorSource)
+        return;
+    m_path_selectorSource = newPath_selectorSource;
+    emit path_selectorSourceChanged();
 }

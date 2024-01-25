@@ -5,7 +5,7 @@
 #include "headermap.h"
 #include "rightsourcefile.h"
 #include "leftsourcefile.h"
-#include "setting_source.h"
+#include "additional_window.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
     headerMap header_temp;
     footer footer_temp;
     RightSourceFile right_temp;
-    //Indicators indicator_temp;
-    //setting_source setting_temp;
     LeftSourceFile left_temp;
+    additional_window add_temp;
+
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
     qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
     const QUrl url(QStringLiteral("qrc:/MainQML.qml"));                         //Загрузка основной QML-страницы
@@ -34,22 +34,27 @@ int main(int argc, char *argv[])
     rootContext->setContextProperty("header_temp_qml", &header_temp);           //Установка свойства контекста QML для объектов
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
     rootContext->setContextProperty("right_temp_qml", &right_temp);
-    //rootContext->setContextProperty("indicator_temp_qml", &indicator_temp);
-    //rootContext->setContextProperty("setting_temp_qml",&setting_temp);
+    rootContext->setContextProperty("add_temp_qml",&add_temp);
     rootContext->setContextProperty("lightsourcefile_temp_qml",&left_temp);
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
     QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
-    Speedometer *ptrSpeedometer = qobject_cast<Speedometer*>(speedometer);    //Приведение при помощи qobject_cast к типу leftsourcefile
+    Speedometer *ptrSpeedometer = qobject_cast<Speedometer*>(object->findChild<QObject *>("speedometer_object_qml"));    //Приведение при помощи qobject_cast к типу leftsourcefile
     qreal value = 0;
     ptrSpeedometer->setSpeed(value);                                                //устанавливаем скорость спидометра, которая зависит на данный момент от времени
     QTimer timer;                                                                   //устанавливаем таймер
     bool direction = true;                                                          //переменная отвечающая за направление
-    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateSpeedometer(value, direction);});   //Устанавливаем сигнал таймера с лямдой выражением, которая вызывает функцию
-                                                     //лямбда-выражение заменяет создание доп функции (слот) для вызова
-    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateTahometer(value);});
-    QObject::connect(&timer, &QTimer::timeout, [&]() {ptrSpeedometer->updateDistance(value);});
-    QObject::connect(&timer, &QTimer::timeout, [&]() {left_temp.indicatorSource()->update_dimensions();});
+    QObject::connect(&timer, &QTimer::timeout, [&]() {
+        static int count = 0;
+        if (count % 200 == 0) {
+            left_temp.indicatorSource()->update_speed_limiter();
+            left_temp.update_battery();
+        }
+        ptrSpeedometer->updateTahometer(value);
+        ptrSpeedometer->updateSpeedometer(value, direction);
+        ptrSpeedometer->updateDistance(value);
+        count++;
+    });
     timer.start(10);                                                                //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)
