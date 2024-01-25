@@ -29,6 +29,7 @@ Rectangle {
                         color: "transparent"
                         border.color: lightsourcefile_temp_qml.selectorSource.name_selectorSource[index]? "green" : "transparent"
                         border.width: 3
+                        radius: 5
                         Image {
                             anchors.fill: parent
                             source: lightsourcefile_temp_qml.selectorSource.path_selectorSource[index]

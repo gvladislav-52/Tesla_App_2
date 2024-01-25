@@ -6,7 +6,7 @@
 
 RightSourceFile::RightSourceFile(QObject *parent)
     : QObject(parent)
-{}
+{m_carLocked = true;}
 
 bool RightSourceFile::carLocked() const
 {
