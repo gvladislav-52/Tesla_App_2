@@ -100,13 +100,6 @@ Item {
                         running: false
                         PropertyAnimation { target: rightDoor; property: "rotation"; to: 0; duration: 500 }
                     }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            doorOpenAnimationRight.running = true
-                        }
-                    }
             }
 
             Image {
@@ -153,13 +146,6 @@ Item {
                         running: false
                         PropertyAnimation { target: leftDoorBottom; property: "rotation"; to: 0; duration: 500 }
                     }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            doorOpenAnimationLeftBottom.running = true
-                        }
-                    }
             }
 
             Image {
@@ -196,7 +182,7 @@ Item {
                 anchors.leftMargin: -54
                 anchors.bottom: parent.verticalCenter
                 anchors.bottomMargin: 2
-                visible: true
+                visible: lightsourcefile_temp_qml.carDoorSource.name_carDoor[4]
             }
 
             Image
@@ -210,7 +196,7 @@ Item {
                 anchors.leftMargin: -54
                 anchors.bottom: parent.verticalCenter
                 anchors.bottomMargin: -5
-                visible: false
+                visible: !lightsourcefile_temp_qml.carDoorSource.name_carDoor[4]
             }
 
             Image
@@ -224,7 +210,7 @@ Item {
                 anchors.leftMargin: -48
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 24
-                visible: true
+                visible: lightsourcefile_temp_qml.carDoorSource.name_carDoor[5]
             }
 
             Image
@@ -238,7 +224,7 @@ Item {
                 anchors.leftMargin: -48
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 12
-                visible: false
+                visible: !lightsourcefile_temp_qml.carDoorSource.name_carDoor[5]
 
             }
 
@@ -253,14 +239,13 @@ Item {
                 anchors.rightMargin: 53
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 80
-                visible: false
+                visible: !lightsourcefile_temp_qml.carDoorSource.name_carDoor[6]
 
             }
         }
 
         ToolButton
         {
-            property bool isButtonClick: true
             id: capotDoorButton
             text: "Open hood"
             width: parent.width * 0.2
@@ -272,14 +257,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                closeCapot.visible = !closeCapot.visible
-                openCapot.visible = !openCapot.visible
-                isButtonClick = !isButtonClick
+                lightsourcefile_temp_qml.update_carDoor(4);
             }
 
             background: Rectangle {
                 id: rectangleCapotDoorButton
-                color:  capotDoorButton.isButtonClick ? "lightgray" : "red"
+                color:  lightsourcefile_temp_qml.carDoorSource.name_carDoor[4] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -288,7 +271,6 @@ Item {
 
         ToolButton
         {
-            property bool isButtonClick: true
             id: bagDoorButton
             text: "Open trunk"
             width: parent.width * 0.2
@@ -300,14 +282,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                closeBag.visible = !closeBag.visible
-                openBag.visible = !openBag.visible
-                isButtonClick = !isButtonClick
+                lightsourcefile_temp_qml.update_carDoor(5);
             }
 
             background: Rectangle {
                 id: rectangleBagDoorButton
-                color:  bagDoorButton.isButtonClick ? "lightgray" : "red"
+                color:  lightsourcefile_temp_qml.carDoorSource.name_carDoor[5] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -316,7 +296,6 @@ Item {
 
         ToolButton
         {
-            property bool isButtonClick: true
             id: energyDoorButton
             text: "Open ePort"
             width: parent.width * 0.2
@@ -328,13 +307,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                energyBut.visible = !energyBut.visible
-                isButtonClick = !isButtonClick
+                lightsourcefile_temp_qml.update_carDoor(6);
             }
 
             background: Rectangle {
                 id: rectangleEnergyDoorButton
-                color:  energyDoorButton.isButtonClick ? "lightgray" : "red"
+                color:  lightsourcefile_temp_qml.carDoorSource.name_carDoor[6] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -345,8 +323,6 @@ Item {
 
         ToolButton
         {
-            property bool rightTopDoorCheck: false
-            property bool isButtonClick: true
             id: rightTopDoorButton
             text: "Open door"
             width: parent.width * 0.2
@@ -357,21 +333,15 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                if(rightTopDoorCheck)
-                {
+                lightsourcefile_temp_qml.update_carDoor(0);
+                if(lightsourcefile_temp_qml.carDoorSource.name_carDoor[0])
                     revdoorOpenAnimationRight.running = true
-                }
-                    else
-                {
-                    doorOpenAnimationRight.running = true
-                }
-                rightTopDoorCheck = !rightTopDoorCheck
-                isButtonClick = !isButtonClick
+                else doorOpenAnimationRight.running = true
             }
 
             background: Rectangle {
                 id: rectangleRightTopDoorButton
-                color:  rightTopDoorButton.isButtonClick ? "lightgray" : "red"
+                color:  lightsourcefile_temp_qml.carDoorSource.name_carDoor[0] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -379,8 +349,7 @@ Item {
         }
 
         ToolButton
-            {   property bool rightBottomDoorCheck: false
-                property bool isButtonClick: true
+            {
                 id: rightBottomDoorButton
                 text: "Open door"
                 width: parent.width * 0.2
@@ -390,20 +359,14 @@ Item {
                 anchors.right: parent.right
 
                 onClicked: {
-                    if(rightBottomDoorCheck)
-                    {
+                    lightsourcefile_temp_qml.update_carDoor(1);
+                    if(lightsourcefile_temp_qml.carDoorSource.name_carDoor[1])
                         revdoorOpenAnimationRightBottom.running = true
-                    }
-                        else
-                    {
-                        doorOpenAnimationRightBottom.running = true
-                    }
-                    rightBottomDoorCheck = !rightBottomDoorCheck
-                    isButtonClick = !isButtonClick
+                    else doorOpenAnimationRightBottom.running = true
                 }
 
                 background: Rectangle {
-                    color: rightBottomDoorButton.isButtonClick ? "lightgray" : "red"
+                    color: lightsourcefile_temp_qml.carDoorSource.name_carDoor[1] ? "lightgray" : "red"
                     radius: 15*parent.width
                     border.color : "gray"
                     border.width: 1
@@ -412,8 +375,6 @@ Item {
 
         ToolButton
         {
-            property bool leftTopDoorCheck: false
-            property bool isButtonClick: true
             id: leftTopDoorButton
             text: "Open door"
             width: parent.width * 0.2
@@ -424,21 +385,15 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                if(leftTopDoorCheck)
-                {
+                lightsourcefile_temp_qml.update_carDoor(2);
+                if(lightsourcefile_temp_qml.carDoorSource.name_carDoor[2])
                     revdoorOpenAnimationLeft.running = true
-                }
-                    else
-                {
-                    doorOpenAnimationLeft.running = true
-                }
-                leftTopDoorCheck = !leftTopDoorCheck
-                isButtonClick = !isButtonClick
+                else doorOpenAnimationLeft.running = true
             }
 
             background: Rectangle {
                 id: rectangleLeftTopDoorButton
-                color:  leftTopDoorButton.isButtonClick ? "lightgray" : "red"
+                color: lightsourcefile_temp_qml.carDoorSource.name_carDoor[2] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -447,8 +402,6 @@ Item {
 
         ToolButton
             {
-                property bool leftBottomDoorCheck: false
-                property bool isButtonClick: true
                 id: leftBottomDoorButton
                 text: "Open door"
                 width: parent.width * 0.2
@@ -458,20 +411,14 @@ Item {
                 anchors.left: parent.left
 
                 onClicked: {
-                    if(leftBottomDoorCheck)
-                    {
+                    lightsourcefile_temp_qml.update_carDoor(3);
+                    if(lightsourcefile_temp_qml.carDoorSource.name_carDoor[3])
                         revdoorOpenAnimationLeftBottom.running = true
-                    }
-                        else
-                    {
-                        doorOpenAnimationLeftBottom.running = true
-                    }
-                    leftBottomDoorCheck = !leftBottomDoorCheck
-                    isButtonClick = !isButtonClick
+                    else doorOpenAnimationLeftBottom.running = true
                 }
 
                 background: Rectangle {
-                    color: leftBottomDoorButton.isButtonClick ? "lightgray" : "red"
+                    color: lightsourcefile_temp_qml.carDoorSource.name_carDoor[3] ? "lightgray" : "red"
                     radius: 15*parent.width
                     border.color : "gray"
                     border.width: 1

@@ -198,6 +198,60 @@ support"
                 }
             }
 
+            Popup {
+                id: errorDrive
+                width: appWindow.width / 1.015
+                height: appWindow.height * 0.08
+                visible: lightsourcefile_temp_qml.selectorSource.boolean_selectorSource
+                x: ((appWindow.width - errorDrive.width) / 2)-appWindow.width*0.002
+                y:  appWindow.height * 0.71
+
+                background: Rectangle {
+                    width: errorDrive.width
+                    height: errorDrive.height
+                    color: "red"
+                    radius: 10
+                    border.color: "darkred"
+                    border.width: 2
+                    opacity: 0.8
+
+                    Text {
+                        id:errorDriveText
+                        text: "Error! Close all doors before continuing to move"
+                        font.pixelSize: errorDrive.height / 2
+                        anchors.centerIn: parent
+                        color: "white"
+                    }
+                }
+            }
+
+            Popup {
+                id: errorSelect
+                width: appWindow.width / 1.015
+                height: appWindow.height * 0.08
+                visible: lightsourcefile_temp_qml.carDoorSource.boolean_carDoor
+                x: ((appWindow.width - errorSelect.width) / 2)-appWindow.width*0.002
+                y:  appWindow.height * 0.71
+
+                background: Rectangle {
+                    width: errorSelect.width
+                    height: errorSelect.height
+                    color: "red"
+                    radius: 10
+                    border.color: "darkred"
+                    border.width: 2
+                    opacity: 0.8
+
+                    Text {
+                        id:errorSelectText
+                        text: "Error! Switch the selector to the PARKING gear to open the doors"
+                        font.pixelSize: errorSelect.height / 2
+                        anchors.centerIn: parent
+                        color: "white"
+                    }
+                }
+            }
+
 
             Popup {
                 id: errorPopup

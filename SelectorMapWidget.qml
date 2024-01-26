@@ -37,7 +37,7 @@ Rectangle {
                         }
                     }
                 hoverEnabled: false
-                onClicked: lightsourcefile_temp_qml.selectorSource.update_select(index)
+                onClicked: lightsourcefile_temp_qml.update_selector(index)
             }
         }
     }

@@ -132,6 +132,7 @@ class Selector: public QObject
     Q_OBJECT
     Q_PROPERTY(QVector<QString> path_selectorSource READ getPath_selectorSource WRITE setPath_selectorSource NOTIFY path_selectorSourceChanged FINAL)
     Q_PROPERTY(QVector<bool> name_selectorSource READ getName_selectorSource WRITE setName_selectorSource NOTIFY name_selectorSourceChanged FINAL)
+    Q_PROPERTY(bool boolean_selectorSource READ getBoolean_selectorSource WRITE setBoolean_selectorSource NOTIFY boolean_selectorSourceChanged FINAL)
 
 public:
     Selector();
@@ -141,16 +142,50 @@ public:
     QVector<QString> getPath_selectorSource() const;
     void setPath_selectorSource(const QVector<QString> &newPath_selectorSource);
 
+    bool getBoolean_selectorSource() const;
+    void setBoolean_selectorSource(bool newBoolean_selectorSource);
+
 signals:
     void name_selectorSourceChanged();
 
     void path_selectorSourceChanged();
 
+    void boolean_selectorSourceChanged();
+
 private:
     QVector<bool> m_name_selectorSource;
     QVector<QString> m_path_selectorSource;
+    bool m_boolean_selectorSource;
+
 public slots:
     void update_select(int i);
+};
+
+class CarDoor: public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(QVector<bool> name_carDoor READ getName_carDoor WRITE setName_carDoor NOTIFY name_carDoorChanged FINAL)
+    Q_PROPERTY(bool boolean_carDoor READ getBoolean_carDoor WRITE setBoolean_carDoor NOTIFY boolean_carDoorChanged FINAL)
+
+public:
+    CarDoor();
+    QVector<bool> getName_carDoor() const;
+    void setName_carDoor(const QVector<bool> &newName_carDoor);
+
+    bool getBoolean_carDoor() const;
+    void setBoolean_carDoor(bool newBoolean_carDoor);
+
+signals:
+    void name_carDoorChanged();
+
+    void boolean_carDoorChanged();
+
+private:
+    QVector<bool> m_name_carDoor;
+    bool m_boolean_carDoor;
+
+public slots:
+    void update_carDoor(int index);
 };
 
 
@@ -163,6 +198,7 @@ class LeftSourceFile : public QObject {
     Q_PROPERTY(setting_source* settingSource READ settingSource CONSTANT)
     Q_PROPERTY(Indicators* indicatorSource READ indicatorSource CONSTANT)
     Q_PROPERTY(Selector* selectorSource READ selectorSource CONSTANT)
+    Q_PROPERTY(CarDoor* carDoorSource READ carDoorSource CONSTANT)
 
     Q_PROPERTY(QString battarySource READ getBattarySource WRITE setBattarySource NOTIFY battarySourceChanged FINAL)
 
@@ -188,6 +224,8 @@ public:
 
     Selector *selectorSource() const;
 
+    CarDoor *carDoorSource() const;
+
 signals:
     void mainBarUpdated();
     void chargeStatusChanged();
@@ -210,9 +248,13 @@ private:
 
     Selector *m_selectorSource = nullptr;
 
+    CarDoor *m_carDoorSource = nullptr;
+
 public slots:
     void update_mainBar(int num);
     void update_indicators();
+    void update_selector(int index);
+    void update_carDoor(int index);
 };
 
 #endif // LEFTSOURCEFILE_H

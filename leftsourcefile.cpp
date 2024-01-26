@@ -292,8 +292,11 @@ LeftSourceFile::LeftSourceFile(QObject *parent) : QObject(parent) {
     m_settingSource = new setting_source();
     m_indicatorSource = new Indicators();
     m_selectorSource = new Selector();
+    m_selectorSource->setBoolean_selectorSource(false);
+    m_carDoorSource = new CarDoor();
+    m_carDoorSource->setBoolean_carDoor(false);
+    m_selectorSource->setBoolean_selectorSource(false);
     m_indicatorSource->update_dimensions();
-
 }
 
 setting_source* LeftSourceFile::settingSource() const {
@@ -397,6 +400,46 @@ void LeftSourceFile::update_indicators()
     m_indicatorSource->update_dimensions();
 }
 
+void LeftSourceFile::update_selector(int index)
+{
+    bool allTrue = true;
+    for(int i = 0; i < 7; i++) {
+        if(m_carDoorSource->getName_carDoor().at(i) == false) {
+            allTrue = false;
+            m_selectorSource->update_select(0);
+            m_selectorSource->setBoolean_selectorSource(true);
+            break;
+        }
+    }
+
+    if (allTrue)
+    {
+        m_selectorSource->update_select(index);
+        m_selectorSource->setBoolean_selectorSource(false);
+    }
+
+    //qDebug() << m_selectorSource->getBoolean_selectorSource();
+    emit m_selectorSource->boolean_selectorSourceChanged();
+    // emit m_carDoorSource->boolean_carDoorChanged();
+}
+
+void LeftSourceFile::update_carDoor(int index)
+{
+    if(m_selectorSource->getName_selectorSource().at(0) == false)
+    {
+        m_carDoorSource->setBoolean_carDoor(true);
+    }
+    else
+    {
+        m_carDoorSource->update_carDoor(index);
+        m_carDoorSource->setBoolean_carDoor(false);
+    }
+
+    qDebug() << m_carDoorSource->getBoolean_carDoor();
+    // emit m_selectorSource->boolean_selectorSourceChanged();
+    emit m_carDoorSource->boolean_carDoorChanged();
+}
+
 QString Indicators::getSpeed_limiter() const
 {
     return m_speed_limiter;
@@ -481,4 +524,57 @@ void Selector::setPath_selectorSource(const QVector<QString> &newPath_selectorSo
         return;
     m_path_selectorSource = newPath_selectorSource;
     emit path_selectorSourceChanged();
+}
+
+CarDoor::CarDoor()
+{
+    for(int i = 0; i<7; i++)
+        m_name_carDoor.append(true);
+}
+
+QVector<bool> CarDoor::getName_carDoor() const
+{
+    return m_name_carDoor;
+}
+
+void CarDoor::setName_carDoor(const QVector<bool> &newName_carDoor)
+{
+    if (m_name_carDoor == newName_carDoor)
+        return;
+    m_name_carDoor = newName_carDoor;
+    emit name_carDoorChanged();
+}
+
+void CarDoor::update_carDoor(int index)
+{
+    m_name_carDoor[index] = !m_name_carDoor[index];
+    emit name_carDoorChanged();
+}
+
+CarDoor *LeftSourceFile::carDoorSource() const
+{
+    return m_carDoorSource;
+}
+
+bool CarDoor::getBoolean_carDoor() const
+{
+    return m_boolean_carDoor;
+}
+
+void CarDoor::setBoolean_carDoor(bool newBoolean_carDoor)
+{
+    if (m_boolean_carDoor == newBoolean_carDoor)
+        return;
+    m_boolean_carDoor = newBoolean_carDoor;
+    emit boolean_carDoorChanged();
+}
+
+bool Selector::getBoolean_selectorSource() const
+{
+    return m_boolean_selectorSource;
+}
+
+void Selector::setBoolean_selectorSource(bool newBoolean_selectorSource)
+{
+    m_boolean_selectorSource = newBoolean_selectorSource;
 }
