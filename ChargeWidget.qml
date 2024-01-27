@@ -42,7 +42,7 @@ Item {
 
         Text {
             id: redittext
-            text:  lightsourcefile_temp_qml.left_charge_object.battarySource + "%"
+            text:  left_main_source.left_charge_object.battarySource + "%"
             color: "black"
             font.bold: true
             font.pixelSize: parent.width * 0.04
@@ -182,7 +182,7 @@ Item {
                 anchors.leftMargin: -54
                 anchors.bottom: parent.verticalCenter
                 anchors.bottomMargin: 2
-                visible: lightsourcefile_temp_qml.left_charge_object.vector_carDoor[4]
+                visible: left_main_source.left_charge_object.vector_carDoor[4]
             }
 
             Image
@@ -196,7 +196,7 @@ Item {
                 anchors.leftMargin: -54
                 anchors.bottom: parent.verticalCenter
                 anchors.bottomMargin: -5
-                visible: !lightsourcefile_temp_qml.left_charge_object.vector_carDoor[4]
+                visible: !left_main_source.left_charge_object.vector_carDoor[4]
             }
 
             Image
@@ -210,7 +210,7 @@ Item {
                 anchors.leftMargin: -48
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 24
-                visible: lightsourcefile_temp_qml.left_charge_object.vector_carDoor[5]
+                visible: left_main_source.left_charge_object.vector_carDoor[5]
             }
 
             Image
@@ -224,7 +224,7 @@ Item {
                 anchors.leftMargin: -48
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 12
-                visible: !lightsourcefile_temp_qml.left_charge_object.vector_carDoor[5]
+                visible: !left_main_source.left_charge_object.vector_carDoor[5]
 
             }
 
@@ -239,7 +239,7 @@ Item {
                 anchors.rightMargin: 53
                 anchors.top: parent.verticalCenter
                 anchors.topMargin: 80
-                visible: !lightsourcefile_temp_qml.left_charge_object.vector_carDoor[6]
+                visible: !left_main_source.left_charge_object.vector_carDoor[6]
 
             }
         }
@@ -257,12 +257,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                lightsourcefile_temp_qml.update_carDoor(4);
+                left_main_source.update_carDoor(4);
             }
 
             background: Rectangle {
                 id: rectangleCapotDoorButton
-                color:  lightsourcefile_temp_qml.left_charge_object.vector_carDoor[4] ? "lightgray" : "red"
+                color:  left_main_source.left_charge_object.vector_carDoor[4] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -282,12 +282,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                lightsourcefile_temp_qml.update_carDoor(5);
+                left_main_source.update_carDoor(5);
             }
 
             background: Rectangle {
                 id: rectangleBagDoorButton
-                color:  lightsourcefile_temp_qml.left_charge_object.vector_carDoor[5] ? "lightgray" : "red"
+                color:  left_main_source.left_charge_object.vector_carDoor[5] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -307,12 +307,12 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                lightsourcefile_temp_qml.update_carDoor(6);
+                left_main_source.update_carDoor(6);
             }
 
             background: Rectangle {
                 id: rectangleEnergyDoorButton
-                color:  lightsourcefile_temp_qml.left_charge_object.vector_carDoor[6] ? "lightgray" : "red"
+                color:  left_main_source.left_charge_object.vector_carDoor[6] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -333,15 +333,15 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                lightsourcefile_temp_qml.update_carDoor(0);
-                if(lightsourcefile_temp_qml.left_charge_object.vector_carDoor[0])
+                left_main_source.update_carDoor(0);
+                if(left_main_source.left_charge_object.vector_carDoor[0])
                     revdoorOpenAnimationRight.running = true
                 else doorOpenAnimationRight.running = true
             }
 
             background: Rectangle {
                 id: rectangleRightTopDoorButton
-                color:  lightsourcefile_temp_qml.left_charge_object.vector_carDoor[0] ? "lightgray" : "red"
+                color:  left_main_source.left_charge_object.vector_carDoor[0] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -359,14 +359,14 @@ Item {
                 anchors.right: parent.right
 
                 onClicked: {
-                    lightsourcefile_temp_qml.update_carDoor(1);
-                    if(lightsourcefile_temp_qml.left_charge_object.vector_carDoor[1])
+                    left_main_source.update_carDoor(1);
+                    if(left_main_source.left_charge_object.vector_carDoor[1])
                         revdoorOpenAnimationRightBottom.running = true
                     else doorOpenAnimationRightBottom.running = true
                 }
 
                 background: Rectangle {
-                    color: lightsourcefile_temp_qml.left_charge_object.vector_carDoor[1] ? "lightgray" : "red"
+                    color: left_main_source.left_charge_object.vector_carDoor[1] ? "lightgray" : "red"
                     radius: 15*parent.width
                     border.color : "gray"
                     border.width: 1
@@ -385,15 +385,15 @@ Item {
 
             hoverEnabled: true
             onClicked: {
-                lightsourcefile_temp_qml.update_carDoor(2);
-                if(lightsourcefile_temp_qml.left_charge_object.vector_carDoor[2])
+                left_main_source.update_carDoor(2);
+                if(left_main_source.left_charge_object.vector_carDoor[2])
                     revdoorOpenAnimationLeft.running = true
                 else doorOpenAnimationLeft.running = true
             }
 
             background: Rectangle {
                 id: rectangleLeftTopDoorButton
-                color: lightsourcefile_temp_qml.left_charge_object.vector_carDoor[2] ? "lightgray" : "red"
+                color: left_main_source.left_charge_object.vector_carDoor[2] ? "lightgray" : "red"
                 radius: 15*parent.width
                 border.color : "gray"
                 border.width: 1
@@ -411,14 +411,14 @@ Item {
                 anchors.left: parent.left
 
                 onClicked: {
-                    lightsourcefile_temp_qml.update_carDoor(3);
-                    if(lightsourcefile_temp_qml.left_charge_object.vector_carDoor[3])
+                    left_main_source.update_carDoor(3);
+                    if(left_main_source.left_charge_object.vector_carDoor[3])
                         revdoorOpenAnimationLeftBottom.running = true
                     else doorOpenAnimationLeftBottom.running = true
                 }
 
                 background: Rectangle {
-                    color: lightsourcefile_temp_qml.left_charge_object.vector_carDoor[3] ? "lightgray" : "red"
+                    color: left_main_source.left_charge_object.vector_carDoor[3] ? "lightgray" : "red"
                     radius: 15*parent.width
                     border.color : "gray"
                     border.width: 1

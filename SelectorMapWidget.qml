@@ -27,17 +27,17 @@ Rectangle {
                     Rectangle {
                         anchors.fill: parent
                         color: "transparent"
-                        border.color: lightsourcefile_temp_qml.name_selectorSource[index]? "green" : "transparent"
+                        border.color: left_main_source.name_selectorSource[index]? "green" : "transparent"
                         border.width: 3
                         radius: 5
                         Image {
                             anchors.fill: parent
-                            source: lightsourcefile_temp_qml.path_selectorSource[index]
+                            source: left_main_source.path_selectorSource[index]
                             fillMode: Image.PreserveAspectFit
                         }
                     }
                 hoverEnabled: false
-                onClicked: lightsourcefile_temp_qml.update_selector(index)
+                onClicked: left_main_source.update_selector(index)
             }
         }
     }

@@ -81,7 +81,7 @@ Rectangle {
 
         Text
         {
-            text: lightsourcefile_temp_qml.left_speed_object.speed_limiter
+            text: left_main_source.left_speed_object.speed_limiter
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: parent.height*0.3
@@ -150,7 +150,7 @@ Rectangle {
         font.bold: true
         color: "white"
         topPadding: -parent.height * 0.03
-        text: lightsourcefile_temp_qml.left_charge_object.battarySource + " %"
+        text: left_main_source.left_charge_object.battarySource + " %"
     }
 
     Text {
@@ -167,7 +167,7 @@ Rectangle {
 
     Image {
         id: image_optics
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[0]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[0]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.05
@@ -178,7 +178,7 @@ Rectangle {
 
     Image {
         id: image_optics_2
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[1]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[1]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.125
@@ -189,7 +189,7 @@ Rectangle {
 
     Image {
         id: image_optics_3
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[2]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[2]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.25
@@ -200,7 +200,7 @@ Rectangle {
 
     Image {
         id: image_optics_4
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[3]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[3]
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.topMargin: parent.height * 0.35
@@ -211,7 +211,7 @@ Rectangle {
 
     Image {
         id: image_optics_5
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[4]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[4]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.05
@@ -222,7 +222,7 @@ Rectangle {
 
     Image {
         id: image_optics_6
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[5]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[5]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.125
@@ -233,7 +233,7 @@ Rectangle {
 
     Image {
         id: image_optics_7
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[6]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[6]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.25
@@ -244,7 +244,7 @@ Rectangle {
 
     Image {
         id: image_optics_8
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[7]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[7]
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: parent.height * 0.35
@@ -255,7 +255,7 @@ Rectangle {
 
     Image {
         id: image_optics_9
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[8]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[8]
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.bottomMargin: parent.height * 0.05
@@ -266,7 +266,7 @@ Rectangle {
 
     Image {
         id: image_optics_10
-        source: lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Path[9]
+        source: left_main_source.left_speed_object.vector_Indicator_Path[9]
         anchors.left: parent.left
         anchors.verticalCenter: image_optics_9.verticalCenter
         anchors.leftMargin: parent.width * 0.05

@@ -4,9 +4,9 @@
 #include "footer.h"
 #include "headermap.h"
 #include "rightsourcefile.h"
-#include "leftsourcefile.h"
 #include "additional_window.h"
 #include "left_speed_widget.h"
+#include "left_main_widget.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     headerMap header_temp;
     footer footer_temp;
     RightSourceFile right_temp;
-    LeftSourceFile left_temp;
+    Left_Main_Widget left_main_temp;
     additional_window add_temp;
 
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
     rootContext->setContextProperty("right_temp_qml", &right_temp);
     rootContext->setContextProperty("add_temp_qml",&add_temp);
-    rootContext->setContextProperty("lightsourcefile_temp_qml",&left_temp);
+    rootContext->setContextProperty("left_main_source",&left_main_temp);
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
     QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
     QObject::connect(&timer, &QTimer::timeout, [&]() {
         static int count = 0;
         if (count % 200 == 0) {
-            left_temp.left_speed_object()->update_speed_limiter();
-            left_temp.left_charge_object()->update_battery();
+            left_main_temp.left_speed_object()->update_speed_limiter();
+            left_main_temp.left_charge_object()->update_battery();
         }
         ptrSpeedometer->updateTahometer(value);
         ptrSpeedometer->updateSpeedometer(value, direction);

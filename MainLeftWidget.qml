@@ -8,7 +8,7 @@ Item {
         anchors.fill: parent
         ChargeWidget
         {   id: chargeStatus
-            visible: lightsourcefile_temp_qml.chargeStatus
+            visible: left_main_source.chargeStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -16,7 +16,7 @@ Item {
 
         SpeedWidget
         {   id: speedStatus
-            visible: lightsourcefile_temp_qml.speedStatus
+            visible: left_main_source.speedStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -24,7 +24,7 @@ Item {
 
         MicroWidget
         {   id: microStatus
-            visible: lightsourcefile_temp_qml.microStatus
+            visible: left_main_source.microStatus
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/1.3
@@ -50,7 +50,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: lightsourcefile_temp_qml.update_mainBar(1);
+                    onClicked: left_main_source.update_mainBar(1);
 
                 }
 
@@ -69,7 +69,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: lightsourcefile_temp_qml.update_mainBar(2);
+                    onClicked: left_main_source.update_mainBar(2);
 
                 }
 
@@ -88,7 +88,7 @@ Item {
                         radius: 10
                     }
 
-                    onClicked: lightsourcefile_temp_qml.update_mainBar(3);
+                    onClicked: left_main_source.update_mainBar(3);
 
                 }
 

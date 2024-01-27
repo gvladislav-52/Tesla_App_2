@@ -13,8 +13,8 @@ SOURCES += \
     footer.cpp \
     headermap.cpp \
     left_charge_widget.cpp \
+    left_main_widget.cpp \
     left_speed_widget.cpp \
-    leftsourcefile.cpp \
     main.cpp \
     rightsourcefile.cpp
 
@@ -23,8 +23,8 @@ HEADERS += \
     footer.h \
     headermap.h \
     left_charge_widget.h \
+    left_main_widget.h \
     left_speed_widget.h \
-    leftsourcefile.h \
     rightsourcefile.h
 
 FORMS +=
