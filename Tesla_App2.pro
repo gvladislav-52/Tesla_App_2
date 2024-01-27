@@ -10,21 +10,23 @@ CONFIG += c++17
 
 SOURCES += \
     additional_window.cpp \
-    footer.cpp \
-    headermap.cpp \
     left_charge_widget.cpp \
     left_main_widget.cpp \
     left_speed_widget.cpp \
     main.cpp \
+    right_footer_widget.cpp \
+    right_header_widget.cpp \
+    right_main_widget.cpp \
     rightsourcefile.cpp
 
 HEADERS += \
     additional_window.h \
-    footer.h \
-    headermap.h \
     left_charge_widget.h \
     left_main_widget.h \
     left_speed_widget.h \
+    right_footer_widget.h \
+    right_header_widget.h \
+    right_main_widget.h \
     rightsourcefile.h
 
 FORMS +=

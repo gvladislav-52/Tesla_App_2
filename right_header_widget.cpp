@@ -1,46 +1,47 @@
-#include "headermap.h"
+#include "right_header_widget.h"
+
 #include <QDateTime>
 #include <QDebug>
 #include <QRandomGenerator>
 #include <QString>
 
-headerMap::headerMap(QObject *parent)
+Right_Header_Widget::Right_Header_Widget(QObject *parent)
     : QObject(parent)
-    , m_currentTime("12:34am")
+    , m_string_currentTime("00:00am")
 {
     m_currentTimeTimer = new QTimer(this);
     m_currentTimeTimer->setInterval(1000);
     m_currentTimeTimer->setSingleShot(true);
-    connect(m_currentTimeTimer, &QTimer::timeout, this, &headerMap::currentTimeTimerTimeout);
+    connect(m_currentTimeTimer, &QTimer::timeout, this, &Right_Header_Widget::currentTimeTimerTimeout);
     //connect(m_currentTimeTimer,&QTimer::timeout, this, &headerMap::temperatureSlot);
     currentTimeTimerTimeout();
     temperatureSlot();
 }
 
-QString headerMap::currentTime() const
+QString Right_Header_Widget::getString_currentTime() const
 {
-    return m_currentTime;
+    return m_string_currentTime;
 }
 
-void headerMap::setCurrentTime(const QString &newCurrentTime)
+void Right_Header_Widget::setString_currentTime(const QString &newCurrentTime)
 {
-    if (m_currentTime == newCurrentTime)
+    if (m_string_currentTime == newCurrentTime)
         return;
-    m_currentTime = newCurrentTime;
-    emit currentTimeChanged();
+    m_string_currentTime = newCurrentTime;
+    emit string_currentTimeChanged();
 }
 
-void headerMap::currentTimeTimerTimeout()
+void Right_Header_Widget::currentTimeTimerTimeout()
 {
     QDateTime dateTime;
     QString currentTime = dateTime.currentDateTime().toString("hh:mm AP");
     //qDebug() << currentTime;
-    setCurrentTime(currentTime);
+    setString_currentTime(currentTime);
 
     m_currentTimeTimer->start();
 }
 
-void headerMap::temperatureSlot()
+void Right_Header_Widget::temperatureSlot()
 {
     QNetworkAccessManager *manager = new QNetworkAccessManager();
     QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(
@@ -77,21 +78,21 @@ void headerMap::temperatureSlot()
         }
         reader.readNext();
     }
-    settemperature(temp);
+    setString_temperature(temp);
 }
 
-QString headerMap::temperature() const
+QString Right_Header_Widget::getString_temperature() const
 {
-    if (m_temperature == "-0")
+    if (m_string_temperature == "-0")
         return "0";
     else
-        return m_temperature;
+        return m_string_temperature;
 }
 
-void headerMap::settemperature(const QString &newTemperature)
+void Right_Header_Widget::setString_temperature(const QString &newTemperature)
 {
-    if (m_temperature == newTemperature)
+    if (m_string_temperature == newTemperature)
         return;
-    m_temperature = newTemperature;
-    emit temperatureChanged();
+    m_string_temperature = newTemperature;
+    emit string_temperatureChanged();
 }

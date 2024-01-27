@@ -6,7 +6,6 @@ Left_Charge_Widget::Left_Charge_Widget()
         m_vector_carDoor.append(true);
 }
 
-
 QVector<bool> Left_Charge_Widget::getVector_carDoor() const
 {
     return m_vector_carDoor;

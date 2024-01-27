@@ -1,10 +1,9 @@
 #include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "footer.h"
-#include "headermap.h"
+#include "right_footer_widget.h"
+#include "right_header_widget.h"
 #include "rightsourcefile.h"
-#include "additional_window.h"
 #include "left_speed_widget.h"
 #include "left_main_widget.h"
 
@@ -14,11 +13,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);                                            //Создание обьекта приложения Qt для графического интерфейса пользователя
-    headerMap header_temp;
-    footer footer_temp;
+    Right_Header_Widget header_temp;
+    Right_Footer_Widget footer_temp;
     RightSourceFile right_temp;
     Left_Main_Widget left_main_temp;
-    additional_window add_temp;
 
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
     qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
@@ -35,7 +33,6 @@ int main(int argc, char *argv[])
     rootContext->setContextProperty("header_temp_qml", &header_temp);           //Установка свойства контекста QML для объектов
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
     rootContext->setContextProperty("right_temp_qml", &right_temp);
-    rootContext->setContextProperty("add_temp_qml",&add_temp);
     rootContext->setContextProperty("left_main_source",&left_main_temp);
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML

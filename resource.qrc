@@ -11,7 +11,6 @@
         <file>ui/button_spotify.png</file>
         <file>ui/CapotClose.png</file>
         <file>ui/CapotOpen.png</file>
-        <file>ui/carIcon.png</file>
         <file>ui/carUP.png</file>
         <file>ui/carUp1.png</file>
         <file>ui/carUp2.png</file>
@@ -19,12 +18,9 @@
         <file>ui/charge.png</file>
         <file>ui/CloseBag.png</file>
         <file>ui/distance.png</file>
-        <file>ui/DOWN.png</file>
         <file>ui/energyBut.png</file>
         <file>ui/font.ttf</file>
         <file>ui/ford.jpg</file>
-        <file>ui/heaperback.png</file>
-        <file>ui/heaperfront.png</file>
         <file>ui/leans.png</file>
         <file>ui/leftDoor.png</file>
         <file>ui/LeftDoorBottom.png</file>
@@ -33,21 +29,13 @@
         <file>ui/marker.png</file>
         <file>ui/menu.png</file>
         <file>ui/minus.png</file>
-        <file>ui/music.png</file>
         <file>ui/navi.png</file>
         <file>ui/OpenBag.png</file>
         <file>ui/overlay.png</file>
-        <file>ui/phone.png</file>
         <file>ui/plus.png</file>
         <file>ui/plus2.png</file>
         <file>ui/RightDoorBottom.png</file>
-        <file>ui/seatLeft.png</file>
-        <file>ui/seatRight.png</file>
-        <file>ui/seatRightRedBottom.png</file>
-        <file>ui/seatRightRedMiddle.png</file>
-        <file>ui/seatRightRedTop.png</file>
         <file>ui/setting.png</file>
-        <file>ui/sound.png</file>
         <file>ui/soundheader.png</file>
         <file>ui/speed.png</file>
         <file>ui/sun.png</file>
@@ -56,9 +44,6 @@
         <file>ui/tesla2.png</file>
         <file>ui/test.png</file>
         <file>ui/thunder.png</file>
-        <file>ui/UP.png</file>
-        <file>ui/Vint.png</file>
-        <file>ui/VintRed.png</file>
         <file>MainQML.qml</file>
         <file>ChargeWidget.qml</file>
         <file>HeaderMapWidget.qml</file>
@@ -107,5 +92,24 @@
         <file>ui/battery/battery_4.png</file>
         <file>ui/battery/battery_5.png</file>
         <file>ui/battery/battery_6.png</file>
+        <file>ui/button_footer/carIcon.png</file>
+        <file>ui/button_footer/carIcon_r.png</file>
+        <file>ui/button_footer/DOWN.png</file>
+        <file>ui/button_footer/heaperback.png</file>
+        <file>ui/button_footer/heaperback_r.png</file>
+        <file>ui/button_footer/heaperfront.png</file>
+        <file>ui/button_footer/heaperfront_r.png</file>
+        <file>ui/button_footer/music.png</file>
+        <file>ui/button_footer/music_r.png</file>
+        <file>ui/button_footer/phone.png</file>
+        <file>ui/button_footer/phone_r.png</file>
+        <file>ui/button_footer/seatRight.png</file>
+        <file>ui/button_footer/seatRightRedBottom.png</file>
+        <file>ui/button_footer/seatRightRedMiddle.png</file>
+        <file>ui/button_footer/seatRightRedTop.png</file>
+        <file>ui/button_footer/sound.png</file>
+        <file>ui/button_footer/UP.png</file>
+        <file>ui/button_footer/Vint.png</file>
+        <file>ui/button_footer/Vint_r.png</file>
     </qresource>
 </RCC>

@@ -9,6 +9,10 @@ import QtQuick.Layouts
         height: 500
         width: 400
 
+        onClosing: {
+                footer_temp_qml.bool_temp_button[0] = false;
+            }
+
         FontLoader {
             id: palaceScriptFont
             source: "qrc:/ui/font.ttf"
