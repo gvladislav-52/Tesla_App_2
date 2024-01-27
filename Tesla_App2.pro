@@ -16,8 +16,7 @@ SOURCES += \
     main.cpp \
     right_footer_widget.cpp \
     right_header_widget.cpp \
-    right_main_widget.cpp \
-    rightsourcefile.cpp
+    right_main_widget.cpp
 
 HEADERS += \
     additional_window.h \
@@ -26,8 +25,7 @@ HEADERS += \
     left_speed_widget.h \
     right_footer_widget.h \
     right_header_widget.h \
-    right_main_widget.h \
-    rightsourcefile.h
+    right_main_widget.h
 
 FORMS +=
 

@@ -9,11 +9,6 @@ Right_Header_Widget::Right_Header_Widget(QObject *parent)
     : QObject(parent)
     , m_string_currentTime("00:00am")
 {
-    m_currentTimeTimer = new QTimer(this);
-    m_currentTimeTimer->setInterval(1000);
-    m_currentTimeTimer->setSingleShot(true);
-    connect(m_currentTimeTimer, &QTimer::timeout, this, &Right_Header_Widget::currentTimeTimerTimeout);
-    //connect(m_currentTimeTimer,&QTimer::timeout, this, &headerMap::temperatureSlot);
     currentTimeTimerTimeout();
     temperatureSlot();
 }
@@ -37,8 +32,6 @@ void Right_Header_Widget::currentTimeTimerTimeout()
     QString currentTime = dateTime.currentDateTime().toString("hh:mm AP");
     //qDebug() << currentTime;
     setString_currentTime(currentTime);
-
-    m_currentTimeTimer->start();
 }
 
 void Right_Header_Widget::temperatureSlot()

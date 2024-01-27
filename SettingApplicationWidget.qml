@@ -11,7 +11,7 @@ import QtQuick.Layouts
         title: "Setting button"
 
         onClosing: {
-                footer_temp_qml.bool_temp_button[0] = false;
+                right_main_source.right_footer_object.bool_temp_button[0] = false;
             }
 
         FontLoader {

@@ -24,6 +24,7 @@ class Left_Main_Widget : public QObject {
 
 public:
     explicit Left_Main_Widget(QObject *parent = nullptr);
+    ~Left_Main_Widget();
 
     bool getChargeStatus() const;
     void setChargeStatus(bool newChargeStatus);

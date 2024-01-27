@@ -1,10 +1,8 @@
 #include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "right_footer_widget.h"
-#include "right_header_widget.h"
-#include "rightsourcefile.h"
-#include "left_speed_widget.h"
+
+#include "right_main_widget.h"
 #include "left_main_widget.h"
 
 int main(int argc, char *argv[])
@@ -13,10 +11,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);                                            //Создание обьекта приложения Qt для графического интерфейса пользователя
-    Right_Header_Widget header_temp;
-    Right_Footer_Widget footer_temp;
-    RightSourceFile right_temp;
     Left_Main_Widget left_main_temp;
+    Right_Main_Widget right_main_temp;
 
     QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
     qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
@@ -30,10 +26,10 @@ int main(int argc, char *argv[])
 
     engine.load(url);                                                           //3агрузка QML-файла по указанному URL
     QQmlContext *rootContext = engine.rootContext();                            //Получения корневого контекста QML-движка (загрузки и выполнения кода)
-    rootContext->setContextProperty("header_temp_qml", &header_temp);           //Установка свойства контекста QML для объектов
-    rootContext->setContextProperty("footer_temp_qml", &footer_temp);
-    rootContext->setContextProperty("right_temp_qml", &right_temp);
+
+    rootContext->setContextProperty("right_main_source",&right_main_temp);
     rootContext->setContextProperty("left_main_source",&left_main_temp);
+
     //[Speedometr]
     QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
     QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
@@ -44,6 +40,10 @@ int main(int argc, char *argv[])
     bool direction = true;                                                          //переменная отвечающая за направление
     QObject::connect(&timer, &QTimer::timeout, [&]() {
         static int count = 0;
+        if(count % 100 == 0)
+            right_main_temp.right_header_object()->currentTimeTimerTimeout();
+        if(count %5000 == 0)
+            right_main_temp.right_header_object()->temperatureSlot();
         if (count % 200 == 0) {
             left_main_temp.left_speed_object()->update_speed_limiter();
             left_main_temp.left_charge_object()->update_battery();

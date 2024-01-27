@@ -9,7 +9,7 @@ Rectangle {
 
     ToolButton {
         id: ventButton
-        icon.source: footer_temp_qml.bool_temp_button[4] ? "qrc:/ui/button_footer/Vint_r.png" : "qrc:/ui/button_footer/Vint.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[4] ? "qrc:/ui/button_footer/Vint_r.png" : "qrc:/ui/button_footer/Vint.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.horizontalCenter: selectButtonFooter.horizontalCenter
         icon.width: selectButtonFooter.width * 0.5 // Масштабирование ширины иконки
@@ -31,7 +31,7 @@ Rectangle {
             onClicked: {
                 ventButton.rotation = 0
                 ventButton.temp_ventButton = !ventButton.temp_ventButton
-                footer_temp_qml.bool_temp_button[4] = !footer_temp_qml.bool_temp_button[4]
+                right_main_source.right_footer_object.bool_temp_button[4] = !right_main_source.right_footer_object.bool_temp_button[4]
             }
 
         onTemp_ventButtonChanged: {
@@ -61,14 +61,15 @@ Rectangle {
                 color: upButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: footer_temp_qml.setLeft_SlotPlus()
+            onClicked: right_main_source.right_footer_object.setLeft_SlotPlus()
+
         }
 
         Text {
             id: textTempLeft
-            text: footer_temp_qml.leftTemperature + "°"
-            color: if (footer_temp_qml.leftTemperature === 29) "red"
-            else if (footer_temp_qml.leftTemperature === 15) "#45FFFF"
+            text: right_main_source.right_footer_object.leftTemperature + "°"
+            color: if (right_main_source.right_footer_object.leftTemperature === 29) "red"
+            else if (right_main_source.right_footer_object.leftTemperature === 15) "#45FFFF"
             else "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -86,7 +87,7 @@ Rectangle {
                 color: downButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: footer_temp_qml.setLeft_SlotMinus()
+            onClicked: right_main_source.right_footer_object.setLeft_SlotMinus()
         }
     }
 
@@ -108,14 +109,14 @@ Rectangle {
                 color: upButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: footer_temp_qml.setRight_SlotPlus()
+            onClicked: right_main_source.right_footer_object.setRight_SlotPlus()
         }
 
         Text {
             id: textTempRight
-            text: footer_temp_qml.rightTemperature + "°"
-            color: if (footer_temp_qml.rightTemperature === 29) "red"
-                    else if (footer_temp_qml.rightTemperature === 15) "#45FFFF"
+            text: right_main_source.right_footer_object.rightTemperature + "°"
+            color: if (right_main_source.right_footer_object.rightTemperature === 29) "red"
+                    else if (right_main_source.right_footer_object.rightTemperature === 15) "#45FFFF"
                     else "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -133,7 +134,7 @@ Rectangle {
                 color: downButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: footer_temp_qml.setRight_SlotMinus()
+            onClicked: right_main_source.right_footer_object.setRight_SlotMinus()
         }
     }
 
@@ -161,12 +162,12 @@ Rectangle {
 
         onClicked: {if(temp_seatButtonLeft < 3)
                     {
-                       footer_temp_qml.bool_temp_button[3] = true
+                       right_main_source.right_footer_object.bool_temp_button[3] = true
                        temp_seatButtonLeft++;
                     }
                     else
                     {
-                        footer_temp_qml.bool_temp_button[3] = false
+                        right_main_source.right_footer_object.bool_temp_button[3] = false
                         temp_seatButtonLeft = 0
                     }
         }
@@ -203,11 +204,11 @@ Rectangle {
         onClicked: {if(temp_seatButtonRight < 3)
                     {
                        temp_seatButtonRight++;
-                       footer_temp_qml.bool_temp_button[5] = true
+                       right_main_source.right_footer_object.bool_temp_button[5] = true
                     }
                     else
                     {
-                        footer_temp_qml.bool_temp_button[5] = false;
+                        right_main_source.right_footer_object.bool_temp_button[5] = false;
                         temp_seatButtonRight = 0
                     }
         }
@@ -215,7 +216,7 @@ Rectangle {
 
     ToolButton {
         id: heaperButtonBack
-        icon.source: footer_temp_qml.bool_temp_button[2] ? "qrc:/ui/button_footer/heaperback_r.png" : "qrc:/ui/button_footer/heaperback.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[2] ? "qrc:/ui/button_footer/heaperback_r.png" : "qrc:/ui/button_footer/heaperback.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.left: seatButtonLeft.left
         anchors.leftMargin: -parent.width * 0.09
@@ -228,12 +229,12 @@ Rectangle {
             radius: 10
         }
 
-        onClicked: footer_temp_qml.bool_temp_button[2] = !footer_temp_qml.bool_temp_button[2]
+        onClicked: right_main_source.right_footer_object.bool_temp_button[2] = !right_main_source.right_footer_object.bool_temp_button[2]
     }
 
     ToolButton {
         id: heaperButtonFront
-        icon.source: footer_temp_qml.bool_temp_button[1] ? "qrc:/ui/button_footer/heaperfront_r.png" : "qrc:/ui/button_footer/heaperfront.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[1] ? "qrc:/ui/button_footer/heaperfront_r.png" : "qrc:/ui/button_footer/heaperfront.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.left: heaperButtonBack.left
         anchors.leftMargin: -parent.width * 0.09
@@ -246,12 +247,12 @@ Rectangle {
             radius: 10
         }
 
-        onClicked: footer_temp_qml.bool_temp_button[1] = !footer_temp_qml.bool_temp_button[1]
+        onClicked: right_main_source.right_footer_object.bool_temp_button[1] = !right_main_source.right_footer_object.bool_temp_button[1]
     }
 
     ToolButton {
         id: carButton
-        icon.source: footer_temp_qml.bool_temp_button[0] ? "qrc:/ui/button_footer/carIcon_r.png" : "qrc:/ui/button_footer/carIcon.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[0] ? "qrc:/ui/button_footer/carIcon_r.png" : "qrc:/ui/button_footer/carIcon.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.left: heaperButtonFront.left
         anchors.leftMargin: -parent.width * 0.09
@@ -264,12 +265,12 @@ Rectangle {
             radius: 10
         }
 
-        onClicked: footer_temp_qml.bool_temp_button[0] = !footer_temp_qml.bool_temp_button[0]
+        onClicked: right_main_source.right_footer_object.bool_temp_button[0] = !right_main_source.right_footer_object.bool_temp_button[0]
     }
 
     ToolButton {
         id: musicButton
-        icon.source: footer_temp_qml.bool_temp_button[6] ? "qrc:/ui/button_footer/music_r.png" : "qrc:/ui/button_footer/music.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[6] ? "qrc:/ui/button_footer/music_r.png" : "qrc:/ui/button_footer/music.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.right: seatButtonRight.right
         anchors.rightMargin: -parent.width * 0.09
@@ -282,12 +283,12 @@ Rectangle {
             radius: 10
         }
 
-         onClicked: footer_temp_qml.bool_temp_button[6] = !footer_temp_qml.bool_temp_button[6]
+         onClicked: right_main_source.right_footer_object.bool_temp_button[6] = !right_main_source.right_footer_object.bool_temp_button[6]
     }
 
     ToolButton {
         id: phoneButton
-        icon.source: footer_temp_qml.bool_temp_button[7] ? "qrc:/ui/button_footer/phone_r.png" : "qrc:/ui/button_footer/phone.png"
+        icon.source: right_main_source.right_footer_object.bool_temp_button[7] ? "qrc:/ui/button_footer/phone_r.png" : "qrc:/ui/button_footer/phone.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.right: musicButton.right
         anchors.rightMargin: -parent.width * 0.09
@@ -300,7 +301,7 @@ Rectangle {
             radius: 10
         }
 
-         onClicked: footer_temp_qml.bool_temp_button[7] = !footer_temp_qml.bool_temp_button[7]
+         onClicked: right_main_source.right_footer_object.bool_temp_button[7] = !right_main_source.right_footer_object.bool_temp_button[7]
 
     }
 
@@ -319,11 +320,11 @@ Rectangle {
             hoverEnabled: false
 
             background: Rectangle {
-                color: "transparent"
+                color: upButtonSound.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
 
-            onClicked: footer_temp_qml.setSound_SlotPlus()
+            onClicked: right_main_source.right_footer_object.setSound_SlotPlus()
         }
 
         ToolButton {
@@ -349,10 +350,10 @@ Rectangle {
             hoverEnabled: false
 
             background: Rectangle {
-                color: "transparent"
+                color: downButtonSound.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: footer_temp_qml.setSound_SlotMinus()
+            onClicked: right_main_source.right_footer_object.setSound_SlotMinus()
         }
     }
 }

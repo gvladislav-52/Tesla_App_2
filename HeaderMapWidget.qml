@@ -10,7 +10,7 @@ Rectangle {
 
     Text {
         id: redittext
-        text: header_temp_qml.string_currentTime
+        text: right_main_source.right_header_object.string_currentTime
         color: "black"
         font.bold: true
         font.pixelSize: headerMap.height/1.5
@@ -21,7 +21,7 @@ Rectangle {
 
     Text {
         id: textTemp
-        text: header_temp_qml.string_temperature + "°C"
+        text: right_main_source.right_header_object.string_temperature + "°C"
         color: "black"
         font.bold: true
         font.pixelSize: headerMap.height/1.5
@@ -72,7 +72,7 @@ Rectangle {
 
     Text {
         id: textSoundHeader
-        text: footer_temp_qml.soundTemp
+        text: right_main_source.right_footer_object.soundTemp
         color: "black"
         font.bold: true
         font.pixelSize: headerMap.height/1.5

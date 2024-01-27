@@ -19,6 +19,12 @@ Left_Main_Widget::Left_Main_Widget(QObject *parent) : QObject(parent) {
     setBoolean_selectorSource(false);
 }
 
+Left_Main_Widget::~Left_Main_Widget()
+{
+    delete m_left_charge_object;
+    delete m_left_speed_object;
+}
+
 Left_Speed_Widget *Left_Main_Widget::left_speed_object() const
 {
     return m_left_speed_object;

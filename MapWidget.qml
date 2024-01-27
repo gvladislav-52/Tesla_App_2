@@ -109,14 +109,14 @@ support"
                 fillMode: Image.PreserveAspectFit
                 source:
                 {
-                    right_temp_qml.carLocked ? "qrc:/ui/15810.png": "qrc:/ui/sun.png"
+                    right_main_source.temp_DayNightMap ? "qrc:/ui/15810.png": "qrc:/ui/sun.png"
                 }
                 MouseArea
                 {
                     anchors.fill: parent
                     onClicked: {
-                        right_temp_qml.setcarLockeder(!right_temp_qml.carLocked)
-                        if(right_temp_qml.carLocked)
+                        right_main_source.temp_DayNightMap =!right_main_source.temp_DayNightMap
+                        if(right_main_source.temp_DayNightMap)
                             mainMenu.mapTypeMenu.createMenu(map,0)
                         else
                             mainMenu.mapTypeMenu.createMenu(map,3)

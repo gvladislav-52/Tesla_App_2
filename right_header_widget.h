@@ -7,7 +7,6 @@
 #include <QNetworkRequest>
 #include <QObject>
 #include <QQuickWidget>
-#include <QTimer>
 #include <QVBoxLayout>
 #include <QtQuick>
 #include <QtWidgets>
@@ -36,7 +35,6 @@ signals:
 
 private:
     QString m_string_currentTime;
-    QTimer *m_currentTimeTimer;
     QString temparature;
 
     QString m_string_temperature;
