@@ -12,6 +12,8 @@ SOURCES += \
     additional_window.cpp \
     footer.cpp \
     headermap.cpp \
+    left_charge_widget.cpp \
+    left_speed_widget.cpp \
     leftsourcefile.cpp \
     main.cpp \
     rightsourcefile.cpp
@@ -20,6 +22,8 @@ HEADERS += \
     additional_window.h \
     footer.h \
     headermap.h \
+    left_charge_widget.h \
+    left_speed_widget.h \
     leftsourcefile.h \
     rightsourcefile.h
 

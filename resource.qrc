@@ -4,7 +4,6 @@
         <file>ui/account.png</file>
         <file>ui/background.png</file>
         <file>ui/background1.png</file>
-        <file>ui/battery.png</file>
         <file>ui/button_70.png</file>
         <file>ui/button_car.png</file>
         <file>ui/button_more.png</file>
@@ -102,5 +101,11 @@
         <file>ui/selector_button/selector_num_3.png</file>
         <file>ui/selector_button/selector_num_4.png</file>
         <file>ui/selector_button/selector_num_5.png</file>
+        <file>ui/battery/battery.png</file>
+        <file>ui/battery/battery_2.png</file>
+        <file>ui/battery/battery_3.png</file>
+        <file>ui/battery/battery_4.png</file>
+        <file>ui/battery/battery_5.png</file>
+        <file>ui/battery/battery_6.png</file>
     </qresource>
 </RCC>

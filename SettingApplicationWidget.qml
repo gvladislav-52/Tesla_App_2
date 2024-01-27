@@ -46,7 +46,7 @@ import QtQuick.Layouts
 
                                 Text {
                                     id: text_1
-                                    text:  lightsourcefile_temp_qml.settingSource.name_optical_switch[index]
+                                    text:  lightsourcefile_temp_qml.left_speed_object.vector_Indicator_Switch[index]
                                     color: "white"
                                     font.pixelSize: switch_optical_1.height * 0.5
                                     anchors.left: parent.left
@@ -85,7 +85,7 @@ import QtQuick.Layouts
                                     }
 
                                     onClicked: {
-                                        lightsourcefile_temp_qml.indicatorSource.indicator_str[index] = !lightsourcefile_temp_qml.indicatorSource.indicator_str[index]
+                                        lightsourcefile_temp_qml.left_speed_object.vector_Indicator[index] = !lightsourcefile_temp_qml.left_speed_object.vector_Indicator[index]
                                         lightsourcefile_temp_qml.update_indicators();
                                     }
                                 }

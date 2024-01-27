@@ -6,6 +6,7 @@
 #include "rightsourcefile.h"
 #include "leftsourcefile.h"
 #include "additional_window.h"
+#include "left_speed_widget.h"
 
 int main(int argc, char *argv[])
 {
@@ -47,8 +48,8 @@ int main(int argc, char *argv[])
     QObject::connect(&timer, &QTimer::timeout, [&]() {
         static int count = 0;
         if (count % 200 == 0) {
-            left_temp.indicatorSource()->update_speed_limiter();
-            left_temp.update_battery();
+            left_temp.left_speed_object()->update_speed_limiter();
+            left_temp.left_charge_object()->update_battery();
         }
         ptrSpeedometer->updateTahometer(value);
         ptrSpeedometer->updateSpeedometer(value, direction);

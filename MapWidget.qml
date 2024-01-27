@@ -202,7 +202,7 @@ support"
                 id: errorDrive
                 width: appWindow.width / 1.015
                 height: appWindow.height * 0.08
-                visible: lightsourcefile_temp_qml.selectorSource.boolean_selectorSource
+                visible: lightsourcefile_temp_qml.boolean_selectorSource
                 x: ((appWindow.width - errorDrive.width) / 2)-appWindow.width*0.002
                 y:  appWindow.height * 0.71
 
@@ -229,7 +229,7 @@ support"
                 id: errorSelect
                 width: appWindow.width / 1.015
                 height: appWindow.height * 0.08
-                visible: lightsourcefile_temp_qml.carDoorSource.boolean_carDoor
+                visible: lightsourcefile_temp_qml.left_charge_object.boolean_carDoor
                 x: ((appWindow.width - errorSelect.width) / 2)-appWindow.width*0.002
                 y:  appWindow.height * 0.71
 
