@@ -4,6 +4,7 @@ Left_Charge_Widget::Left_Charge_Widget()
 {
     for(int i = 0; i<7; i++)
         m_vector_carDoor.append(true);
+    m_battary_path = "qrc:/ui/battery/battery.png";
 }
 
 QVector<bool> Left_Charge_Widget::getVector_carDoor() const
@@ -55,4 +56,40 @@ void Left_Charge_Widget::update_battery()
 {
     if(battery_temp >= 0)
         setBattarySource(QString::number(battery_temp--));
+
+    switch(battery_temp) {
+    case 74:
+        setBattary_path("qrc:/ui/battery/battery_2.png");
+        emit battary_pathChanged();
+        break;
+    case 59:
+        setBattary_path("qrc:/ui/battery/battery_3.png");
+        emit battary_pathChanged();
+        break;
+    case 34:
+        setBattary_path("qrc:/ui/battery/battery_4.png");
+        emit battary_pathChanged();
+        break;
+    case 19:
+        setBattary_path("qrc:/ui/battery/battery_5.png");
+        emit battary_pathChanged();
+        break;
+    case 0:
+        setBattary_path("qrc:/ui/battery/battery_6.png");
+        emit battary_pathChanged();
+        break;
+    }
+}
+
+QString Left_Charge_Widget::getBattary_path() const
+{
+    return m_battary_path;
+}
+
+void Left_Charge_Widget::setBattary_path(const QString &newBattary_path)
+{
+    if (m_battary_path == newBattary_path)
+        return;
+    m_battary_path = newBattary_path;
+    emit battary_pathChanged();
 }

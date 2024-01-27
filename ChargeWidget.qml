@@ -30,7 +30,7 @@ Item {
 
         Image {
             id: battery
-            source: "qrc:/ui/battery/battery.png"
+            source: left_main_source.left_charge_object.battary_path
             anchors.right: parent.right
             width: parent.width * 0.15
             height: parent.height * 0.25

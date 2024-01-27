@@ -8,6 +8,7 @@ import QtQuick.Layouts
         color: "#1f1f1f"
         height: 500
         width: 400
+        title: "Setting button"
 
         onClosing: {
                 footer_temp_qml.bool_temp_button[0] = false;

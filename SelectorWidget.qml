@@ -160,9 +160,15 @@ Rectangle {
         }
 
         onClicked: {if(temp_seatButtonLeft < 3)
+                    {
+                       footer_temp_qml.bool_temp_button[3] = true
                        temp_seatButtonLeft++;
-                    else temp_seatButtonLeft = 0
-            footer_temp_qml.bool_temp_button[3] = !footer_temp_qml.bool_temp_button[3]
+                    }
+                    else
+                    {
+                        footer_temp_qml.bool_temp_button[3] = false
+                        temp_seatButtonLeft = 0
+                    }
         }
 
         transform: Scale {
@@ -195,9 +201,15 @@ Rectangle {
         }
 
         onClicked: {if(temp_seatButtonRight < 3)
+                    {
                        temp_seatButtonRight++;
-                    else temp_seatButtonRight = 0
-            footer_temp_qml.bool_temp_button[5] = !footer_temp_qml.bool_temp_button[5]
+                       footer_temp_qml.bool_temp_button[5] = true
+                    }
+                    else
+                    {
+                        footer_temp_qml.bool_temp_button[5] = false;
+                        temp_seatButtonRight = 0
+                    }
         }
     }
 
