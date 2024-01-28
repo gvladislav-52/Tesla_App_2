@@ -11,19 +11,16 @@ Item {
      property variant mapview
      property variant plugin
      property variant parameters
-    property variant coordinateYou
+    //property variant coordinateYou
     property variant fromCoordinate: QtPositioning.coordinate(56.307706, 43.984085)
     property variant toCoordinate: QtPositioning.coordinate(55.320688, 42.167970)
     signal showRoute(variant startCoordinate,variant endCoordinate)
     property string toCoordinateText
 
-    function initializeProviders(provider1)
+    function initializeProviders()
     {
         var provider = "osm"
-        if (parameters && parameters.length>0)
-            plugin = Qt.createQmlObject ('import QtLocation; Plugin{ name:"' + provider + '"; parameters: appWindow.parameters}', appWindow)
-        else
-            plugin = Qt.createQmlObject ('import QtLocation; Plugin{ name:"' + provider + '"}', appWindow)
+        plugin = Qt.createQmlObject ('import QtLocation; Plugin{ name:"' + provider + '"}', appWindow)
 
         mapview = mapComponent.createObject(page);
         mapview.map.plugin = plugin;
@@ -90,7 +87,6 @@ support"
             height: page.height
             map.center: fromCoordinate
             map.zoomLevel: (maximumZoomLevel - minimumZoomLevel)/2
-             //map.onSupportedMapTypesChanged: mainMenu.mapTypeMenu.createMenu(map)
 
             Image {
                 id: mapSunSet
@@ -317,6 +313,4 @@ support"
             }
         }
     }
-
-    //MainMenu {id: mainMenu}
 }
