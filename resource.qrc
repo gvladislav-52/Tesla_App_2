@@ -48,7 +48,6 @@
         <file>ChargeWidget.qml</file>
         <file>HeaderMapWidget.qml</file>
         <file>MainLeftWidget.qml</file>
-        <file>MainMenu.qml</file>
         <file>MainRightWidget.qml</file>
         <file>MapComponent.qml</file>
         <file>MapSliders.qml</file>

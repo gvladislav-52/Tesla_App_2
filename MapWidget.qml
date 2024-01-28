@@ -35,10 +35,6 @@ Item {
 
      Address {
          id: toAddress
-         //street: "Зеленая 2"
-         //"Ковров Маяковского 6"
-         //Выкса Ближне-Песочное Зеленая 2
-         //Пыщуг Луговая 3
          city: toCoordinateText
     }
 
@@ -117,9 +113,9 @@ support"
                     onClicked: {
                         right_main_source.temp_DayNightMap =!right_main_source.temp_DayNightMap
                         if(right_main_source.temp_DayNightMap)
-                            mainMenu.mapTypeMenu.createMenu(map,0)
+                            map.activeMapType = map.supportedMapTypes[0]
                         else
-                            mainMenu.mapTypeMenu.createMenu(map,3)
+                            map.activeMapType = map.supportedMapTypes[3]
                     }
                 }
             }
@@ -322,5 +318,5 @@ support"
         }
     }
 
-    MainMenu {id: mainMenu}
+    //MainMenu {id: mainMenu}
 }
