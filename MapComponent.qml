@@ -41,10 +41,10 @@ MapView {
     }
 
     MapQuickItem {
-        id: mePoisition
+        id: to_coordinate
         parent: view.map
         sourceItem: Rectangle { width: 14; height: 14; color: "#251ee4"; border.width: 2; border.color: "white"; smooth: true; radius: 7 }
-        coordinate: toCoordinate
+        coordinate: right_main_source.right_map_object.to_coordinate_temp
         opacity: 1.0
         anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
         visible: true
@@ -52,23 +52,24 @@ MapView {
     MapQuickItem {
         parent: view.map
         sourceItem: Text{
-            text: qsTr("You're here!")
-            color:"#242424"
+            text: qsTr("FINISH!")
+            color:{if(right_main_source.temp_DayNightMap) return "black"
+                else return "yellow"
+            }
             font.bold: true
-            styleColor: "#ECECEC"
-            style: Text.Outline
+            //style: Text.Outline
         }
-        coordinate: toCoordinate
-        anchorPoint: Qt.point(-mePoisition.sourceItem.width * 0.5, mePoisition.sourceItem.height * 1.5)
+        coordinate: to_coordinate.coordinate
+        anchorPoint: Qt.point(-to_coordinate.sourceItem.width * 0.5, to_coordinate.sourceItem.height * 1.5)
         visible: true
     }
 
 
     MapQuickItem {
-        id: poiTheQtComapny
+        id: from_coordinate
         parent: view.map
         sourceItem: Rectangle { width: 14; height: 14; color: "#e41e25"; border.width: 2; border.color: "white"; smooth: true; radius: 7 }
-        coordinate: fromCoordinate
+        coordinate: right_main_source.right_map_object.from_coordinate_temp
         opacity: 1.0
         anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
     }
@@ -76,14 +77,16 @@ MapView {
     MapQuickItem {
         parent: view.map
         sourceItem: Text{
-            text: "Vladislav"
-            color:"#242424"
+            text: qsTr("VLADISLAV")
+            color:{if(right_main_source.temp_DayNightMap) return "black"
+                else return "yellow"
+            }
             font.bold: true
-            styleColor: "#ECECEC"
-            style: Text.Outline
+            styleColor: "white"
+            //style: Text.Outline
         }
-        coordinate: poiTheQtComapny.coordinate
-        anchorPoint: Qt.point(-poiTheQtComapny.sourceItem.width * 0.5, poiTheQtComapny.sourceItem.height * 1.5)
+        coordinate: from_coordinate.coordinate
+        anchorPoint: Qt.point(-from_coordinate.sourceItem.width * 0.5, from_coordinate.sourceItem.height * 1.5)
     }
 
     MapSliders {
@@ -110,17 +113,19 @@ MapView {
         MapRoute {
             id: route
             route: routeData
-            line.color: "blue"
+            line.color: {if(right_main_source.temp_DayNightMap) return "blue"
+                                        else return "yellow"
+            }
             line.width: 5
             smooth: true
             opacity: 0.8
      //! [routedelegate0]
             TapHandler {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
-                onLongPressed: showRouteMenu(view.map.toCoordinate(tapHandler.point.position))
+                onLongPressed: showRouteMenu(view.map.right_main_source.right_map_object.to_coordinate_temp(tapHandler.point.position))
                 onSingleTapped: (eventPoint, button) => {
                     if (button === Qt.RightButton)
-                        showRouteMenu(view.map.toCoordinate(tapHandler.point.position))
+                        showRouteMenu(view.map.right_main_source.right_map_object.to_coordinate_temp(tapHandler.point.position))
                 }
             }
         }

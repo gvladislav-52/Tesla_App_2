@@ -6,14 +6,16 @@ import QtPositioning
 Item {
     id: appWindow
     property string bufferText
-    property string tempText: textSearch.text
+   // property string tempText: textSearch.text
     signal selectTool();
      property variant mapview
      property variant plugin
      property variant parameters
+
     //property variant coordinateYou
-    property variant fromCoordinate: QtPositioning.coordinate(56.307706, 43.984085)
-    property variant toCoordinate: QtPositioning.coordinate(55.320688, 42.167970)
+    //property variant fromCoordinate: right_main_source.right_map_object.from_coordinate_temp
+    //property variant toCoordinate: right_main_source.right_map_object.to_coordinate_temp
+
     signal showRoute(variant startCoordinate,variant endCoordinate)
     property string toCoordinateText
 
@@ -36,8 +38,8 @@ Item {
     }
 
     onSelectTool: {
-        tempGeocodeModel.reset()
-        tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
+        //tempGeocodeModel.reset()
+        //tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
         tempGeocodeModel.query = toAddress
         tempGeocodeModel.update();
         showRoute.connect(mapview.calculateCoordinateRoute)
@@ -50,9 +52,8 @@ Item {
         property variant endCoordinate
 
         onStatusChanged: {
-            endCoordinate.latitude = get(0).coordinate.latitude
-            endCoordinate.longitude = get(0).coordinate.longitude
-            showRoute(fromCoordinate,endCoordinate)
+            right_main_source.right_map_object.update_map_to_coordinate(get(0).coordinate.latitude,get(0).coordinate.longitude)
+            showRoute(right_main_source.right_map_object.from_coordinate_temp,right_main_source.right_map_object.to_coordinate_temp)
         }
     }
 
@@ -85,7 +86,7 @@ support"
             id: mapview_comp
             width: page.width
             height: page.height
-            map.center: fromCoordinate
+            map.center: right_main_source.right_map_object.from_coordinate_temp
             map.zoomLevel: (maximumZoomLevel - minimumZoomLevel)/2
 
             Image {
@@ -136,7 +137,7 @@ support"
                 }
                 onClicked:
                 {
-                    mapview_comp.map.center= fromCoordinate
+                    mapview_comp.map.center= right_main_source.right_map_object.from_coordinate_temp
                     mapview_comp.map.zoomLevel = 16
                 }
             }
