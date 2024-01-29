@@ -171,8 +171,7 @@ support"
                     selectByMouse: true
 
                     Keys.onReturnPressed: {
-                        toCoordinateText = textSearch.text
-                        selectTool()
+                        buttonSearch.clicked()
                     }
 
                     onActiveFocusChanged: {
@@ -273,15 +272,44 @@ support"
                 }
             }
 
+            ToolButton
+            {
+                visible: false
+                id: resetCoordinate
+                icon.source: "qrc:/ui/cancel.png"
+                anchors.left: buttonSearch.right
+                anchors.leftMargin: searchRectangle.width / 20
+                anchors.verticalCenter: buttonSearch.verticalCenter
+                icon.width: buttonSearch.width*0.4
+                icon.height: buttonSearch.height*0.78
+                background: Rectangle
+                {
+                    color: "#F73E5F"
+                    radius: 4
+                    border.color: "black"
+                    border.width: 1
+                }
+
+                onClicked:
+                {
+                    mapview.clearMapRoute()
+                    bufferText = "-1"
+                    resetCoordinate.visible = false
+                    textSearch.text = "Search..."
+                }
+            }
+
             Button {
+                id: buttonSearch
                 enabled: plugin ? plugin.supportsRouting() : false
                 anchors.left: searchRectangle.right
                 anchors.leftMargin: searchRectangle.width / 20
                 anchors.verticalCenter: searchRectangle.verticalCenter
                 width: searchRectangle.width / 2
                 height: searchRectangle.height
+                hoverEnabled: false;
                 background: Rectangle {
-                    color: "green"
+                    color: buttonSearch.pressed ? "lightgray" : "green"
                     radius: 4
                     Text {
                         id: textButton
@@ -294,12 +322,15 @@ support"
                     border.color: "black"
                     border.width: 1
                 }
+
+
                 onClicked: {
                     if((textSearch.text !== "") && (textSearch.text !== "Search..." ) && (textSearch.text !== " " ) && (bufferText !== textSearch.text))
                     {
                     bufferText = textSearch.text
                     toCoordinateText = textSearch.text
                     selectTool()
+                    resetCoordinate.visible = true
                     }
                     else
                     {

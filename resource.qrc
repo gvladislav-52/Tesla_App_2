@@ -111,5 +111,6 @@
         <file>ui/button_footer/Vint.png</file>
         <file>ui/button_footer/Vint_r.png</file>
         <file>ui/Finish.png</file>
+        <file>ui/cancel.png</file>
     </qresource>
 </RCC>

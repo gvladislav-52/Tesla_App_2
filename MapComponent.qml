@@ -6,18 +6,6 @@ import QtPositioning
 MapView {
     id: view
 
-    function calculateMarkerRoute()
-    {
-        routeQuery.clearWaypoints();
-        for (var i = currentMarker; i< view.markers.length; i++){
-            routeQuery.addWaypoint(markers[i].coordinate)
-        }
-        routeQuery.travelModes = RouteQuery.CarTravel
-        routeQuery.routeOptimizations = RouteQuery.ShortestRoute
-
-        routeModel.update();
-    }
-
     function calculateCoordinateRoute(startCoordinate, endCoordinate)
     {
         //! [routerequest0]
@@ -30,6 +18,7 @@ MapView {
         routeQuery.routeOptimizations = RouteQuery.FastestRoute
         //! [routerequest0]
 
+        to_coordinate.visible = true
         //! [routerequest1]
         routeModel.update();
         //! [routerequest1]
@@ -38,6 +27,13 @@ MapView {
         // center the map on the start coord
         view.map.center = startCoordinate;
         //! [routerequest2]
+    }
+
+    function clearMapRoute()
+    {
+        routeQuery.clearWaypoints();
+        to_coordinate.visible = false
+        routeModel.update();
     }
 
     MapQuickItem {
@@ -61,7 +57,7 @@ MapView {
         }
         coordinate: to_coordinate.coordinate
         anchorPoint: Qt.point(-to_coordinate.sourceItem.width * 0.5, to_coordinate.sourceItem.height * 1.5)
-        visible: true
+        visible: to_coordinate.visible
     }
 
 
@@ -109,9 +105,9 @@ MapView {
     //! [routedelegate0]
     Component {
         id: routeDelegate
-
         MapRoute {
-            id: route
+            id: route_MapRote
+            visible: to_coordinate.visible
             route: routeData
             line.color: {if(right_main_source.temp_DayNightMap) return "blue"
                                         else return "yellow"
