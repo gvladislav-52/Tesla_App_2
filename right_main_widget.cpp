@@ -8,6 +8,10 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     //m_right_map_object->setTo_coordinate_temp(-0, -0);
     m_right_map_object->setFrom_coordinate_temp(56.307706, 43.984085);
     m_temp_DayNightMap = true;
+    m_temp_ErrorPopup.append("Enter a different address");
+    m_temp_ErrorPopup.append("Please enter a valid address");
+    m_temp_ErrorPopup.append("Error! Switch the selector to the PARKING gear to open the doors");
+    m_temp_ErrorPopup.append("Error! Close all doors before continuing to move");
 }
 
 Right_Main_Widget::~Right_Main_Widget()
@@ -43,4 +47,17 @@ void Right_Main_Widget::setTemp_DayNightMap(bool newCarLocked)
 Right_Map_Widget *Right_Main_Widget::right_map_object() const
 {
     return m_right_map_object;
+}
+
+QVector<QString> Right_Main_Widget::getTemp_ErrorPopup() const
+{
+    return m_temp_ErrorPopup;
+}
+
+void Right_Main_Widget::setTemp_ErrorPopup(const QVector<QString> &newTemp_ErrorPopup)
+{
+    if (m_temp_ErrorPopup == newTemp_ErrorPopup)
+        return;
+    m_temp_ErrorPopup = newTemp_ErrorPopup;
+    emit temp_ErrorPopupChanged();
 }

@@ -191,37 +191,10 @@ support"
             }
 
             Popup {
-                id: errorDrive
-                width: appWindow.width / 1.015
-                height: appWindow.height * 0.08
-                visible: left_main_source.boolean_selectorSource
-                x: ((appWindow.width - errorDrive.width) / 2)-appWindow.width*0.002
-                y:  appWindow.height * 0.71
-
-                background: Rectangle {
-                    width: errorDrive.width
-                    height: errorDrive.height
-                    color: "red"
-                    radius: 10
-                    border.color: "darkred"
-                    border.width: 2
-                    opacity: 0.8
-
-                    Text {
-                        id:errorDriveText
-                        text: "Error! Close all doors before continuing to move"
-                        font.pixelSize: errorDrive.height / 2
-                        anchors.centerIn: parent
-                        color: "white"
-                    }
-                }
-            }
-
-            Popup {
                 id: errorSelect
                 width: appWindow.width / 1.015
                 height: appWindow.height * 0.08
-                visible: left_main_source.left_charge_object.boolean_carDoor
+                visible: left_main_source.boolean_selectorSource || left_main_source.left_charge_object.boolean_carDoor
                 x: ((appWindow.width - errorSelect.width) / 2)-appWindow.width*0.002
                 y:  appWindow.height * 0.71
 
@@ -236,7 +209,7 @@ support"
 
                     Text {
                         id:errorSelectText
-                        text: "Error! Switch the selector to the PARKING gear to open the doors"
+                        text: left_main_source.boolean_selectorSource? right_main_source.temp_ErrorPopup[3]:right_main_source.temp_ErrorPopup[2]
                         font.pixelSize: errorSelect.height / 2
                         anchors.centerIn: parent
                         color: "white"
@@ -264,7 +237,7 @@ support"
 
                     Text {
                         id:errorPopupText
-                        text: "Please enter a valid address!"
+                        text: right_main_source.temp_ErrorPopup[0]
                         font.pixelSize: errorPopup.height / 2
                         anchors.centerIn: parent
                         color: "white"
@@ -335,9 +308,9 @@ support"
                     else
                     {
                         if(bufferText === textSearch.text)
-                            errorPopupText.text = "Enter a different address"
+                            errorPopupText.text = right_main_source.temp_ErrorPopup[0]
                         else
-                            errorPopupText.text = "Please enter a valid address"
+                            errorPopupText.text = right_main_source.temp_ErrorPopup[1]
 
                         errorPopup.visible = true
                     }

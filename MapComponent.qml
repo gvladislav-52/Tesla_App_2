@@ -32,6 +32,8 @@ MapView {
     function clearMapRoute()
     {
         routeQuery.clearWaypoints();
+        routeQuery.addWaypoint(right_main_source.right_map_object.from_coordinate_temp)
+        routeQuery.addWaypoint(right_main_source.right_map_object.from_coordinate_temp)
         to_coordinate.visible = false
         routeModel.update();
     }
@@ -114,7 +116,7 @@ MapView {
             }
             line.width: 5
             smooth: true
-            opacity: 0.8
+            opacity: 1
      //! [routedelegate0]
             TapHandler {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
