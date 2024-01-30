@@ -15,6 +15,10 @@ class Right_Main_Widget: public QObject
 
     Q_PROPERTY(bool temp_DayNightMap READ getTemp_DayNightMap WRITE setTemp_DayNightMap NOTIFY temp_DayNightMapChanged FINAL)
     Q_PROPERTY(QVector<QString> temp_ErrorPopup READ getTemp_ErrorPopup WRITE setTemp_ErrorPopup NOTIFY temp_ErrorPopupChanged FINAL)
+
+    Q_PROPERTY(QString name_music READ getName_music WRITE setName_music NOTIFY name_musicChanged FINAL)
+    Q_PROPERTY(QString name_artist READ getName_artist WRITE setName_artist NOTIFY name_artistChanged FINAL)
+
 public:
     explicit Right_Main_Widget(QObject *parent = nullptr);
     ~Right_Main_Widget();
@@ -29,10 +33,20 @@ public:
     QVector<QString> getTemp_ErrorPopup() const;
     void setTemp_ErrorPopup(const QVector<QString> &newTemp_ErrorPopup);
 
+    QString getName_music() const;
+    void setName_music(const QString &newName_music);
+
+    QString getName_artist() const;
+    void setName_artist(const QString &newName_artist);
+
 signals:
     void temp_DayNightMapChanged();
 
     void temp_ErrorPopupChanged();
+
+    void name_musicChanged();
+
+    void name_artistChanged();
 
 private:
     Right_Header_Widget *m_right_header_object = nullptr;
@@ -40,6 +54,8 @@ private:
     bool m_temp_DayNightMap;
     Right_Map_Widget *m_right_map_object = nullptr;
     QVector<QString> m_temp_ErrorPopup;
+    QString m_name_music;
+    QString m_name_artist;
 };
 
 #endif // RIGHT_MAIN_WIDGET_H

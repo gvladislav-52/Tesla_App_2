@@ -12,6 +12,9 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     m_temp_ErrorPopup.append("Please enter a valid address");
     m_temp_ErrorPopup.append("Error! Switch the selector to the PARKING gear to open the doors");
     m_temp_ErrorPopup.append("Error! Close all doors before continuing to move");
+
+    m_name_music = "none";
+    m_name_artist = "none";
 }
 
 Right_Main_Widget::~Right_Main_Widget()
@@ -60,4 +63,30 @@ void Right_Main_Widget::setTemp_ErrorPopup(const QVector<QString> &newTemp_Error
         return;
     m_temp_ErrorPopup = newTemp_ErrorPopup;
     emit temp_ErrorPopupChanged();
+}
+
+QString Right_Main_Widget::getName_music() const
+{
+    return m_name_music;
+}
+
+void Right_Main_Widget::setName_music(const QString &newName_music)
+{
+    if (m_name_music == newName_music)
+        return;
+    m_name_music = newName_music;
+    emit name_musicChanged();
+}
+
+QString Right_Main_Widget::getName_artist() const
+{
+    return m_name_artist;
+}
+
+void Right_Main_Widget::setName_artist(const QString &newName_artist)
+{
+    if (m_name_artist == newName_artist)
+        return;
+    m_name_artist = newName_artist;
+    emit name_artistChanged();
 }

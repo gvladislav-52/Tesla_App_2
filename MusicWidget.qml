@@ -11,5 +11,12 @@ Item {
         height: 0.2*parent.height
         color: "lightgray"
         opacity: 0.95
+
+        AudiMain {
+            width: 750
+            height: 180
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.fill: parent
+        }
     }
 }
