@@ -6,15 +6,17 @@ import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
+import QtQuick.Dialogs
 
 
 Item {
     id: root
     visible: true
-    // minimumWidth: 750
-    // minimumHeight: 180
-    // title: qsTr("Multimedia Player")
     property alias source: mediaPlayer.source
+    property int mediaPlayerState: mediaPlayer.playbackState
+
+    property string name_music
+    property string artist_music
 
     Popup {
         id: mediaError
@@ -27,22 +29,34 @@ Item {
     MediaPlayer {
         id: mediaPlayer
 
-        function updateMetadata() {
-                if (mediaPlayer.metaData) {
-                    for (var key of mediaPlayer.metaData.keys()) {
-                        if (mediaPlayer.metaData.metaDataKeyToString(key) === 'Title')
-                            right_main_source.name_music = mediaPlayer.metaData.stringValue(key)
-                        if(mediaPlayer.metaData.metaDataKeyToString(key) === 'Contributing artist')
-                            right_main_source.name_artist = mediaPlayer.metaData.stringValue(key)
-                    }
+        function clear()
+        {
+            name_music = "-"
+            artist_music = "-"
+        }
+
+        function updateMetadata()
+        {
+            mediaPlayer.clear();
+            mediaPlayer.read(mediaPlayer.metaData);
+        }
+
+        function read(metadata) {
+            if (metadata) {
+                for (var key of metadata.keys()) {
+                    if (metadata.metaDataKeyToString(key) === 'Title')
+                        name_music = metadata.stringValue(key)
+                    if (metadata.metaDataKeyToString(key) === 'Contributing artist')
+                        artist_music = metadata.stringValue(key)
                 }
+            }
         }
 
         videoOutput: videoOutput
         audioOutput: AudioOutput {
             id: audio
-            muted: playbackControl.muted
-            volume: playbackControl.volume
+            muted: false
+            volume: right_main_source.right_footer_object.soundTemp/10
         }
 
         onErrorOccurred: { mediaErrorText.text = mediaPlayer.errorString; mediaError.open() }
@@ -59,178 +73,218 @@ Item {
         onActiveTracksChanged: { updateMetadata() }
     }
 
-    // PlayerMenuBar {
-    //     id: menuBar
-
-    //     //anchors.left: parent.left
-    //     //anchors.right: parent.right
-    //     visible: !videoOutput.fullScreen
-
-    //     mediaPlayer: mediaPlayer
-    //     videoOutput: videoOutput
-    //     metadataInfo: metadataInfo
-    //     //audioTracksInfo: audioTracksInfo
-    //     //videoTracksInfo: videoTracksInfo
-    //     //subtitleTracksInfo: subtitleTracksInfo
-
-    //     //onClosePlayer: root.close()
-    // }
-
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        onAccepted: {
+            mediaPlayer.stop()
+            mediaPlayer.source = fileDialog.currentFile
+            mediaPlayer.play()
+        }
+    }
     RowLayout
     {
         anchors.fill: parent
         anchors.verticalCenter: parent.verticalCenter
-        VideoOutput {
-            id: videoOutput
+    VideoOutput {
+        id: videoOutput
 
-            Layout.maximumWidth: parent.width * 0.3
-            //width: parent.width *0.4
-            Layout.maximumHeight: parent.height * 0.9
-            anchors.left: parent.left
+        Layout.maximumWidth: parent.width * 0.4
+        //width: parent.width *0.4
+        Layout.maximumHeight: parent.height * 0.9
+        anchors.left: parent.left
+        property bool fullScreen: false
 
-            property bool fullScreen: false
-            // anchors.top: fullScreen ? parent.top : menuBar.bottom
-            // anchors.bottom: playbackControl.top
-
-           // anchors.verticalCenter: parent.verticalCenter
-            //anchors.left: parent.left
-
-            TapHandler {
-                onDoubleTapped: {
-                    parent.fullScreen ?  showNormal() : showFullScreen()
-                    parent.fullScreen = !parent.fullScreen
-                }
-                onTapped: {
-                    metadataInfo.visible = false
-                    //audioTracksInfo.visible = false
-                    //videoTracksInfo.visible = false
-                    //subtitleTracksInfo.visible = false
-                }
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                Layout.preferredWidth: parent.width * 0.1
+        TapHandler {
+            onDoubleTapped: {
+                parent.fullScreen ?  showNormal() : showFullScreen()
+                parent.fullScreen = !parent.fullScreen
             }
-
+            onTapped: {
+                metadataInfo.visible = false
+                //audioTracksInfo.visible = false
+                //videoTracksInfo.visible = false
+                //subtitleTracksInfo.visible = false
+            }
         }
 
-        ColumnLayout
-        {
-        Text
-        {
-            id: text_artist
-            text: right_main_source.name_artist
-        }
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-        Text
-        {
-            id: text_music
-            text: right_main_source.name_music
-        }
-        }
-
-
-        PlaybackControl {                           //Управление песней
-            id: playbackControl
-
-            width: parent.width *0.5
-            height: parent.height *0.5
-            // anchors.left: parent.horizontalCenter
-            //anchors.verticalCenter: parent.verticalCenter
-            //anchors.verticalCenter: parent.verticalCenter
-            // anchors.bottom: parent.bottom
-            // anchors.left: parent.left
-            // anchors.right: parent.right
-
-            mediaPlayer: mediaPlayer
-
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            Layout.preferredWidth: parent.width * 0.9
-        }
+        Layout.preferredWidth: parent.width * 0.2
     }
 
-    // VideoOutput {
-    //     id: videoOutput
-    //     width: parent.width *0.4
-    //     height: parent.height *0.8
+    ColumnLayout
+    {
+        id: column_Id
+        anchors.bottom: parent.bottom
+        anchors.top: parent.top
 
-    //     property bool fullScreen: false
-    //     // anchors.top: fullScreen ? parent.top : menuBar.bottom
-    //     // anchors.bottom: playbackControl.top
+        anchors.bottomMargin: parent.height*0.1
+        anchors.topMargin: parent.height * 0.4
+        Text
+        {
+            anchors.left: parent.left
+            text: artist_music + ":   " + name_music
+        }
 
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     anchors.left: parent.left
-    //     anchors.leftMargin: -parent.width*0.075
+        Slider {
+            id: mediaSlider
+            anchors.left: parent.left
+            anchors.right: parent.right
+            enabled: mediaPlayer.seekable
+            value: mediaPlayer.position / mediaPlayer.duration
 
-    //     TapHandler {
-    //         onDoubleTapped: {
-    //             parent.fullScreen ?  showNormal() : showFullScreen()
-    //             parent.fullScreen = !parent.fullScreen
-    //         }
-    //         onTapped: {
-    //             metadataInfo.visible = false
-    //             //audioTracksInfo.visible = false
-    //             //videoTracksInfo.visible = false
-    //             //subtitleTracksInfo.visible = false
-    //         }
-    //     }
-    // }
+            onMoved: mediaPlayer.setPosition(value * mediaPlayer.duration)
+        }
 
-    // Text
-    // {
-    //     id: name_text_music
-    //     text: right_main_source.name_music
-    // }
+        RowLayout {
+             Layout.preferredWidth: column_Id.width
+            Text {
+                id: mediaTime
+                Layout.minimumWidth: 50
+                Layout.minimumHeight: 18
+                anchors.left: parent.left
+                text: {
+                    var m = Math.floor(mediaPlayer.position / 60000)
+                    var ms = (mediaPlayer.position / 1000 - m * 60).toFixed(1)
+                    return `${m}:${ms.padStart(4, 0)}`
+                }
+            }
 
-    // PlaybackControl {                           //Управление песней
-    //     id: playbackControl
+            Text {
+                id: mediaTime2
+                Layout.minimumWidth: 50
+                Layout.minimumHeight: 18
+                anchors.right: parent.right
+                text: {
+                    var totalSeconds = mediaPlayer.duration / 1000
+                      var minutes = Math.floor(totalSeconds / 60)
+                      var seconds = (totalSeconds % 60).toFixed(0)
+                      return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
+                }
+            }
+        }
 
-    //     width: parent.width *0.5
-    //     height: parent.height *0.5
-    //     anchors.left: parent.horizontalCenter
-    //     anchors.verticalCenter: parent.verticalCenter
-    //     //anchors.verticalCenter: parent.verticalCenter
-    //     // anchors.bottom: parent.bottom
-    //     // anchors.left: parent.left
-    //     // anchors.right: parent.right
+    Layout.fillHeight: true
+    Layout.fillWidth: true
 
-    //     mediaPlayer: mediaPlayer
-    // }
+    Layout.preferredWidth: parent.width * 0.5
+    }
 
-    // TracksInfo {
-    //     id: audioTracksInfo
 
-    //     anchors.right: parent.right
-    //     anchors.top: videoOutput.fullScreen ? parent.top : menuBar.bottom
-    //     anchors.bottom: playbackControl.opacity ? playbackControl.bottom : parent.bottom
+    Item {                           //Управление песней
+        id: playbackControl
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
-    //     visible: false
-    //     //onSelectedTrackChanged:  mediaPlayer.activeAudioTrack = audioTracksInfo.selectedTrack
-    // }
+        Layout.preferredWidth: parent.width * 0.3
+        height: frame.height
 
-    // TracksInfo {                               //вывод информации об видео
-    //     id: videoTracksInfo
+        Frame {
+            id: frame
+            anchors.fill: parent
 
-    //     anchors.right: parent.right
-    //     anchors.top: videoOutput.fullScreen ? parent.top : menuBar.bottom
-    //     anchors.bottom: playbackControl.opacity ? playbackControl.bottom : parent.bottom
+            background: Rectangle {
+                color: "transparent"
+            }
 
-    //     visible: false
-    //     onSelectedTrackChanged: mediaPlayer.activeVideoTrack = videoTracksInfo.selectedTrack
-    // }
+            ColumnLayout {
+                id: playbackControlPanel
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                anchors.rightMargin: 10
 
-    // TracksInfo {                               //вывод информации об треке
-    //     id: subtitleTracksInfo
+                RowLayout {
+                    id: playerButtons
 
-    //     anchors.right: parent.right
-    //     anchors.top: videoOutput.fullScreen ? parent.top : menuBar.bottom
-    //     anchors.bottom: playbackControl.opacity ? playbackControl.bottom : parent.bottom
+                    Layout.fillWidth: true
 
-    //     visible: false
-    //     onSelectedTrackChanged: mediaPlayer.activeSubtitleTrack = subtitleTracksInfo.selectedTrack
-    // }
+                    Button
+                    {
+                        text: "100"
+                        onClicked: fileDialog.open()
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignCenter
+                        id: controlButtons
+
+                        RoundButton {
+                            id: pauseButton
+                            radius: 50.0
+                            text: "\u2016";
+                            onClicked: mediaPlayer.pause()
+                        }
+
+                        RoundButton {
+                            id: playButton
+                            radius: 50.0
+                            text: "\u25B6";
+                            onClicked: mediaPlayer.play()
+                        }
+
+                        RoundButton {
+                            id: stopButton
+                            radius: 50.0
+                            text: "\u25A0";
+                            onClicked: mediaPlayer.stop()
+                        }
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+
+                        Item {
+                            id: buttons
+
+                            width: muteButton.implicitWidth
+                            height: muteButton.implicitHeight
+
+                            RoundButton {
+                                id: muteButton
+                                radius: 50.0
+                                text: audio.muted ? "+" : "-"
+                                //icon.source: audio.muted ? "+" : "-"
+                                onClicked: { audio.muted = !audio.muted }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        states: [
+            State {
+                name: "playing"
+                when: mediaPlayerState == MediaPlayer.PlayingState
+                PropertyChanges { target: pauseButton; visible: true}
+                PropertyChanges { target: playButton; visible: false}
+                PropertyChanges { target: stopButton; visible: true}
+            },
+            State {
+                name: "stopped"
+                when: mediaPlayerState == MediaPlayer.StoppedState
+                PropertyChanges { target: pauseButton; visible: false}
+                PropertyChanges { target: playButton; visible: true}
+                PropertyChanges { target: stopButton; visible: false}
+            },
+            State {
+                name: "paused"
+                when: mediaPlayerState == MediaPlayer.PausedState
+                PropertyChanges { target: pauseButton; visible: false}
+                PropertyChanges { target: playButton; visible: true}
+                PropertyChanges { target: stopButton; visible: true}
+            }
+        ]
+    }
+    }
 }
-
-

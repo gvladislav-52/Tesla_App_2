@@ -112,10 +112,6 @@
         <file>ui/button_footer/Vint_r.png</file>
         <file>ui/Finish.png</file>
         <file>ui/cancel.png</file>
-        <file>AudioControl.qml</file>
         <file>AudiMain.qml</file>
-        <file>MetadataInfo.qml</file>
-        <file>PlaybackControl.qml</file>
-        <file>PlaybackSeekControl.qml</file>
     </qresource>
 </RCC>
