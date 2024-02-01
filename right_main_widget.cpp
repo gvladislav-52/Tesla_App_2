@@ -12,7 +12,7 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     m_temp_ErrorPopup.append("Please enter a valid address");
     m_temp_ErrorPopup.append("Error! Switch the selector to the PARKING gear to open the doors");
     m_temp_ErrorPopup.append("Error! Close all doors before continuing to move");
-
+    m_right_footer_object->setMuted_music(false);
     m_name_music = "none";
     m_name_artist = "none";
 }

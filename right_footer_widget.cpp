@@ -5,7 +5,7 @@ Right_Footer_Widget::Right_Footer_Widget(QObject *parent)
 {
     m_left_Temparate = 15;
     m_right_Temparate = 15;
-    m_soundTemp = 0;
+    m_soundTemp = 5;
     for(int i = 0; i < 8; i++)
         m_bool_temp_button.append(false);
 }
@@ -109,7 +109,7 @@ void Right_Footer_Widget::setSoundTemp(int newSoundTemp)
 
 void Right_Footer_Widget::setSound_SlotPlus()
 {
-    if (m_soundTemp < 20)
+    if (m_soundTemp < 10)
         m_soundTemp++;
     emit soundTempChanged();
 }
@@ -132,4 +132,17 @@ void Right_Footer_Widget::setBool_temp_button(const QVector<bool> &newBool_temp_
         return;
     m_bool_temp_button = newBool_temp_button;
     emit bool_temp_buttonChanged();
+}
+
+bool Right_Footer_Widget::muted_music() const
+{
+    return m_muted_music;
+}
+
+void Right_Footer_Widget::setMuted_music(bool newMuted_music)
+{
+    if (m_muted_music == newMuted_music)
+        return;
+    m_muted_music = newMuted_music;
+    emit muted_musicChanged();
 }

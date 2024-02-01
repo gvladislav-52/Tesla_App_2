@@ -329,7 +329,7 @@ Rectangle {
 
         ToolButton {
             id: soundButton
-            icon.source: "qrc:/ui/button_footer/sound.png"
+            icon.source: right_main_source.right_footer_object.muted_music? "qrc:/ui/button_footer/muted.png": "qrc:/ui/button_footer/sound.png"
             anchors.verticalCenter: selectButtonFooter.verticalCenter
             icon.width: selectButtonFooter.width * 0.25
             icon.height: selectButtonFooter.height * 0.25
@@ -339,6 +339,8 @@ Rectangle {
                 color: "transparent"
                 radius: 10
             }
+
+            onClicked: right_main_source.right_footer_object.muted_music = !right_main_source.right_footer_object.muted_music
         }
 
         ToolButton {

@@ -113,5 +113,6 @@
         <file>ui/Finish.png</file>
         <file>ui/cancel.png</file>
         <file>AudiMain.qml</file>
+        <file>ui/button_footer/muted.png</file>
     </qresource>
 </RCC>

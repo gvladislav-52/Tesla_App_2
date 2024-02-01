@@ -55,7 +55,7 @@ Item {
         videoOutput: videoOutput
         audioOutput: AudioOutput {
             id: audio
-            muted: false
+            muted: right_main_source.right_footer_object.muted_music
             volume: right_main_source.right_footer_object.soundTemp/10
         }
 
@@ -120,12 +120,23 @@ Item {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
 
-        anchors.bottomMargin: parent.height*0.1
-        anchors.topMargin: parent.height * 0.4
-        Text
+        anchors.topMargin: parent.height * 0.3
+
+
+        Rectangle
         {
             anchors.left: parent.left
-            text: artist_music + ":   " + name_music
+            anchors.right: parent.right
+            height: 30
+            color: "transparent"
+            clip: true
+
+            Text
+            {
+                anchors.left: parent.left
+                text: artist_music + ":   " + name_music
+                font.pixelSize: 20
+            }
         }
 
         Slider {
@@ -136,35 +147,62 @@ Item {
             value: mediaPlayer.position / mediaPlayer.duration
 
             onMoved: mediaPlayer.setPosition(value * mediaPlayer.duration)
+
+            background: Rectangle {
+
+                    implicitWidth: column_Id.width // Изменяем ширину фона ориентируясь на вашу задачу
+                    width: implicitWidth
+                    height: 4
+                    radius: 2
+                    color: "white"
+
+                    Rectangle {
+                        width: mediaSlider.visualPosition * parent.width
+                        height: 4
+                        color: "black"
+                        radius: 2
+                    }
+                }
+
+            handle: Rectangle {
+                    id: circleSlide_bearingSlider
+                    // anchors.verticalCenter: mediaSlider.verticalCenter
+                    x: mediaSlider.visualPosition * (mediaSlider.availableWidth - width)
+                    y: -mediaSlider.height/3
+                    implicitWidth: 18
+                    implicitHeight: 18
+                    radius: 13
+                    color: "white"
+                    border.color: "black"
+                    border.width: 2
+                }
         }
 
         RowLayout {
-             Layout.preferredWidth: column_Id.width
-            Text {
-                id: mediaTime
-                Layout.minimumWidth: 50
-                Layout.minimumHeight: 18
-                anchors.left: parent.left
-                text: {
-                    var m = Math.floor(mediaPlayer.position / 60000)
-                    var ms = (mediaPlayer.position / 1000 - m * 60).toFixed(1)
-                    return `${m}:${ms.padStart(4, 0)}`
-                }
-            }
+                Layout.preferredWidth: column_Id.width
+                Layout.alignment: Qt.AlignHCenter // Установить выравнивающее свойство
 
-            Text {
-                id: mediaTime2
-                Layout.minimumWidth: 50
-                Layout.minimumHeight: 18
-                anchors.right: parent.right
-                text: {
-                    var totalSeconds = mediaPlayer.duration / 1000
-                      var minutes = Math.floor(totalSeconds / 60)
-                      var seconds = (totalSeconds % 60).toFixed(0)
-                      return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
+                Text {
+                    id: mediaTimeStart
+                    anchors.left: parent.left
+                    text: {
+                        var m = Math.floor(mediaPlayer.position / 60000)
+                        var ms = (mediaPlayer.position / 1000 - m * 60).toFixed(1)
+                        return `${m}:${ms.padStart(4, 0)}`
+                    }
+                }
+
+                Text {
+                    id: mediaTimeEndt
+                    anchors.right: parent.right
+                    text: {
+                        var totalSeconds = mediaPlayer.duration / 1000
+                        var minutes = Math.floor(totalSeconds / 60)
+                        var seconds = (totalSeconds % 60).toFixed(0)
+                        return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
+                    }
                 }
             }
-        }
 
     Layout.fillHeight: true
     Layout.fillWidth: true
@@ -173,7 +211,7 @@ Item {
     }
 
 
-    Item {                           //Управление песней
+    Item {
         id: playbackControl
         Layout.fillHeight: true
         Layout.fillWidth: true
@@ -200,12 +238,6 @@ Item {
 
                     Layout.fillWidth: true
 
-                    Button
-                    {
-                        text: "100"
-                        onClicked: fileDialog.open()
-                    }
-
                     Item {
                         Layout.fillWidth: true
                     }
@@ -213,6 +245,13 @@ Item {
                     RowLayout {
                         Layout.alignment: Qt.AlignCenter
                         id: controlButtons
+
+                        RoundButton {
+                            id: leftButton
+                            radius: 50.0
+                            text: "<-";
+                            //onClicked: mediaPlayer.
+                        }
 
                         RoundButton {
                             id: pauseButton
@@ -234,29 +273,25 @@ Item {
                             text: "\u25A0";
                             onClicked: mediaPlayer.stop()
                         }
+
+                        RoundButton
+                        {
+                            id: addButton
+                            radius: 50.0
+                            text: "▲";
+                            onClicked: fileDialog.open()
+                        }
+
+                        RoundButton {
+                            id: rightButton
+                            radius: 50.0
+                            text: "->";
+                            //onClicked: mediaPlayer.
+                        }
                     }
 
                     Item {
                         Layout.fillWidth: true
-                    }
-
-                    RowLayout {
-                        Layout.fillWidth: true
-
-                        Item {
-                            id: buttons
-
-                            width: muteButton.implicitWidth
-                            height: muteButton.implicitHeight
-
-                            RoundButton {
-                                id: muteButton
-                                radius: 50.0
-                                text: audio.muted ? "+" : "-"
-                                //icon.source: audio.muted ? "+" : "-"
-                                onClicked: { audio.muted = !audio.muted }
-                            }
-                        }
                     }
                 }
             }

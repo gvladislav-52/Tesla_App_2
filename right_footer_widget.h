@@ -10,6 +10,8 @@ class Right_Footer_Widget: public QObject
     Q_PROPERTY(int soundTemp READ soundTemp WRITE setSoundTemp NOTIFY soundTempChanged FINAL)
 
     Q_PROPERTY(QVector<bool> bool_temp_button READ getBool_temp_button WRITE setBool_temp_button NOTIFY bool_temp_buttonChanged FINAL)
+    Q_PROPERTY(bool muted_music READ muted_music WRITE setMuted_music NOTIFY muted_musicChanged FINAL)
+
 public:
     explicit Right_Footer_Widget(QObject *parent = nullptr);
     int getLeft_Temparate() const;
@@ -23,6 +25,9 @@ public:
     QVector<bool> getBool_temp_button() const;
     void setBool_temp_button(const QVector<bool> &newBool_temp_button);
 
+    bool muted_music() const;
+    void setMuted_music(bool newMuted_music);
+
 signals:
     void left_TemparateChanged();
     void right_TemparateChanged();
@@ -31,12 +36,16 @@ signals:
 
     void bool_temp_buttonChanged();
 
+    void muted_musicChanged();
+
 private:
     int m_left_Temparate;
     int m_right_Temparate;
     int m_soundTemp;
 
     QVector<bool> m_bool_temp_button;
+
+    bool m_muted_music;
 
 public slots:
     void setLeft_SlotPlus();
