@@ -215,85 +215,111 @@ Item {
         id: playbackControl
         Layout.fillHeight: true
         Layout.fillWidth: true
-
         Layout.preferredWidth: parent.width * 0.3
-        height: frame.height
 
-        Frame {
-            id: frame
+        ColumnLayout {
+            id: playbackControlPanel
             anchors.fill: parent
+            anchors.leftMargin: parent.width*0.1
+            anchors.rightMargin: parent.width*0.1
+            anchors.topMargin: parent.height*0.1
+            anchors.bottomMargin: parent.height*0.2
 
-            background: Rectangle {
-                color: "transparent"
+            ToolButton {
+                id: addButton
+                icon.source: "qrc:/ui/button_footer/trio.png"
+                Layout.fillWidth: true
+                hoverEnabled: false
+                icon.width: parent.width *0.2
+                icon.height: parent.height * 0.2
+                background: Rectangle {
+                    color: addButton.pressed ? "darkgray" : "transparent"
+                    radius: 10
+                }
+                onClicked: fileDialog.open()
             }
 
-            ColumnLayout {
-                id: playbackControlPanel
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                anchors.rightMargin: 10
+            RowLayout {
+                id: playerButtonsPanel
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-                RowLayout {
-                    id: playerButtons
 
+                ToolButton {
+                    id: leftButton
+                    icon.source: "qrc:/ui/button_footer/Right.png"
                     Layout.fillWidth: true
-
-                    Item {
-                        Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: 35
+                    icon.height: 35
+                    background: Rectangle {
+                        color: leftButton.pressed ? "darkgray" : "transparent"
+                        radius: 10
                     }
-
-                    RowLayout {
-                        Layout.alignment: Qt.AlignCenter
-                        id: controlButtons
-
-                        RoundButton {
-                            id: leftButton
-                            radius: 50.0
-                            text: "<-";
-                            //onClicked: mediaPlayer.
-                        }
-
-                        RoundButton {
-                            id: pauseButton
-                            radius: 50.0
-                            text: "\u2016";
-                            onClicked: mediaPlayer.pause()
-                        }
-
-                        RoundButton {
-                            id: playButton
-                            radius: 50.0
-                            text: "\u25B6";
-                            onClicked: mediaPlayer.play()
-                        }
-
-                        RoundButton {
-                            id: stopButton
-                            radius: 50.0
-                            text: "\u25A0";
-                            onClicked: mediaPlayer.stop()
-                        }
-
-                        RoundButton
-                        {
-                            id: addButton
-                            radius: 50.0
-                            text: "▲";
-                            onClicked: fileDialog.open()
-                        }
-
-                        RoundButton {
-                            id: rightButton
-                            radius: 50.0
-                            text: "->";
-                            //onClicked: mediaPlayer.
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
+                    transform: Scale {
+                        xScale: -1
+                        origin.x: leftButton.width / 2
+                        origin.y: leftButton.height / 2
                     }
                 }
+
+                ToolButton {
+                    id: pauseButton
+                    icon.source: "qrc:/ui/button_footer/pause.png"
+                    Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: 35
+                    icon.height: 35
+                    background: Rectangle {
+                        color: pauseButton.pressed ? "darkgray" : "transparent"
+                        radius: 10
+                    }
+                    onClicked: mediaPlayer.pause()
+                }
+
+                ToolButton {
+                    id: playButton
+                    icon.source: "qrc:/ui/button_footer/play.png"
+                    Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: 35
+                    icon.height: 35
+                    background: Rectangle {
+                        color: playButton.pressed ? "darkgray" : "transparent"
+                        radius: 10
+                    }
+                    onClicked: mediaPlayer.play()
+                }
+
+                ToolButton {
+                    id: rightButton
+                    icon.source: "qrc:/ui/button_footer/Right.png"
+                    Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: 35
+                    icon.height: 35
+                    background: Rectangle {
+                        color: rightButton.pressed ? "darkgray" : "transparent"
+                        radius: 10
+                    }
+                }
+
+                }
+
+            ToolButton {
+                id: stopButton
+                icon.source: "qrc:/ui/button_footer/stop.png"
+                Layout.fillWidth: true
+                hoverEnabled: false
+                icon.width: parent.width *0.2
+                icon.height: parent.height * 0.2
+                background: Rectangle {
+                    color: stopButton.pressed ? "darkgray" : "transparent"
+                    radius: 10
+                }
+                onClicked: mediaPlayer.stop()
+            }
+
             }
         }
 
@@ -320,6 +346,5 @@ Item {
                 PropertyChanges { target: stopButton; visible: true}
             }
         ]
-    }
     }
 }

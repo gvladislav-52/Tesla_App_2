@@ -114,5 +114,10 @@
         <file>ui/cancel.png</file>
         <file>AudiMain.qml</file>
         <file>ui/button_footer/muted.png</file>
+        <file>ui/button_footer/Right.png</file>
+        <file>ui/button_footer/pause.png</file>
+        <file>ui/button_footer/stop.png</file>
+        <file>ui/button_footer/trio.png</file>
+        <file>ui/button_footer/play.png</file>
     </qresource>
 </RCC>
