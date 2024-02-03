@@ -119,5 +119,7 @@
         <file>ui/button_footer/stop.png</file>
         <file>ui/button_footer/trio.png</file>
         <file>ui/button_footer/play.png</file>
+        <file>ui/music/Destroy-Lonely-how-u-feel-(HiphopMood.com).mp3</file>
+        <file>ui/music/Juice-WRLD-Lucid-Dreams-(HiphopMood.com).mp3</file>
     </qresource>
 </RCC>

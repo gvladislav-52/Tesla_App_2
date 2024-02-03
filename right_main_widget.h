@@ -18,6 +18,8 @@ class Right_Main_Widget: public QObject
 
     Q_PROPERTY(QString name_music READ getName_music WRITE setName_music NOTIFY name_musicChanged FINAL)
     Q_PROPERTY(QString name_artist READ getName_artist WRITE setName_artist NOTIFY name_artistChanged FINAL)
+    Q_PROPERTY(QVector<QString> music_path READ getMusic_path WRITE setMusic_path NOTIFY music_pathChanged FINAL)
+
 
 public:
     explicit Right_Main_Widget(QObject *parent = nullptr);
@@ -39,6 +41,11 @@ public:
     QString getName_artist() const;
     void setName_artist(const QString &newName_artist);
 
+    QVector<QString> getMusic_path() const;
+    void setMusic_path(const QVector<QString> &newMusic_path);
+
+    //void right_update_music();
+
 signals:
     void temp_DayNightMapChanged();
 
@@ -48,6 +55,8 @@ signals:
 
     void name_artistChanged();
 
+    void music_pathChanged();
+
 private:
     Right_Header_Widget *m_right_header_object = nullptr;
     Right_Footer_Widget *m_right_footer_object = nullptr;
@@ -56,6 +65,16 @@ private:
     QVector<QString> m_temp_ErrorPopup;
     QString m_name_music;
     QString m_name_artist;
+    QVector<QString> m_music_path;
+    QDir directory_path;
+    QStringList fileNames;
+    int prev_temp;
+    int current_temp = 0;
+    int next_temp;
+
+public slots:
+    void right_update_music();
+    void left_update_music();
 };
 
 #endif // RIGHT_MAIN_WIDGET_H

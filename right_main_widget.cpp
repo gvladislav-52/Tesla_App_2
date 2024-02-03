@@ -15,6 +15,35 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     m_right_footer_object->setMuted_music(false);
     m_name_music = "none";
     m_name_artist = "none";
+
+    QDir directory("C:\\Users\\gvlad\\Desktop\\exepsion\\QT Studia\\Tesla_App2\\ui\\music"); // Укажите полный путь к папке
+    directory_path = directory;
+    fileNames = directory.entryList(QDir::Files | QDir::NoDotAndDotDot);
+    m_music_path.append(directory_path.filePath(fileNames.at(current_temp)));
+}
+
+void Right_Main_Widget::left_update_music()
+{
+    if(current_temp > 0)
+    {
+    current_temp--;
+    prev_temp = --current_temp;
+    next_temp = ++current_temp;
+    m_music_path[0] = directory_path.filePath(fileNames.at(current_temp));
+    emit music_pathChanged();
+    }
+}
+
+void Right_Main_Widget::right_update_music()
+{
+    if(current_temp < (fileNames.size()-1))
+    {
+    current_temp++;
+    prev_temp = --current_temp;
+    next_temp = ++current_temp;
+    m_music_path[0] = directory_path.filePath(fileNames.at(current_temp));
+    emit music_pathChanged();
+    }
 }
 
 Right_Main_Widget::~Right_Main_Widget()
@@ -89,4 +118,17 @@ void Right_Main_Widget::setName_artist(const QString &newName_artist)
         return;
     m_name_artist = newName_artist;
     emit name_artistChanged();
+}
+
+QVector<QString> Right_Main_Widget::getMusic_path() const
+{
+    return m_music_path;
+}
+
+void Right_Main_Widget::setMusic_path(const QVector<QString> &newMusic_path)
+{
+    if (m_music_path == newMusic_path)
+        return;
+    m_music_path = newMusic_path;
+    emit music_pathChanged();
 }

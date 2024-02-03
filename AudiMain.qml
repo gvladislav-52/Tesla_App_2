@@ -77,11 +77,13 @@ Item {
         id: fileDialog
         title: "Please choose a file"
         onAccepted: {
-            mediaPlayer.stop()
-            mediaPlayer.source = fileDialog.currentFile
+            //mediaPlayer.stop()
+            mediaPlayer.source = right_main_source.music_path[0]
+                    //fileDialog.currentFile
             mediaPlayer.play()
         }
     }
+
     RowLayout
     {
         anchors.fill: parent
@@ -261,6 +263,12 @@ Item {
                         origin.x: leftButton.width / 2
                         origin.y: leftButton.height / 2
                     }
+
+                    onClicked: {
+                        right_main_source.left_update_music()
+                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.play()
+                    }
                 }
 
                 ToolButton {
@@ -301,6 +309,11 @@ Item {
                     background: Rectangle {
                         color: rightButton.pressed ? "darkgray" : "transparent"
                         radius: 10
+                    }
+                    onClicked: {
+                        right_main_source.right_update_music()
+                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.play()
                     }
                 }
 
