@@ -71,6 +71,7 @@ private:
     int prev_temp;
     int current_temp = 0;
     int next_temp;
+    QString dir_path_string;
 
 public slots:
     void right_update_music();

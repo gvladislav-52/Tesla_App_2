@@ -296,7 +296,11 @@ Item {
                         color: playButton.pressed ? "darkgray" : "transparent"
                         radius: 10
                     }
-                    onClicked: mediaPlayer.play()
+                    onClicked:
+                    {
+                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.play()
+                    }
                 }
 
                 ToolButton {

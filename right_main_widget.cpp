@@ -16,9 +16,9 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     m_name_music = "none";
     m_name_artist = "none";
 
-    QDir directory("C:\\Users\\gvlad\\Desktop\\exepsion\\QT Studia\\Tesla_App2\\ui\\music"); // Укажите полный путь к папке
-    directory_path = directory;
-    fileNames = directory.entryList(QDir::Files | QDir::NoDotAndDotDot);
+    dir_path_string = "C:\\Users\\gvlad\\Desktop\\exepsion\\QT Studia\\Tesla_App2\\ui\\music";
+    directory_path = dir_path_string;
+    fileNames = directory_path.entryList(QDir::Files | QDir::NoDotAndDotDot);
     m_music_path.append(directory_path.filePath(fileNames.at(current_temp)));
 }
 
