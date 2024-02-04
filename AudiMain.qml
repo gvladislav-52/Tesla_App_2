@@ -62,8 +62,8 @@ Item {
         onErrorOccurred: { mediaErrorText.text = mediaPlayer.errorString; mediaError.open() }
         onMetaDataChanged: { updateMetadata() }
         onTracksChanged: {
-            audioTracksInfo.read(mediaPlayer.audioTracks);
-            audioTracksInfo.selectedTrack = mediaPlayer.activeAudioTrack;
+            //audioTracksInfo.read(mediaPlayer.audioTracks);
+            //audioTracksInfo.selectedTrack = mediaPlayer.activeAudioTrack;
            // videoTracksInfo.read(mediaPlayer.videoTracks);
            // videoTracksInfo.selectedTrack = mediaPlayer.activeVideoTrack;
            // subtitleTracksInfo.read(mediaPlayer.subtitleTracks);
@@ -77,7 +77,7 @@ Item {
         id: fileDialog
         title: "Please choose a file"
         onAccepted: {
-            //mediaPlayer.stop()
+           //mediaPlayer.stop()
             mediaPlayer.source = right_main_source.music_path[0]
                     //fileDialog.currentFile
             mediaPlayer.play()
