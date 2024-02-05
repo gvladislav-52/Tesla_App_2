@@ -73,16 +73,16 @@ Item {
         onActiveTracksChanged: { updateMetadata() }
     }
 
-    FileDialog {
-        id: fileDialog
-        title: "Please choose a file"
-        onAccepted: {
-           //mediaPlayer.stop()
-            mediaPlayer.source = right_main_source.music_path[0]
-                    //fileDialog.currentFile
-            mediaPlayer.play()
-        }
-    }
+    // FileDialog {
+    //     id: fileDialog
+    //     title: "Please choose a file"
+    //     onAccepted: {
+    //        //mediaPlayer.stop()
+    //         mediaPlayer.source = right_main_source.music_path[0]
+    //                 //fileDialog.currentFile
+    //         mediaPlayer.play()
+    //     }
+    // }
 
     RowLayout
     {
@@ -227,18 +227,47 @@ Item {
             anchors.topMargin: parent.height*0.1
             anchors.bottomMargin: parent.height*0.2
 
-            ToolButton {
-                id: addButton
-                icon.source: "qrc:/ui/button_footer/trio.png"
+
+            RowLayout
+            {
+                id: playerButtonsPanelUp
                 Layout.fillWidth: true
-                hoverEnabled: false
-                icon.width: parent.width *0.2
-                icon.height: parent.height * 0.2
-                background: Rectangle {
-                    color: addButton.pressed ? "darkgray" : "transparent"
-                    radius: 10
+                Layout.fillHeight: true
+                ToolButton {
+                    id: randomButton
+                    icon.source: "qrc:/ui/button_footer/rand.png"
+                    Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: parent.width *0.1
+                    icon.height: parent.height * 0.65
+                    background: Rectangle {
+                        color: right_main_source.random_bool ? "darkgray" : "transparent"
+                        radius: 10
+                    }
+                    onClicked:
+                    {
+                        right_main_source.random_bool = !right_main_source.random_bool
+                        right_main_source.random_track()
+                    }
                 }
-                onClicked: fileDialog.open()
+
+
+                ToolButton {
+                    id: circleButton
+                    icon.source: "qrc:/ui/button_footer/circle.png"
+                    Layout.fillWidth: true
+                    hoverEnabled: false
+                    icon.width: parent.width *0.1
+                    icon.height: parent.height * 0.65
+                    background: Rectangle {
+                        color: right_main_source.circle_bool ? "darkgray" : "transparent"
+                        radius: 10
+                    }
+                    onClicked:
+                    {
+                        right_main_source.circle_bool = !right_main_source.circle_bool
+                    }
+                }
             }
 
             RowLayout {
@@ -266,7 +295,7 @@ Item {
 
                     onClicked: {
                         right_main_source.left_update_music()
-                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.source = right_main_source.music_path
                         mediaPlayer.play()
                     }
                 }
@@ -298,7 +327,8 @@ Item {
                     }
                     onClicked:
                     {
-                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.source = right_main_source.music_path
+                        mediaPlayer.read(mediaPlayer.metaData)
                         mediaPlayer.play()
                     }
                 }
@@ -316,7 +346,7 @@ Item {
                     }
                     onClicked: {
                         right_main_source.right_update_music()
-                        mediaPlayer.source = right_main_source.music_path[0]
+                        mediaPlayer.source = right_main_source.music_path
                         mediaPlayer.play()
                     }
                 }
@@ -334,7 +364,10 @@ Item {
                     color: stopButton.pressed ? "darkgray" : "transparent"
                     radius: 10
                 }
-                onClicked: mediaPlayer.stop()
+                onClicked: {
+                    mediaPlayer.stop()
+                    mediaPlayer.clear()
+                }
             }
 
             }

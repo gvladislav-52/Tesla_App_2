@@ -18,8 +18,9 @@ class Right_Main_Widget: public QObject
 
     Q_PROPERTY(QString name_music READ getName_music WRITE setName_music NOTIFY name_musicChanged FINAL)
     Q_PROPERTY(QString name_artist READ getName_artist WRITE setName_artist NOTIFY name_artistChanged FINAL)
-    Q_PROPERTY(QVector<QString> music_path READ getMusic_path WRITE setMusic_path NOTIFY music_pathChanged FINAL)
-
+    Q_PROPERTY(QString music_path READ getMusic_path WRITE setMusic_path NOTIFY music_pathChanged FINAL)
+    Q_PROPERTY(bool random_bool READ getRandom_bool WRITE setRandom_bool NOTIFY random_boolChanged FINAL)
+    Q_PROPERTY(bool circle_bool READ getCircle_bool WRITE setCircle_bool NOTIFY circle_boolChanged FINAL)
 
 public:
     explicit Right_Main_Widget(QObject *parent = nullptr);
@@ -41,10 +42,16 @@ public:
     QString getName_artist() const;
     void setName_artist(const QString &newName_artist);
 
-    QVector<QString> getMusic_path() const;
-    void setMusic_path(const QVector<QString> &newMusic_path);
+    QString getMusic_path() const;
+    void setMusic_path(const QString &newMusic_path);
 
     //void right_update_music();
+
+    bool getRandom_bool() const;
+    void setRandom_bool(bool newRandom_bool);
+
+    bool getCircle_bool() const;
+    void setCircle_bool(bool newCircle_bool);
 
 signals:
     void temp_DayNightMapChanged();
@@ -57,6 +64,10 @@ signals:
 
     void music_pathChanged();
 
+    void random_boolChanged();
+
+    void circle_boolChanged();
+
 private:
     Right_Header_Widget *m_right_header_object = nullptr;
     Right_Footer_Widget *m_right_footer_object = nullptr;
@@ -65,17 +76,23 @@ private:
     QVector<QString> m_temp_ErrorPopup;
     QString m_name_music;
     QString m_name_artist;
-    QVector<QString> m_music_path;
+    QString m_music_path;
     QDir directory_path;
     QStringList fileNames;
     int prev_temp;
     int current_temp = 0;
     int next_temp;
     QString dir_path_string;
+    QVector<int> random_vector;
+
+    bool m_random_bool;
+
+    bool m_circle_bool;
 
 public slots:
     void right_update_music();
     void left_update_music();
+    void random_track();
 };
 
 #endif // RIGHT_MAIN_WIDGET_H

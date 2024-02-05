@@ -19,29 +19,49 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     dir_path_string = "C:\\Users\\gvlad\\Desktop\\exepsion\\QT Studia\\Tesla_App2\\ui\\music";
     directory_path = dir_path_string;
     fileNames = directory_path.entryList(QDir::Files | QDir::NoDotAndDotDot);
-    m_music_path.append(directory_path.filePath(fileNames.at(current_temp)));
+    m_music_path = directory_path.filePath(fileNames.at(current_temp));
+    for(int i =0; i < fileNames.size(); i++)
+        random_vector.append(i);
+    m_random_bool = false;
+    m_circle_bool = false;
+}
+
+void Right_Main_Widget::random_track()
+{
+    if(m_random_bool)
+        std::random_shuffle(random_vector.begin(),random_vector.end());
+    else
+        current_temp = random_vector[current_temp];
 }
 
 void Right_Main_Widget::left_update_music()
 {
+    if(current_temp == 0 && m_circle_bool)
+        current_temp = fileNames.size();
+
     if(current_temp > 0)
     {
-    current_temp--;
-    prev_temp = --current_temp;
-    next_temp = ++current_temp;
-    m_music_path[0] = directory_path.filePath(fileNames.at(current_temp));
-    emit music_pathChanged();
+        current_temp--;
+            if(m_random_bool)
+                m_music_path = directory_path.filePath(fileNames.at(random_vector[current_temp]));
+            else
+                m_music_path = directory_path.filePath(fileNames.at(current_temp));
+        emit music_pathChanged();
     }
 }
 
 void Right_Main_Widget::right_update_music()
 {
+    if(current_temp == fileNames.size()-1 && m_circle_bool)
+        current_temp = -1;
+
     if(current_temp < (fileNames.size()-1))
     {
     current_temp++;
-    prev_temp = --current_temp;
-    next_temp = ++current_temp;
-    m_music_path[0] = directory_path.filePath(fileNames.at(current_temp));
+        if(m_random_bool)
+            m_music_path = directory_path.filePath(fileNames.at(random_vector[current_temp]));
+        else
+            m_music_path = directory_path.filePath(fileNames.at(current_temp));
     emit music_pathChanged();
     }
 }
@@ -120,15 +140,41 @@ void Right_Main_Widget::setName_artist(const QString &newName_artist)
     emit name_artistChanged();
 }
 
-QVector<QString> Right_Main_Widget::getMusic_path() const
+QString Right_Main_Widget::getMusic_path() const
 {
     return m_music_path;
 }
 
-void Right_Main_Widget::setMusic_path(const QVector<QString> &newMusic_path)
+void Right_Main_Widget::setMusic_path(const QString &newMusic_path)
 {
     if (m_music_path == newMusic_path)
         return;
     m_music_path = newMusic_path;
     emit music_pathChanged();
+}
+
+bool Right_Main_Widget::getRandom_bool() const
+{
+    return m_random_bool;
+}
+
+void Right_Main_Widget::setRandom_bool(bool newRandom_bool)
+{
+    if (m_random_bool == newRandom_bool)
+        return;
+    m_random_bool = newRandom_bool;
+    emit random_boolChanged();
+}
+
+bool Right_Main_Widget::getCircle_bool() const
+{
+    return m_circle_bool;
+}
+
+void Right_Main_Widget::setCircle_bool(bool newCircle_bool)
+{
+    if (m_circle_bool == newCircle_bool)
+        return;
+    m_circle_bool = newCircle_bool;
+    emit circle_boolChanged();
 }

@@ -119,5 +119,7 @@
         <file>ui/button_footer/stop.png</file>
         <file>ui/button_footer/trio.png</file>
         <file>ui/button_footer/play.png</file>
+        <file>ui/button_footer/rand.png</file>
+        <file>ui/button_footer/circle.png</file>
     </qresource>
 </RCC>
