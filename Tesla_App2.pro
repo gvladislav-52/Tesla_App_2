@@ -1,4 +1,4 @@
-QT       += core gui quickwidgets location network positioning qml quick xml
+QT       += core gui quickwidgets location network positioning qml quick xml sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,7 +17,8 @@ SOURCES += \
     right_footer_widget.cpp \
     right_header_widget.cpp \
     right_main_widget.cpp \
-    right_map_widget.cpp
+    right_map_widget.cpp \
+    sql_file.cpp
 
 HEADERS += \
     additional_window.h \
@@ -27,7 +28,8 @@ HEADERS += \
     right_footer_widget.h \
     right_header_widget.h \
     right_main_widget.h \
-    right_map_widget.h
+    right_map_widget.h \
+    sql_file.h
 
 FORMS +=
 

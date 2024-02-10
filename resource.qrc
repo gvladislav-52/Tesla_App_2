@@ -121,5 +121,6 @@
         <file>ui/button_footer/play.png</file>
         <file>ui/button_footer/rand.png</file>
         <file>ui/button_footer/circle.png</file>
+        <file>AutoResetion.qml</file>
     </qresource>
 </RCC>

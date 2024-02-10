@@ -32,12 +32,17 @@ Rectangle {
 
     Text {
         id: textAccount
-        text: qsTr("Vladislav");
+        text: right_main_source.right_header_object.name_data.name_dataBase;
         color: "black"
         font.bold: true
         font.pixelSize: headerMap.height/1.5
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: headerMap.verticalCenter
+
+        MouseArea {
+                anchors.fill: parent
+                onClicked: left_main_source.update_mainBar(4);
+            }
     }
 
     Image {
@@ -46,8 +51,8 @@ Rectangle {
         anchors.right: textAccount.left
         anchors.verticalCenter: headerMap.verticalCenter
         anchors.rightMargin: parent.width * 0.01
-        height: textAccount.height*0.9
-        width: textAccount.width*0.3
+        height: textAccount.height*0.8
+        width: parent.width*0.02
     }
 
     Image {
@@ -56,8 +61,8 @@ Rectangle {
         anchors.right: headerMap.left
         anchors.verticalCenter: headerMap.verticalCenter
         anchors.rightMargin: -parent.width * 0.085
-        height: textAccount.height*0.8
-        width: textAccount.width*0.25
+        height: textSoundHeader.height*0.8
+        width: parent.width*0.02
     }
 
     Image {
@@ -66,8 +71,8 @@ Rectangle {
         anchors.left: imageLocer.right
         anchors.verticalCenter: headerMap.verticalCenter
         anchors.leftMargin: parent.width*0.05
-        height: textAccount.height*0.9
-        width: textAccount.width*0.3
+        height: textSoundHeader.height*0.9
+        width: parent.width*0.03
     }
 
     Text {

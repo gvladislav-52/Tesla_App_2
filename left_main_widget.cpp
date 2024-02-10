@@ -4,6 +4,7 @@ Left_Main_Widget::Left_Main_Widget(QObject *parent) : QObject(parent) {
     m_chargeStatus = true;
     m_speedStatus = false;
     m_microStatus = false;
+    m_autoresStatus = false;
 
     m_left_speed_object = new Left_Speed_Widget();
     m_left_charge_object = new Left_Charge_Widget();
@@ -71,22 +72,34 @@ void Left_Main_Widget::setMicroStatus(bool newMicroStatus)
 
 void Left_Main_Widget::update_mainBar(int num)
 {
-    if(num == 1)
+    switch(num)
     {
+    case 1:
         setChargeStatus(true);
         setSpeedStatus(false);
         setMicroStatus(false);
-    }
-    else if (num == 2) {
+        setAutoresStatus(false);
+        break;
+    case 2:
         setChargeStatus(false);
         setSpeedStatus(true);
         setMicroStatus(false);
-    }
-    else if (num == 3) {
+        setAutoresStatus(false);
+        break;
+    case 3:
         setChargeStatus(false);
         setSpeedStatus(false);
         setMicroStatus(true);
+        setAutoresStatus(false);
+        break;
+    case 4:
+        setChargeStatus(false);
+        setSpeedStatus(false);
+        setMicroStatus(false);
+        setAutoresStatus(true);
+        break;
     }
+
     emit mainBarUpdated();
 }
 
@@ -182,4 +195,17 @@ bool Left_Main_Widget::getBoolean_selectorSource() const
 void Left_Main_Widget::setBoolean_selectorSource(bool newBoolean_selectorSource)
 {
     m_boolean_selectorSource = newBoolean_selectorSource;
+}
+
+bool Left_Main_Widget::getAutoresStatus() const
+{
+    return m_autoresStatus;
+}
+
+void Left_Main_Widget::setAutoresStatus(bool newAutoresStatus)
+{
+    if (m_autoresStatus == newAutoresStatus)
+        return;
+    m_autoresStatus = newAutoresStatus;
+    emit autoresStatusChanged();
 }

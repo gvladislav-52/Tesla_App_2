@@ -12,6 +12,7 @@ class Left_Main_Widget : public QObject {
     Q_PROPERTY(bool chargeStatus READ getChargeStatus WRITE setChargeStatus NOTIFY chargeStatusChanged FINAL)
     Q_PROPERTY(bool speedStatus READ getSpeedStatus WRITE setSpeedStatus NOTIFY speedStatusChanged FINAL)
     Q_PROPERTY(bool microStatus READ getMicroStatus WRITE setMicroStatus NOTIFY microStatusChanged FINAL)
+    Q_PROPERTY(bool autoresStatus READ getAutoresStatus WRITE setAutoresStatus NOTIFY autoresStatusChanged FINAL)
 
     //Обьекты виджетов, для отображения
     Q_PROPERTY(Left_Charge_Widget* left_charge_object READ left_charge_object CONSTANT)
@@ -43,6 +44,9 @@ public:
     bool getBoolean_selectorSource() const;
     void setBoolean_selectorSource(bool newBoolean_selectorSource);
 
+    bool getAutoresStatus() const;
+    void setAutoresStatus(bool newAutoresStatus);
+
 signals:
     void mainBarUpdated();          //обновление левой стороны виджета, при нажатии на другой
 
@@ -53,6 +57,8 @@ signals:
     void name_selectorSourceChanged();
     void path_selectorSourceChanged();
     void boolean_selectorSourceChanged();
+
+    void autoresStatusChanged();
 
 private:
     bool m_chargeStatus;
@@ -65,6 +71,8 @@ private:
     QVector<bool> m_name_selectorSource;
     QVector<QString> m_path_selectorSource;
     bool m_boolean_selectorSource;
+
+    bool m_autoresStatus;
 
 public slots:
     void update_mainBar(int num);

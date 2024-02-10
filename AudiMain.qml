@@ -84,36 +84,33 @@ Item {
     //     }
     // }
 
-    RowLayout
-    {
+    RowLayout {
         anchors.fill: parent
         anchors.verticalCenter: parent.verticalCenter
-    VideoOutput {
-        id: videoOutput
 
-        Layout.maximumWidth: parent.width * 0.4
-        //width: parent.width *0.4
-        Layout.maximumHeight: parent.height * 0.9
-        anchors.left: parent.left
-        property bool fullScreen: false
+        VideoOutput {
+            id: videoOutput
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            Layout.maximumWidth: parent.width * 0.4
+            Layout.maximumHeight: parent.height * 0.9
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * 0.2
 
-        TapHandler {
-            onDoubleTapped: {
-                parent.fullScreen ?  showNormal() : showFullScreen()
-                parent.fullScreen = !parent.fullScreen
+            property bool fullScreen: false
+
+            TapHandler {
+                onDoubleTapped: {
+                    parent.fullScreen ?  showNormal() : showFullScreen()
+                    parent.fullScreen = !parent.fullScreen
+                }
+                onTapped: {
+                    metadataInfo.visible = false
+                    //audioTracksInfo.visible = false
+                    //videoTracksInfo.visible = false
+                    //subtitleTracksInfo.visible = false
+                }
             }
-            onTapped: {
-                metadataInfo.visible = false
-                //audioTracksInfo.visible = false
-                //videoTracksInfo.visible = false
-                //subtitleTracksInfo.visible = false
-            }
-        }
-
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-
-        Layout.preferredWidth: parent.width * 0.2
     }
 
     ColumnLayout
@@ -206,8 +203,7 @@ Item {
                 }
             }
 
-    Layout.fillHeight: true
-    Layout.fillWidth: true
+    Layout.alignment: Qt.AlignVCenter
 
     Layout.preferredWidth: parent.width * 0.5
     }
@@ -272,8 +268,7 @@ Item {
 
             RowLayout {
                 id: playerButtonsPanel
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
 
                 ToolButton {

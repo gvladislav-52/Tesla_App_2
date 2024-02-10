@@ -11,6 +11,8 @@ Right_Header_Widget::Right_Header_Widget(QObject *parent)
 {
     currentTimeTimerTimeout();
     temperatureSlot();
+    //sql_object.search();
+    m_name_data = new sql_file();
 }
 
 QString Right_Header_Widget::getString_currentTime() const
@@ -74,6 +76,22 @@ void Right_Header_Widget::temperatureSlot()
     setString_temperature(temp);
 }
 
+void Right_Header_Widget::autoresetion(QString login, QString password)
+{
+    if(login.isEmpty() || password.isEmpty())
+        qDebug() << "Поля пустые";
+    else
+        m_name_data->search(login,password);
+}
+
+void Right_Header_Widget::regestration(QString name, QString login, QString password)
+{
+    if(name.isEmpty() || login.isEmpty() || password.isEmpty())
+        qDebug() << "Поля пустые";
+    else
+        m_name_data->add_query_function(name,login,password);
+}
+
 QString Right_Header_Widget::getString_temperature() const
 {
     if (m_string_temperature == "-0")
@@ -88,4 +106,9 @@ void Right_Header_Widget::setString_temperature(const QString &newTemperature)
         return;
     m_string_temperature = newTemperature;
     emit string_temperatureChanged();
+}
+
+sql_file *Right_Header_Widget::name_data() const
+{
+    return m_name_data;
 }

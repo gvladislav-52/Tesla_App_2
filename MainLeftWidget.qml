@@ -30,6 +30,15 @@ Item {
             Layout.minimumHeight: parent.height/1.3
         }
 
+        AutoResetion
+        {
+            id: autoResStatus
+            visible: left_main_source.autoresStatus
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.minimumHeight: parent.height/1.3
+        }
+
         Rectangle {
             color: "white"
             width: 200

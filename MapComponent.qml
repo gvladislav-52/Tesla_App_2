@@ -75,7 +75,7 @@ MapView {
     MapQuickItem {
         parent: view.map
         sourceItem: Text{
-            text: qsTr("VLADISLAV")
+            text: right_main_source.right_header_object.name_data.name_dataBase
             color:{if(right_main_source.temp_DayNightMap) return "black"
                 else return "yellow"
             }
