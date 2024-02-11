@@ -8,7 +8,7 @@ sql_file::sql_file()
     db.setPassword("8901236767");
     if(!db.open())
         qDebug() << "Error open data base PosgreSQL";
-    m_name_dataBase = "None (Enter to the BD)";
+    m_name_dataBase = "None (Click me)";
 }
 
 void sql_file::search(QString login,QString password)
