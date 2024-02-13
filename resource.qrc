@@ -122,5 +122,8 @@
         <file>ui/button_footer/rand.png</file>
         <file>ui/button_footer/circle.png</file>
         <file>AutoResetion.qml</file>
+        <file>ui/button_footer/refresh.png</file>
+        <file>ui/button_footer/camera.png</file>
+        <file>ui/traectoria.png</file>
     </qresource>
 </RCC>

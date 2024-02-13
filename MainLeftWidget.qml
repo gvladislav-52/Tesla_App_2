@@ -84,7 +84,7 @@ Item {
 
                 ToolButton {
                     id: microButton
-                    icon.source: "qrc:/ui/setting.png"
+                    icon.source: "qrc:/ui/button_footer/camera.png"
                     anchors.right: chargeButton.horizontalCenter
                     anchors.rightMargin: -parent.width * 0.3
                     anchors.verticalCenter: parent.verticalCenter
