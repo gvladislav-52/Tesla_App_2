@@ -2,47 +2,60 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "right_main_widget.h"
 #include "left_main_widget.h"
+#include "right_main_widget.h"
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 6, 1)
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app(argc, argv);                                            //Создание обьекта приложения Qt для графического интерфейса пользователя
+    QGuiApplication
+        app(argc, argv); //Создание обьекта приложения Qt для графического интерфейса пользователя
     Left_Main_Widget left_main_temp;
     Right_Main_Widget right_main_temp;
 
-    QQmlApplicationEngine engine;                                               //Создание обьекта для загрузки и выполнения QML-code
-    qmlRegisterType<Speedometer>("my_type_speedometer",1,0,"Speedometer");   //Регистрация типа leftsourcefile в QML под именем Speedometer
-    const QUrl url(QStringLiteral("qrc:/MainQML.qml"));                         //Загрузка основной QML-страницы
-    QObject::connect(&engine,&QQmlApplicationEngine::objectCreated,&app,[url](QObject *obj, const QUrl &objUrl)
-        {
+    QQmlApplicationEngine engine; //Создание обьекта для загрузки и выполнения QML-code
+    qmlRegisterType<Speedometer>(
+        "my_type_speedometer",
+        1,
+        0,
+        "Speedometer"); //Регистрация типа leftsourcefile в QML под именем Speedometer
+    const QUrl url(QStringLiteral("qrc:/MainQML.qml")); //Загрузка основной QML-страницы
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
-        }, Qt::QueuedConnection);                                               //Установка соединения, которое будет вызвано при создании объектов Qt Quick из QML.
-                                                                                //Если объект не создан и URL совпадает, вызывается QCoreApplication::exit().
+        },
+        Qt::QueuedConnection); //Установка соединения, которое будет вызвано при создании объектов Qt Quick из QML.
+        //Если объект не создан и URL совпадает, вызывается QCoreApplication::exit().
 
-    engine.load(url);                                                           //3агрузка QML-файла по указанному URL
-    QQmlContext *rootContext = engine.rootContext();                            //Получения корневого контекста QML-движка (загрузки и выполнения кода)
+    engine.load(url); //3агрузка QML-файла по указанному URL
+    QQmlContext *rootContext
+        = engine.rootContext(); //Получения корневого контекста QML-движка (загрузки и выполнения кода)
 
-    rootContext->setContextProperty("right_main_source",&right_main_temp);
-    rootContext->setContextProperty("left_main_source",&left_main_temp);
+    rootContext->setContextProperty("right_main_source", &right_main_temp);
+    rootContext->setContextProperty("left_main_source", &left_main_temp);
 
     //[Speedometr]
-    QObject *object = engine.rootObjects()[0];                                  //Получение корневого объекта QML
-    QObject *speedometer = object->findChild<QObject *>("speedometer_object_qml");         //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
-    Speedometer *ptrSpeedometer = qobject_cast<Speedometer*>(object->findChild<QObject *>("speedometer_object_qml"));    //Приведение при помощи qobject_cast к типу leftsourcefile
+    QObject *object = engine.rootObjects()[0]; //Получение корневого объекта QML
+    QObject *speedometer = object->findChild<QObject *>(
+        "speedometer_object_qml"); //Поиск дочернего объекта с именем "speedometer_object_qml"  в файле QML, для дальнейшей работы с ним
+    Speedometer *ptrSpeedometer = qobject_cast<Speedometer *>(object->findChild<QObject *>(
+        "speedometer_object_qml")); //Приведение при помощи qobject_cast к типу leftsourcefile
     qreal value = 0;
-    ptrSpeedometer->setSpeed(value);                                                //устанавливаем скорость спидометра, которая зависит на данный момент от времени
-    QTimer timer;                                                                   //устанавливаем таймер
-    bool direction = true;                                                          //переменная отвечающая за направление
+    ptrSpeedometer->setSpeed(
+        value); //устанавливаем скорость спидометра, которая зависит на данный момент от времени
+    QTimer timer;          //устанавливаем таймер
+    bool direction = true; //переменная отвечающая за направление
     QObject::connect(&timer, &QTimer::timeout, [&]() {
         static int count = 0;
-        if(count % 100 == 0)
+        if (count % 100 == 0)
             right_main_temp.right_header_object()->currentTimeTimerTimeout();
-        if(count %5000 == 0)
+        if (count % 5000 == 0)
             right_main_temp.right_header_object()->temperatureSlot();
         if (count % 200 == 0) {
             left_main_temp.left_speed_object()->update_speed_limiter();
@@ -53,13 +66,17 @@ int main(int argc, char *argv[])
         ptrSpeedometer->updateDistance(value);
         count++;
     });
-    timer.start(10);                                                                //запуск таймера с шагом на 10
+    timer.start(10); //запуск таймера с шагом на 10
 
 #if QT_CONFIG(ssl)
-    engine.rootContext()->setContextProperty("supportsSsl", QSslSocket::supportsSsl()); //Устанавливаем свойства контекста QML поддержки SSL, для Map
+    engine.rootContext()->setContextProperty(
+        "supportsSsl",
+        QSslSocket::supportsSsl()); //Устанавливаем свойства контекста QML поддержки SSL, для Map
 #else
     engine.rootContext()->setContextProperty("supportsSsl", false);
 #endif
-    QMetaObject::invokeMethod(engine.rootObjects().value(0), "initializeProviders");    //Вызов метода initializeProviders у корневого объекта QML для Map
+    QMetaObject::invokeMethod(
+        engine.rootObjects().value(0),
+        "initializeProviders"); //Вызов метода initializeProviders у корневого объекта QML для Map
     return app.exec();
 }

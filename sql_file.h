@@ -3,13 +3,14 @@
 
 #include <QObject>
 #include <QSqlDatabase>
-#include <QtSql>
 #include <QSqlTableModel>
+#include <QtSql>
 
-class sql_file: public QObject
+class sql_file : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString name_dataBase READ name_dataBase WRITE setName_dataBase NOTIFY name_dataBaseChanged FINAL)
+    Q_PROPERTY(QString name_dataBase READ name_dataBase WRITE setName_dataBase NOTIFY
+                   name_dataBaseChanged FINAL)
 
 public:
     sql_file();
@@ -17,7 +18,7 @@ public:
     void del_query_function(int id);
     void select_query_function();
     void clear_query_function();
-    void search(QString login,QString password);
+    void search(QString login, QString password);
     QString name_dataBase() const;
     void setName_dataBase(const QString &newName_dataBase);
 

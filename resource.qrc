@@ -125,5 +125,10 @@
         <file>ui/button_footer/refresh.png</file>
         <file>ui/button_footer/camera.png</file>
         <file>ui/traectoria.png</file>
+        <file>Screen_image/Tesla_screen_1.png</file>
+        <file>Screen_image/Tesla_screen_2.png</file>
+        <file>Screen_image/Tesla_screen_3.png</file>
+        <file>Screen_image/Tesla_screen_4.png</file>
+        <file>Screen_image/Tesla_screen_5.png</file>
     </qresource>
 </RCC>

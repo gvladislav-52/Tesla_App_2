@@ -2,13 +2,17 @@
 #define LEFT_CHARGE_WIDGET_H
 
 #include <QObject>
-class Left_Charge_Widget: public QObject
+class Left_Charge_Widget : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QVector<bool> vector_carDoor READ getVector_carDoor WRITE setVector_carDoor NOTIFY vector_carDoorChanged FINAL)
-    Q_PROPERTY(bool boolean_carDoor READ getBoolean_carDoor WRITE setBoolean_carDoor NOTIFY boolean_carDoorChanged FINAL)
-    Q_PROPERTY(QString battarySource READ getBattarySource WRITE setBattarySource NOTIFY battarySourceChanged FINAL)
-    Q_PROPERTY(QString battary_path READ getBattary_path WRITE setBattary_path NOTIFY battary_pathChanged FINAL)
+    Q_PROPERTY(QVector<bool> vector_carDoor READ getVector_carDoor WRITE setVector_carDoor NOTIFY
+                   vector_carDoorChanged FINAL)
+    Q_PROPERTY(bool boolean_carDoor READ getBoolean_carDoor WRITE setBoolean_carDoor NOTIFY
+                   boolean_carDoorChanged FINAL)
+    Q_PROPERTY(QString battarySource READ getBattarySource WRITE setBattarySource NOTIFY
+                   battarySourceChanged FINAL)
+    Q_PROPERTY(QString battary_path READ getBattary_path WRITE setBattary_path NOTIFY
+                   battary_pathChanged FINAL)
 
 public:
     Left_Charge_Widget();

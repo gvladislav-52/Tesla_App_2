@@ -3,27 +3,27 @@
 sql_file::sql_file()
 {
     db = QSqlDatabase::addDatabase("QPSQL");
-    db.setDatabaseName("tesla_app");
+    db.setDatabaseName("postgres");
     db.setUserName("postgres");
-    db.setPassword("8901236767");
-    if(!db.open())
+    db.setPassword("12345");
+    db.setHostName("127.0.0.1");
+    if (!db.open())
         qDebug() << "Error open data base PosgreSQL";
     m_name_dataBase = "None (Click me)";
 }
 
-void sql_file::search(QString login,QString password)
+void sql_file::search(QString login, QString password)
 {
     QSqlQuery search_query;
-    search_query.prepare("SELECT * FROM person_app WHERE login = :login AND password = :password");
+    search_query.prepare("SELECT * FROM person_user WHERE login = :login AND password = :password");
     search_query.bindValue(":login", login);
     search_query.bindValue(":password", password);
 
-    if(!search_query.exec())
-    {
+    if (!search_query.exec()) {
         qDebug() << "Ошибка выполнения запроса на select";
     }
-    if(search_query.next())
-            setName_dataBase(search_query.value(3).toString());
+    if (search_query.next())
+        setName_dataBase(search_query.value(3).toString());
     else
         qDebug() << "Логин" << login << "не найден в базе данных";
     emit name_dataBaseChanged();
@@ -71,14 +71,15 @@ void sql_file::search(QString login,QString password)
 //     }
 // }
 
-void sql_file::add_query_function(QString first_name_temp, QString login_temp,QString password_temp)
+void sql_file::add_query_function(QString first_name_temp, QString login_temp, QString password_temp)
 {
     QSqlQuery add_query;
 
-    add_query.prepare("INSERT INTO person_app (login, password, first_name) VALUES (:login, :password, :first_name)");
+    add_query.prepare("INSERT INTO person_user (login, password, name) VALUES (:login, "
+                      ":password, :name)");
     add_query.bindValue(":login", login_temp);
     add_query.bindValue(":password", password_temp);
-    add_query.bindValue(":first_name", first_name_temp);
+    add_query.bindValue(":name", first_name_temp);
 
     if (!add_query.exec()) {
         qDebug() << "Ошибка выполнения запроса на добавление записи";

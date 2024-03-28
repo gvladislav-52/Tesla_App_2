@@ -208,7 +208,6 @@ Item {
     Layout.preferredWidth: parent.width * 0.5
     }
 
-
     Item {
         id: playbackControl
         Layout.fillHeight: true
@@ -290,7 +289,7 @@ Item {
 
                     onClicked: {
                         right_main_source.left_update_music()
-                        mediaPlayer.source = right_main_source.music_path
+                        mediaPlayer.source = "file:/" + right_main_source.music_path
                         mediaPlayer.play()
                     }
                 }
@@ -322,7 +321,7 @@ Item {
                     }
                     onClicked:
                     {
-                        mediaPlayer.source = right_main_source.music_path
+                        mediaPlayer.source = "file:/" + right_main_source.music_path
                         mediaPlayer.read(mediaPlayer.metaData)
                         mediaPlayer.play()
                     }
@@ -341,7 +340,7 @@ Item {
                     }
                     onClicked: {
                         right_main_source.right_update_music()
-                        mediaPlayer.source = right_main_source.music_path
+                        mediaPlayer.source = "file:/" + right_main_source.music_path
                         mediaPlayer.play()
                     }
                 }

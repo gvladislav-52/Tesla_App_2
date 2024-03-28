@@ -6,7 +6,7 @@ Right_Footer_Widget::Right_Footer_Widget(QObject *parent)
     m_left_Temparate = 15;
     m_right_Temparate = 15;
     m_soundTemp = 5;
-    for(int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
         m_bool_temp_button.append(false);
 }
 

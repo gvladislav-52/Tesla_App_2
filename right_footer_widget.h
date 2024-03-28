@@ -2,14 +2,17 @@
 #define RIGHT_FOOTER_WIDGET_H
 #include <QObject>
 
-class Right_Footer_Widget: public QObject
+class Right_Footer_Widget : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int leftTemperature READ getLeft_Temparate WRITE setLeft_Temparate NOTIFY left_TemparateChanged FINAL)
-    Q_PROPERTY(int rightTemperature READ getRight_Temparate WRITE setRight_Temparate NOTIFY right_TemparateChanged FINAL)
+    Q_PROPERTY(int leftTemperature READ getLeft_Temparate WRITE setLeft_Temparate NOTIFY
+                   left_TemparateChanged FINAL)
+    Q_PROPERTY(int rightTemperature READ getRight_Temparate WRITE setRight_Temparate NOTIFY
+                   right_TemparateChanged FINAL)
     Q_PROPERTY(int soundTemp READ soundTemp WRITE setSoundTemp NOTIFY soundTempChanged FINAL)
 
-    Q_PROPERTY(QVector<bool> bool_temp_button READ getBool_temp_button WRITE setBool_temp_button NOTIFY bool_temp_buttonChanged FINAL)
+    Q_PROPERTY(QVector<bool> bool_temp_button READ getBool_temp_button WRITE setBool_temp_button
+                   NOTIFY bool_temp_buttonChanged FINAL)
     Q_PROPERTY(bool muted_music READ muted_music WRITE setMuted_music NOTIFY muted_musicChanged FINAL)
 
 public:

@@ -5,9 +5,9 @@
 Left_Speed_Widget::Left_Speed_Widget()
 {
     //m_speed_limiter = "40";
-    for(int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
         m_vector_Indicator.append(true);
-    for(int i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
         m_vector_Indicator_Path.append("1");
 
     m_vector_Indicator_Switch.append("Parking lights");
@@ -51,28 +51,28 @@ void Left_Speed_Widget::setVector_Indicator_Path(const QVector<QString> &newVect
 void Left_Speed_Widget::update_dimensions()
 {
     path_temp = m_vector_Indicator_Path;
-    for(int i = 0; i < m_vector_Indicator.size(); i++)
-    {
-        if(m_vector_Indicator[i])
-        {
-            if (m_vector_Indicator_Path[i] != "qrc:/ui/optics/optics_" + QString::number(i+1) +"_bw.png")
-                m_vector_Indicator_Path[i] = ("qrc:/ui/optics/optics_" + QString::number(i+1) +"_bw.png");
-        }
-        else
-        {
-            if (m_vector_Indicator_Path[i] != "qrc:/ui/optics/optics_" + QString::number(i+1) +".png")
-                m_vector_Indicator_Path[i] = ("qrc:/ui/optics/optics_" + QString::number(i+1) +".png");
+    for (int i = 0; i < m_vector_Indicator.size(); i++) {
+        if (m_vector_Indicator[i]) {
+            if (m_vector_Indicator_Path[i]
+                != "qrc:/ui/optics/optics_" + QString::number(i + 1) + "_bw.png")
+                m_vector_Indicator_Path[i] = ("qrc:/ui/optics/optics_" + QString::number(i + 1)
+                                              + "_bw.png");
+        } else {
+            if (m_vector_Indicator_Path[i]
+                != "qrc:/ui/optics/optics_" + QString::number(i + 1) + ".png")
+                m_vector_Indicator_Path[i] = ("qrc:/ui/optics/optics_" + QString::number(i + 1)
+                                              + ".png");
         }
     }
 
-    if(path_temp !=m_vector_Indicator_Path)
+    if (path_temp != m_vector_Indicator_Path)
         emit vector_Indicator_PathChanged();
 }
 
 void Left_Speed_Widget::update_speed_limiter()
 {
-    int random = rand()%6+1;
-    if(random == 1)
+    int random = rand() % 6 + 1;
+    if (random == 1)
         setSpeed_limiter("20");
     else if (random == 2)
         setSpeed_limiter("40");
@@ -86,7 +86,6 @@ void Left_Speed_Widget::update_speed_limiter()
         setSpeed_limiter("130");
     emit speed_limiterChanged();
 }
-
 
 QString Left_Speed_Widget::getSpeed_limiter() const
 {
@@ -118,12 +117,12 @@ void Left_Speed_Widget::setVector_Indicator_Switch(const QVector<QString> &newVe
 
 ////////////////////////////////////////////////////////////////////////////////[SPEEDOMETER]///////////////////////////////////////////////////////////////////////
 
-Speedometer::Speedometer(QQuickItem * parent): QQuickPaintedItem(parent),
-    m_SpeedometerSize(500),
-    m_StartAngle(50),
-    m_AlignAngle(260)
-{
-}
+Speedometer::Speedometer(QQuickItem *parent)
+    : QQuickPaintedItem(parent)
+    , m_SpeedometerSize(500)
+    , m_StartAngle(50)
+    , m_AlignAngle(260)
+{}
 
 void Speedometer::paint(QPainter *painter)
 {
@@ -141,37 +140,47 @@ void Speedometer::paint(QPainter *painter)
     painter->save();
     pen.setWidth(m_ArcWidth);
     pen.setColor(m_OuterColor);
-    qreal valueToAngle = ((m_Speed - m_LowestRange)/(m_HighestRange - m_LowestRange)) * spanAngle;
+    qreal valueToAngle = ((m_Speed - m_LowestRange) / (m_HighestRange - m_LowestRange)) * spanAngle;
     painter->setPen(pen);
-    painter->drawArc(rect.adjusted(m_ArcWidth, m_ArcWidth, -m_ArcWidth, -m_ArcWidth),startAngle * 16, valueToAngle * 16);
+    painter->drawArc(rect.adjusted(m_ArcWidth, m_ArcWidth, -m_ArcWidth, -m_ArcWidth),
+                     startAngle * 16,
+                     valueToAngle * 16);
     painter->restore();
 }
 
 void Speedometer::updateTahometer(qreal value)
 {
-    value = value/17.8;
-    if(value > 210) setTextSelector("6");
-    else if (value > 150) setTextSelector("5");
-    else if (value > 110) setTextSelector("4");
-    else if (value > 70)  setTextSelector("3");
-    else if (value > 30)  setTextSelector("2");
-    else if (value > 0)   setTextSelector("1");
-    else setTextSelector("N");
+    value = value / 17.8;
+    if (value > 210)
+        setTextSelector("6");
+    else if (value > 150)
+        setTextSelector("5");
+    else if (value > 110)
+        setTextSelector("4");
+    else if (value > 70)
+        setTextSelector("3");
+    else if (value > 30)
+        setTextSelector("2");
+    else if (value > 0)
+        setTextSelector("1");
+    else
+        setTextSelector("N");
 }
 
-void Speedometer::updateSpeedometer(qreal &value, bool &direction){
+void Speedometer::updateSpeedometer(qreal &value, bool &direction)
+{
     if (value < 1500)
-        setOuterColor(QColor(128,255,0));
+        setOuterColor(QColor(128, 255, 0));
     else if (value > 1500 && value < 3000)
-        setOuterColor(QColor(255,255,0));
+        setOuterColor(QColor(255, 255, 0));
     else if (value > 3000 && value < 4000)
-        setOuterColor(QColor(255,0,0));
-    if(value >= 4450)
+        setOuterColor(QColor(255, 0, 0));
+    if (value >= 4450)
         direction = false;
     else if (value <= 0.1)
         direction = true;
 
-    if(direction)
+    if (direction)
         value = value + 10;
     else
         value = value - 10;
@@ -180,7 +189,7 @@ void Speedometer::updateSpeedometer(qreal &value, bool &direction){
 
 void Speedometer::updateDistance(qreal value)
 {
-    qreal distance = ((value / 17.8)/60/60);
+    qreal distance = ((value / 17.8) / 60 / 60);
     full_distance += distance;
     setTextDistance(QString::number(full_distance, 'f', 1));
 }
@@ -237,16 +246,16 @@ QString Speedometer::getTextDistance()
 
 void Speedometer::setSpeedometerSize(qreal size)
 {
-    if(m_SpeedometerSize == size)
+    if (m_SpeedometerSize == size)
         return;
 
     m_SpeedometerSize = size;
-    emit speedometerSizeChanged();      //this will call the qml part
+    emit speedometerSizeChanged(); //this will call the qml part
 }
 
 void Speedometer::setStartAngle(qreal startAngle)
 {
-    if(m_StartAngle == startAngle)
+    if (m_StartAngle == startAngle)
         return;
 
     m_StartAngle = startAngle;
@@ -255,7 +264,7 @@ void Speedometer::setStartAngle(qreal startAngle)
 
 void Speedometer::setAlignAngle(qreal angle)
 {
-    if(m_StartAngle == angle)
+    if (m_StartAngle == angle)
         return;
 
     m_StartAngle = angle;
@@ -264,7 +273,7 @@ void Speedometer::setAlignAngle(qreal angle)
 
 void Speedometer::setLowestRange(qreal lowestRange)
 {
-    if(m_LowestRange == lowestRange)
+    if (m_LowestRange == lowestRange)
         return;
 
     m_LowestRange = lowestRange;
@@ -273,7 +282,7 @@ void Speedometer::setLowestRange(qreal lowestRange)
 
 void Speedometer::setHighestRange(qreal highestRange)
 {
-    if(m_HighestRange == highestRange)
+    if (m_HighestRange == highestRange)
         return;
 
     m_HighestRange = highestRange;
@@ -282,7 +291,7 @@ void Speedometer::setHighestRange(qreal highestRange)
 
 void Speedometer::setSpeed(qreal speed)
 {
-    if(m_Speed == speed)
+    if (m_Speed == speed)
         return;
 
     m_Speed = speed;
@@ -292,7 +301,7 @@ void Speedometer::setSpeed(qreal speed)
 
 void Speedometer::setArcWidth(int arcWidth)
 {
-    if(m_ArcWidth == arcWidth)
+    if (m_ArcWidth == arcWidth)
         return;
 
     m_ArcWidth = arcWidth;
@@ -301,7 +310,7 @@ void Speedometer::setArcWidth(int arcWidth)
 
 void Speedometer::setOuterColor(QColor outerColor)
 {
-    if(m_OuterColor == outerColor)
+    if (m_OuterColor == outerColor)
         return;
 
     m_OuterColor = outerColor;
@@ -310,7 +319,7 @@ void Speedometer::setOuterColor(QColor outerColor)
 
 void Speedometer::setTextSelector(QString textSelector)
 {
-    if(m_textSelector == textSelector)
+    if (m_textSelector == textSelector)
         return;
 
     m_textSelector = textSelector;
@@ -319,7 +328,7 @@ void Speedometer::setTextSelector(QString textSelector)
 
 void Speedometer::setTextDistance(QString textDistance)
 {
-    if(m_textDistance == textDistance)
+    if (m_textDistance == textDistance)
         return;
 
     m_textDistance = textDistance;
@@ -327,4 +336,3 @@ void Speedometer::setTextDistance(QString textDistance)
 }
 
 ////////////////////////////////////////////////////////////////////////////////[~SPEEDOMETER]//////////////////////////////////////////////////////////////////////
-

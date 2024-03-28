@@ -7,8 +7,10 @@
 class Right_Map_Widget : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QVariantMap to_coordinate_temp READ getTo_coordinate_temp  NOTIFY to_coordinate_tempChanged FINAL)
-    Q_PROPERTY(QVariantMap from_coordinate_temp READ getFrom_coordinate_temp NOTIFY from_coordinate_tempChanged FINAL)
+    Q_PROPERTY(QVariantMap to_coordinate_temp READ getTo_coordinate_temp NOTIFY
+                   to_coordinate_tempChanged FINAL)
+    Q_PROPERTY(QVariantMap from_coordinate_temp READ getFrom_coordinate_temp NOTIFY
+                   from_coordinate_tempChanged FINAL)
 public:
     Right_Map_Widget();
 

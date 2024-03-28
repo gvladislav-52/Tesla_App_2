@@ -1,6 +1,8 @@
 #include "left_main_widget.h"
 
-Left_Main_Widget::Left_Main_Widget(QObject *parent) : QObject(parent) {
+Left_Main_Widget::Left_Main_Widget(QObject *parent)
+    : QObject(parent)
+{
     m_chargeStatus = true;
     m_speedStatus = false;
     m_microStatus = false;
@@ -11,9 +13,9 @@ Left_Main_Widget::Left_Main_Widget(QObject *parent) : QObject(parent) {
     m_left_charge_object->setBoolean_carDoor(false);
     m_left_speed_object->update_dimensions();
 
-    for(int i = 0; i < 5; i++)
-    {
-        m_path_selectorSource.append("qrc:/ui/selector_button/selector_num_"+QString::number(i+1)+".png");
+    for (int i = 0; i < 5; i++) {
+        m_path_selectorSource.append("qrc:/ui/selector_button/selector_num_"
+                                     + QString::number(i + 1) + ".png");
         m_name_selectorSource.append(false);
     }
     m_name_selectorSource[0] = true;
@@ -72,8 +74,7 @@ void Left_Main_Widget::setMicroStatus(bool newMicroStatus)
 
 void Left_Main_Widget::update_mainBar(int num)
 {
-    switch(num)
-    {
+    switch (num) {
     case 1:
         setChargeStatus(true);
         setSpeedStatus(false);
@@ -111,8 +112,8 @@ void Left_Main_Widget::update_indicators()
 void Left_Main_Widget::update_selector(int index)
 {
     bool allTrue = true;
-    for(int i = 0; i < 7; i++) {
-        if(m_left_charge_object->getVector_carDoor().at(i) == false) {
+    for (int i = 0; i < 7; i++) {
+        if (m_left_charge_object->getVector_carDoor().at(i) == false) {
             allTrue = false;
             update_select(0);
             setBoolean_selectorSource(true);
@@ -120,8 +121,7 @@ void Left_Main_Widget::update_selector(int index)
         }
     }
 
-    if (allTrue)
-    {
+    if (allTrue) {
         update_select(index);
         setBoolean_selectorSource(false);
     }
@@ -131,12 +131,9 @@ void Left_Main_Widget::update_selector(int index)
 
 void Left_Main_Widget::update_carDoor(int index)
 {
-    if(getName_selectorSource().at(0) == false)
-    {
+    if (getName_selectorSource().at(0) == false) {
         m_left_charge_object->setBoolean_carDoor(true);
-    }
-    else
-    {
+    } else {
         m_left_charge_object->update_carDoor(index);
         m_left_charge_object->setBoolean_carDoor(false);
     }
@@ -146,9 +143,8 @@ void Left_Main_Widget::update_carDoor(int index)
 
 void Left_Main_Widget::update_select(int index_path)
 {
-    for(int i = 0; i < 5; i++)
-    {
-        if(index_path == i)
+    for (int i = 0; i < 5; i++) {
+        if (index_path == i)
             m_name_selectorSource[i] = true;
         else
             m_name_selectorSource[i] = false;

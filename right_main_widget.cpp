@@ -1,6 +1,7 @@
 #include "right_main_widget.h"
 
-Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
+Right_Main_Widget::Right_Main_Widget(QObject *parent)
+    : QObject(parent)
 {
     m_right_footer_object = new Right_Footer_Widget();
     m_right_header_object = new Right_Header_Widget();
@@ -16,53 +17,52 @@ Right_Main_Widget::Right_Main_Widget(QObject *parent) : QObject(parent)
     m_name_music = "none";
     m_name_artist = "none";
 
-    dir_path_string = "C:\\Users\\gvlad\\Desktop\\exepsion\\QT Studia\\Tesla_App2\\ui\\music";
+    dir_path_string = "/home/gvladislav-52/Documents/QT_Project/Tesla_App_2/ui/music";
     directory_path = dir_path_string;
     fileNames = directory_path.entryList(QDir::Files | QDir::NoDotAndDotDot);
     m_music_path = directory_path.filePath(fileNames.at(current_temp));
-    for(int i =0; i < fileNames.size(); i++)
+    for (int i = 0; i < fileNames.size(); i++)
         random_vector.append(i);
     m_random_bool = false;
     m_circle_bool = false;
+    qDebug() << random_vector.size();
 }
 
 void Right_Main_Widget::random_track()
 {
-    if(m_random_bool)
-        std::random_shuffle(random_vector.begin(),random_vector.end());
+    if (m_random_bool)
+        std::random_shuffle(random_vector.begin(), random_vector.end());
     else
         current_temp = random_vector[current_temp];
 }
 
 void Right_Main_Widget::left_update_music()
 {
-    if(current_temp == 0 && m_circle_bool)
+    if (current_temp == 0 && m_circle_bool)
         current_temp = fileNames.size();
 
-    if(current_temp > 0)
-    {
+    if (current_temp > 0) {
         current_temp--;
-            if(m_random_bool)
-                m_music_path = directory_path.filePath(fileNames.at(random_vector[current_temp]));
-            else
-                m_music_path = directory_path.filePath(fileNames.at(current_temp));
+        if (m_random_bool)
+            m_music_path = directory_path.filePath(fileNames.at(random_vector[current_temp]));
+        else
+            m_music_path = directory_path.filePath(fileNames.at(current_temp));
         emit music_pathChanged();
     }
 }
 
 void Right_Main_Widget::right_update_music()
 {
-    if(current_temp == fileNames.size()-1 && m_circle_bool)
+    if (current_temp == fileNames.size() - 1 && m_circle_bool)
         current_temp = -1;
 
-    if(current_temp < (fileNames.size()-1))
-    {
-    current_temp++;
-        if(m_random_bool)
+    if (current_temp < (fileNames.size() - 1)) {
+        current_temp++;
+        if (m_random_bool)
             m_music_path = directory_path.filePath(fileNames.at(random_vector[current_temp]));
         else
             m_music_path = directory_path.filePath(fileNames.at(current_temp));
-    emit music_pathChanged();
+        emit music_pathChanged();
     }
 }
 

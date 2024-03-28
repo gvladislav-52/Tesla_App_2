@@ -2,16 +2,20 @@
 #define LEFT_SPEED_WIDGET_H
 
 #include <QObject>
-#include <QQuickPaintedItem>
 #include <QPainter>
+#include <QQuickPaintedItem>
 
-class Left_Speed_Widget: public QObject
+class Left_Speed_Widget : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QVector<bool> vector_Indicator READ getVector_Indicator WRITE setVector_Indicator NOTIFY vector_IndicatorChanged FINAL)
-    Q_PROPERTY(QVector<QString> vector_Indicator_Path READ getVector_Indicator_Path WRITE setVector_Indicator_Path NOTIFY vector_Indicator_PathChanged FINAL)
-    Q_PROPERTY(QString speed_limiter READ getSpeed_limiter WRITE setSpeed_limiter NOTIFY speed_limiterChanged FINAL)
-    Q_PROPERTY(QVector<QString> vector_Indicator_Switch READ getVector_Indicator_Switch WRITE setVector_Indicator_Switch NOTIFY vector_Indicator_SwitchChanged FINAL)
+    Q_PROPERTY(QVector<bool> vector_Indicator READ getVector_Indicator WRITE setVector_Indicator
+                   NOTIFY vector_IndicatorChanged FINAL)
+    Q_PROPERTY(QVector<QString> vector_Indicator_Path READ getVector_Indicator_Path WRITE
+                   setVector_Indicator_Path NOTIFY vector_Indicator_PathChanged FINAL)
+    Q_PROPERTY(QString speed_limiter READ getSpeed_limiter WRITE setSpeed_limiter NOTIFY
+                   speed_limiterChanged FINAL)
+    Q_PROPERTY(QVector<QString> vector_Indicator_Switch READ getVector_Indicator_Switch WRITE
+                   setVector_Indicator_Switch NOTIFY vector_Indicator_SwitchChanged FINAL)
 
 public:
     Left_Speed_Widget();
@@ -45,24 +49,30 @@ private:
     QVector<QString> m_vector_Indicator_Switch;
 };
 
-class Speedometer: public QQuickPaintedItem
+class Speedometer : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal speedometerSize READ getSpeedometerSize WRITE setSpeedometerSize NOTIFY speedometerSizeChanged FINAL)
+    Q_PROPERTY(qreal speedometerSize READ getSpeedometerSize WRITE setSpeedometerSize NOTIFY
+                   speedometerSizeChanged FINAL)
     Q_PROPERTY(qreal startAngle READ getStartAngle WRITE setStartAngle NOTIFY startAngleChanged FINAL)
     Q_PROPERTY(qreal alignAngle READ getAlignAngle WRITE setAlignAngle NOTIFY alignAngleChanged FINAL)
-    Q_PROPERTY(qreal lowestRange READ getLowestRange WRITE setLowestRange NOTIFY lowestRangeChanged FINAL)
-    Q_PROPERTY(qreal highestRange READ getHighestRange WRITE setHighestRange NOTIFY highestRangeChanged FINAL)
+    Q_PROPERTY(
+        qreal lowestRange READ getLowestRange WRITE setLowestRange NOTIFY lowestRangeChanged FINAL)
+    Q_PROPERTY(qreal highestRange READ getHighestRange WRITE setHighestRange NOTIFY
+                   highestRangeChanged FINAL)
     Q_PROPERTY(qreal speed READ getSpeed WRITE setSpeed NOTIFY speedChanged FINAL)
     Q_PROPERTY(int arcWidth READ getArcWidth WRITE setArcWidth NOTIFY arcWidthChanged FINAL)
-    Q_PROPERTY(QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged FINAL)
+    Q_PROPERTY(
+        QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged FINAL)
 
-    Q_PROPERTY(QString textSelector READ getTextSelector WRITE setTextSelector NOTIFY textSelectorChanged FINAL)
-    Q_PROPERTY(QString textDistance READ getTextDistance WRITE setTextDistance NOTIFY textDistanceChanged FINAL)
+    Q_PROPERTY(QString textSelector READ getTextSelector WRITE setTextSelector NOTIFY
+                   textSelectorChanged FINAL)
+    Q_PROPERTY(QString textDistance READ getTextDistance WRITE setTextDistance NOTIFY
+                   textDistanceChanged FINAL)
 
 public:
-    Speedometer(QQuickItem * parent = 0);
+    Speedometer(QQuickItem *parent = 0);
     virtual void paint(QPainter *painter);
     void updateTahometer(qreal value);
     void updateSpeedometer(qreal &value, bool &direction);
@@ -74,12 +84,12 @@ public:
     qreal getLowestRange();
     qreal getHighestRange();
     qreal getSpeed();
-    int   getArcWidth();
+    int getArcWidth();
     QColor getOuterColor();
     QString getTextSelector();
     QString getTextDistance();
 
-    void  setSpeedometerSize(qreal size);
+    void setSpeedometerSize(qreal size);
     void setStartAngle(qreal startAngle);
     void setAlignAngle(qreal angle);
     void setLowestRange(qreal lowestRange);

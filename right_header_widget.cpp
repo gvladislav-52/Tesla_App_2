@@ -78,18 +78,18 @@ void Right_Header_Widget::temperatureSlot()
 
 void Right_Header_Widget::autoresetion(QString login, QString password)
 {
-    if(login.isEmpty() || password.isEmpty())
+    if (login.isEmpty() || password.isEmpty())
         qDebug() << "Поля пустые";
     else
-        m_name_data->search(login,password);
+        m_name_data->search(login, password);
 }
 
 void Right_Header_Widget::regestration(QString name, QString login, QString password)
 {
-    if(name.isEmpty() || login.isEmpty() || password.isEmpty())
+    if (name.isEmpty() || login.isEmpty() || password.isEmpty())
         qDebug() << "Поля пустые";
     else
-        m_name_data->add_query_function(name,login,password);
+        m_name_data->add_query_function(name, login, password);
 }
 
 QString Right_Header_Widget::getString_temperature() const

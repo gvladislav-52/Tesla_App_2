@@ -1,26 +1,33 @@
 #ifndef RIGHT_MAIN_WIDGET_H
 #define RIGHT_MAIN_WIDGET_H
 
-#include "right_header_widget.h"
-#include "right_footer_widget.h"
-#include "right_map_widget.h"
 #include <QObject>
+#include "right_footer_widget.h"
+#include "right_header_widget.h"
+#include "right_map_widget.h"
 
-class Right_Main_Widget: public QObject
+class Right_Main_Widget : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Right_Header_Widget* right_header_object READ right_header_object CONSTANT)
-    Q_PROPERTY(Right_Footer_Widget* right_footer_object READ right_footer_object CONSTANT)
-    Q_PROPERTY(Right_Map_Widget* right_map_object READ right_map_object CONSTANT)
+    Q_PROPERTY(Right_Header_Widget *right_header_object READ right_header_object CONSTANT)
+    Q_PROPERTY(Right_Footer_Widget *right_footer_object READ right_footer_object CONSTANT)
+    Q_PROPERTY(Right_Map_Widget *right_map_object READ right_map_object CONSTANT)
 
-    Q_PROPERTY(bool temp_DayNightMap READ getTemp_DayNightMap WRITE setTemp_DayNightMap NOTIFY temp_DayNightMapChanged FINAL)
-    Q_PROPERTY(QVector<QString> temp_ErrorPopup READ getTemp_ErrorPopup WRITE setTemp_ErrorPopup NOTIFY temp_ErrorPopupChanged FINAL)
+    Q_PROPERTY(bool temp_DayNightMap READ getTemp_DayNightMap WRITE setTemp_DayNightMap NOTIFY
+                   temp_DayNightMapChanged FINAL)
+    Q_PROPERTY(QVector<QString> temp_ErrorPopup READ getTemp_ErrorPopup WRITE setTemp_ErrorPopup
+                   NOTIFY temp_ErrorPopupChanged FINAL)
 
-    Q_PROPERTY(QString name_music READ getName_music WRITE setName_music NOTIFY name_musicChanged FINAL)
-    Q_PROPERTY(QString name_artist READ getName_artist WRITE setName_artist NOTIFY name_artistChanged FINAL)
-    Q_PROPERTY(QString music_path READ getMusic_path WRITE setMusic_path NOTIFY music_pathChanged FINAL)
-    Q_PROPERTY(bool random_bool READ getRandom_bool WRITE setRandom_bool NOTIFY random_boolChanged FINAL)
-    Q_PROPERTY(bool circle_bool READ getCircle_bool WRITE setCircle_bool NOTIFY circle_boolChanged FINAL)
+    Q_PROPERTY(
+        QString name_music READ getName_music WRITE setName_music NOTIFY name_musicChanged FINAL)
+    Q_PROPERTY(QString name_artist READ getName_artist WRITE setName_artist NOTIFY
+                   name_artistChanged FINAL)
+    Q_PROPERTY(
+        QString music_path READ getMusic_path WRITE setMusic_path NOTIFY music_pathChanged FINAL)
+    Q_PROPERTY(
+        bool random_bool READ getRandom_bool WRITE setRandom_bool NOTIFY random_boolChanged FINAL)
+    Q_PROPERTY(
+        bool circle_bool READ getCircle_bool WRITE setCircle_bool NOTIFY circle_boolChanged FINAL)
 
 public:
     explicit Right_Main_Widget(QObject *parent = nullptr);
