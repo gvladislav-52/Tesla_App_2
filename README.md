@@ -1,0 +1,5 @@
+![the first screen app!](https://github.com/Tesla_App_2/blob/main/Screen_image/Tesla_screen_1.png)
+![the first screen app!](https://github.com/Tesla_App_2/blob/main/Screen_image/Tesla_screen_2.png)
+![the first screen app!](https://github.com/Tesla_App_2/blob/main/Screen_image/Tesla_screen_3.png)
+![the first screen app!](https://github.com/Tesla_App_2/blob/main/Screen_image/Tesla_screen_4.png)
+![the first screen app!](https://github.com/Tesla_App_2/blob/main/Screen_image/Tesla_screen_5.png)
